@@ -9,16 +9,16 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
-import file_lock
-from file_lock import FileLock
-from batch_runtime import BatchRuntime
-from crawl_store import CrawlStore
+from law_crawler import file_lock
+from law_crawler.file_lock import FileLock
+from law_crawler.batch_runtime import BatchRuntime
+from law_crawler.crawl_store import CrawlStore
 
 
 class FileLockTests(unittest.TestCase):
     def test_real_cross_process_mutex_and_persistent_file(self):
         child = '''import sys
-from file_lock import FileLock
+from law_crawler.file_lock import FileLock
 try:
     lock = FileLock(sys.argv[1], 'busy')
 except ValueError as exc:
@@ -88,7 +88,7 @@ else:
 
     def test_store_init_failure_releases_country_lock(self):
         with tempfile.TemporaryDirectory() as directory:
-            with patch('crawl_store.sqlite3.connect', side_effect=sqlite3.OperationalError('unavailable')):
+            with patch('law_crawler.crawl_store.sqlite3.connect', side_effect=sqlite3.OperationalError('unavailable')):
                 with self.assertRaises(sqlite3.OperationalError):
                     CrawlStore(directory)
             with CrawlStore(directory):

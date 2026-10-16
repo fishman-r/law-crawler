@@ -17,10 +17,8 @@ import time
 import unittest
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / 'skills/download-official-regulations/scripts/browser_healthcheck.py'
-SPEC = importlib.util.spec_from_file_location('browser_healthcheck', SCRIPT)
-app = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(app)
+SCRIPT = Path(__file__).resolve().parents[1] / 'skills/law-crawler/scripts/browser_healthcheck.py'
+from law_crawler import browser_healthcheck as app
 
 
 class BrowserHealthcheckHTTPTests(unittest.TestCase):

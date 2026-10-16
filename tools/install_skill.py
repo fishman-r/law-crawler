@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / 'skills/download-official-regulations'
+SKILL = ROOT / 'skills/law-crawler'
 
 
 def skills_root(agent, scope='user', project=None):
@@ -50,7 +50,7 @@ def main():
     parser.add_argument('--agent', choices=('codex', 'claude', 'opencode', 'workbuddy'), required=True)
     parser.add_argument('--scope', choices=('user', 'project'), default='user')
     parser.add_argument('--project', help='项目级安装的工程路径')
-    parser.add_argument('--dest', help='自定义技能集合目录（其下创建download-official-regulations）')
+    parser.add_argument('--dest', help='自定义技能集合目录（其下创建law-crawler）')
     parser.add_argument('--source', type=Path, default=SKILL, help='完整skill包路径，默认使用当前工程skill源码')
     args = parser.parse_args()
     try:

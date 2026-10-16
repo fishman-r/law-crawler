@@ -4,7 +4,7 @@ import unittest
 import json
 from urllib.error import HTTPError, URLError
 
-from platform_adapters.national import ADAPTERS
+from law_crawler.platform_adapters.national import ADAPTERS
 
 
 FIXTURES = Path(__file__).parent / 'fixtures' / 'national'

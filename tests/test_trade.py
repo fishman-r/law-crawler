@@ -2,7 +2,7 @@
 from pathlib import Path
 import unittest
 
-from platform_adapters.trade import TradeAdapter
+from law_crawler.platform_adapters.trade import TradeAdapter
 
 
 DETAIL = 'https://jdih.kemendag.go.id/peraturan/peraturan-menteri-perdagangan-nomor-25-tahun-2026'

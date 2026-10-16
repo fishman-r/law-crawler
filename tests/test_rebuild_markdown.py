@@ -12,9 +12,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from crawl_store import CrawlStore, write_json
-import rebuild_markdown as cli
-from text_documents import CONVERSION_METHOD
+from law_crawler.crawl_store import CrawlStore, write_json
+from law_crawler import rebuild_markdown as cli
+from law_crawler.text_documents import CONVERSION_METHOD
 
 
 SOURCE = 'https://official.example/source.xml'
@@ -260,7 +260,7 @@ class RebuildMarkdownCLITests(unittest.TestCase):
             self.assertEqual(fixture.request_snapshot(), before_requests)
 
     def test_cli_precondition_errors_have_readable_stderr_without_traceback(self):
-        script = Path(cli.__file__).resolve()
+        script = Path(__file__).resolve().parents[1] / 'rebuild_markdown.py'
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             fixture = RebuildFixture(root)

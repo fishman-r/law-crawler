@@ -7,9 +7,9 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import import_browser_download as app
-from crawl_store import CrawlStore, unknown_metadata
-from platform_adapters.base import field
+from law_crawler import import_browser_download as app
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler.platform_adapters.base import field
 
 
 PDF = b'%PDF-1.4\nbrowser regulation fixture\n%%EOF\n'

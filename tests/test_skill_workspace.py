@@ -11,7 +11,7 @@ import unittest
 from tools.install_skill import install, skills_root
 
 
-SKILL = Path(__file__).resolve().parents[1] / 'skills/download-official-regulations'
+SKILL = Path(__file__).resolve().parents[1] / 'skills/law-crawler'
 
 
 class WorkspacePreparationTests(unittest.TestCase):
@@ -154,8 +154,8 @@ class InstallerCompatibilityTests(unittest.TestCase):
             self.assertEqual(skills_root('workbuddy', 'project', project), project / '.workbuddy/skills')
             target = install('workbuddy', 'project', project, source=SKILL)
             self.assertTrue((target / 'scripts/prepare_workspace.py').is_file())
-            self.assertTrue((target / 'scripts/file_lock.py').is_file())
-            self.assertTrue((target / 'assets/global-config.properties').is_file())
+            self.assertTrue((target / 'scripts/law_crawler/file_lock.py').is_file())
+            self.assertTrue((target / 'countries/global-config.properties').is_file())
 
     def test_missing_source_cannot_claim_success_or_create_a_target(self):
         with tempfile.TemporaryDirectory() as tmp:

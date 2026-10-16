@@ -7,10 +7,10 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from crawl_store import CrawlStore, unknown_metadata
-import download_regulations as download
-import import_browser_download as importer
-from platform_adapters.base import field
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler import download_regulations as download
+from law_crawler import import_browser_download as importer
+from law_crawler.platform_adapters.base import field
 
 
 PDF = b'%PDF-1.4\nofficial cli regulation fixture\n%%EOF\n'
@@ -43,7 +43,7 @@ class OfficialCLIImportTests(unittest.TestCase):
         self.manifest.write_text(json.dumps(self.item))
         self.directory = self.root / 'downloads/Indonesia'
         self.network = self.enterContext(patch('urllib.request.urlopen', side_effect=AssertionError('offline import')))
-        self.fetch = self.enterContext(patch('download_regulations.fetch', side_effect=AssertionError('offline import')))
+        self.fetch = self.enterContext(patch('law_crawler.download_regulations.fetch', side_effect=AssertionError('offline import')))
 
     def tearDown(self):
         self.network.assert_not_called()
@@ -166,13 +166,13 @@ class OfficialFetchLimitTests(unittest.TestCase):
     def test_default_limit_is_compatible_with_two_argument_fetch(self):
         def legacy_fetch(url, timeout):
             return PDF, url
-        with patch('download_regulations.fetch', side_effect=legacy_fetch) as fetch:
+        with patch('law_crawler.download_regulations.fetch', side_effect=legacy_fetch) as fetch:
             self.assertEqual(download.official_fetch(DOWNLOAD, 12, ('s.mkri.id',)), (PDF, DOWNLOAD))
             fetch.assert_called_once_with(DOWNLOAD, 12)
 
     def test_explicit_expanded_limit_is_forwarded_and_fetch_read_is_bounded(self):
         limit = 128 * 1024 * 1024
-        with patch('download_regulations.fetch', return_value=(PDF, DOWNLOAD)) as fetch:
+        with patch('law_crawler.download_regulations.fetch', return_value=(PDF, DOWNLOAD)) as fetch:
             self.assertEqual(download.official_fetch(DOWNLOAD, 12, ('s.mkri.id',), max_bytes=limit), (PDF, DOWNLOAD))
             fetch.assert_called_once_with(DOWNLOAD, 12, limit)
         response = Mock(url=DOWNLOAD)
@@ -185,11 +185,11 @@ class OfficialFetchLimitTests(unittest.TestCase):
 
     def test_expanded_limit_still_checks_request_and_redirect_host_whitelist(self):
         limit = 128 * 1024 * 1024
-        with patch('download_regulations.fetch', return_value=(PDF, 'https://outsider.example/a.pdf')) as fetch:
+        with patch('law_crawler.download_regulations.fetch', return_value=(PDF, 'https://outsider.example/a.pdf')) as fetch:
             with self.assertRaisesRegex(ValueError, '响应跳转到未适配主机'):
                 download.official_fetch(DOWNLOAD, 12, ('s.mkri.id',), max_bytes=limit)
             fetch.assert_called_once_with(DOWNLOAD, 12, limit)
-        with patch('download_regulations.fetch') as fetch:
+        with patch('law_crawler.download_regulations.fetch') as fetch:
             with self.assertRaisesRegex(ValueError, '请求主机未在平台白名单中'):
                 download.official_fetch('https://outsider.example/a.pdf', 12, ('s.mkri.id',), max_bytes=limit)
             fetch.assert_not_called()

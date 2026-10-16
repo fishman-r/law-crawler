@@ -1,6 +1,6 @@
 """加拿大适配器离线回归；真实网络验收另见 reports。"""
 import unittest
-from platform_adapters.canada import JusticeCanadaAdapter, OpenCanadaAdapter
+from law_crawler.platform_adapters.canada import JusticeCanadaAdapter, OpenCanadaAdapter
 
 ACT='https://laws.justice.gc.ca/eng/acts/A-1/index.html'
 REG='https://laws.justice.gc.ca/eng/regulations/SOR-86-304/index.html'

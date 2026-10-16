@@ -1,6 +1,6 @@
 from pathlib import Path
 import unittest
-from platform_adapters.ojk import OJKAdapter
+from law_crawler.platform_adapters.ojk import OJKAdapter
 
 
 class OJKTests(unittest.TestCase):

@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock
 
-from platform_adapters.institutions import ADAPTERS, DPRAdapter, MAAdapter, MKAdapter
+from law_crawler.platform_adapters.institutions import ADAPTERS, DPRAdapter, MAAdapter, MKAdapter
 
 FIXTURES = Path(__file__).parent / 'fixtures' / 'institutions'
 

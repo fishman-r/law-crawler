@@ -8,6 +8,7 @@ import urllib.error
 import urllib.request
 
 from observer.server import Observer, Server
+from tools.install_skill import install
 
 
 class ObserverServerTests(unittest.TestCase):
@@ -46,6 +47,15 @@ class ObserverServerTests(unittest.TestCase):
         self.assertFalse((self.root/'data').exists())
         self.assertFalse((self.root/'runtime').exists())
         self.assertEqual(body['counts']['batches'],0)
+
+    def test_installed_skill_uses_current_complete_package_layout(self):
+        self.assertFalse(self.server.observer.setup()['skill_installed'])
+        installed = install('claude', destination=self.settings.parent/'skills')
+        self.assertFalse((installed/'assets').exists())
+        with self.get('/api/overview') as response:
+            self.assertTrue(json.load(response)['setup']['skill_installed'])
+        (installed/'countries').rename(installed/'missing-countries')
+        self.assertFalse(self.server.observer.setup()['skill_installed'])
 
     def test_rebinding_and_cross_origin_are_rejected(self):
         for headers in ({'Host':'attacker.example'},{'Origin':'https://attacker.example'}):

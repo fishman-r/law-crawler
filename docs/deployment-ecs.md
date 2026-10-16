@@ -12,7 +12,7 @@
 | --- | --- |
 | `/opt/law-crawler/releases/<version>/` | 只读源码版本 |
 | `/opt/law-crawler/current` | 当前源码版本的符号链接 |
-| `/home/lawcrawler/.claude/skills/download-official-regulations/` | Claude 用户级完整技能包 |
+| `/home/lawcrawler/.claude/skills/law-crawler/` | Claude 用户级完整技能包 |
 | `/home/lawcrawler/.claude/settings.json` | DeepSeek 配置、密钥和观测 hooks，权限 0600 |
 | `/var/lib/law-crawler/workspace/` | 工作区索引、下载路径配置和批次计划 |
 | `/var/lib/law-crawler/downloads/` | 法规原件、元数据、状态及执行报告 |
@@ -71,7 +71,7 @@ law-claude
 # Ctrl+B 然后 D，暂时离开 tmux；下次用同一个 tmux 命令返回。
 ```
 
-可以在 Claude 中明确输入，例如“使用 download-official-regulations，适用法域加拿大，只采集目录元数据，每个平台最多检查 1 个详情页”。未给出明确法域和采集模式时，skill 会先确认输入；部署验收不自动启动正式法规采集。
+可以在 Claude 中明确输入，例如“使用 law-crawler，适用法域加拿大，只采集目录元数据，每个平台最多检查 1 个详情页”。未给出明确法域和采集模式时，skill 会先确认输入；部署验收不自动启动正式法规采集。
 
 在自己的电脑另开一个终端，保持 SSH 隧道运行：
 
@@ -102,7 +102,7 @@ ZIP 在服务器临时目录中逐块生成，完成文件完整性校验后再�
 
 观测使用 [Claude Code hooks](https://code.claude.com/docs/en/hooks)。默认跟踪 `Skill` 工具调用；较新的直接 `/skill-name` 展开事件 `UserPromptExpansion` 需要在确认目标 Claude 版本支持后，用 `CLAUDE_OBSERVER_USER_PROMPT_EXPANSION=1` 运行配置器安装。旧版本不能仅凭 Skill 工具事件完整观察直接 slash 调用。新会话启动后才能读取重新安装的 hooks。
 
-2026-10-16 在 Alibaba Cloud Linux 4 / Python 3.11 / Claude Code 2.1.292 上实测：DeepSeek 请求成功，Skill 工具加载成功，只读子代理完成；直接 `/download-official-regulations` 产生了 `UserPromptExpansion` 事件。本次实例已启用此扩展事件，后续安装或更新同版本时使用 `CLAUDE_OBSERVER_USER_PROMPT_EXPANSION=1 bash deploy/install.sh` 保持启用。
+2026-10-16 在 Alibaba Cloud Linux 4 / Python 3.11 / Claude Code 2.1.292 上实测：DeepSeek 请求成功，Skill 工具加载成功，只读子代理完成；当时直接调用技能产生了 `UserPromptExpansion` 事件。本次实例已启用此扩展事件，后续安装或更新同版本时使用 `CLAUDE_OBSERVER_USER_PROMPT_EXPANSION=1 bash deploy/install.sh` 保持启用。
 
 ## 运维与更新
 

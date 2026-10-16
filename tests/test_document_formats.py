@@ -8,8 +8,8 @@ import zipfile
 import zlib
 from pathlib import Path
 from unittest.mock import Mock, patch
-from crawl_store import CrawlStore, validate_pdf
-from document_formats import identify_document
+from law_crawler.crawl_store import CrawlStore, validate_pdf
+from law_crawler.document_formats import identify_document
 
 PDF = b'%PDF-1.4\nfixture\n%%EOF\n'
 RTF = b'{\\rtf1\\ansi Official regulation \\{quoted\\}}'
@@ -77,7 +77,7 @@ class FormatTests(unittest.TestCase):
     def test_zip_crc_and_size_limit_checked(self):
         raw = archive({'a.txt': b'content'})
         self.assertEqual(identify_document(raw)['extension'], 'zip')
-        with patch('document_formats.MAX_EXPANDED', 3), self.assertRaises(ValueError):
+        with patch('law_crawler.document_formats.MAX_EXPANDED', 3), self.assertRaises(ValueError):
             identify_document(raw)
         broken = bytearray(raw)
         name_end = 30 + len('a.txt')

@@ -5,9 +5,9 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import download_regulations as app
-from crawl_store import CrawlStore, canonical_url
-from regulation_metadata import extract_metadata
+from law_crawler import download_regulations as app
+from law_crawler.crawl_store import CrawlStore, canonical_url
+from law_crawler.regulation_metadata import extract_metadata
 
 PDF = b'%PDF-1.4\nfixture\n%%EOF\n'
 

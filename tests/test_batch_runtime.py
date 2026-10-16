@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 
-from batch_runtime import BatchRuntime, emit_report, retry_fetch
+from law_crawler.batch_runtime import BatchRuntime, emit_report, retry_fetch
 
 
 class BatchRuntimeTests(unittest.TestCase):

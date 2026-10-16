@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from crawl_store import CrawlStore, write_json
-from text_documents import render_markdown
+from law_crawler.crawl_store import CrawlStore, write_json
+from law_crawler.text_documents import render_markdown
 
 
 URL = 'https://official.example/source.xml'
@@ -144,12 +144,12 @@ class ConversionUpgradeTests(unittest.TestCase):
                                   size_bytes=len(identical_markdown))
             previous_v1 = copy.deepcopy(record)
             before_requests = requests(store)
-            with patch('text_documents.CONVERSION_METHOD', 'method-A'):
+            with patch('law_crawler.text_documents.CONVERSION_METHOD', 'method-A'):
                 self.assertTrue(store.upgrade_conversion(record))
                 self.assertEqual(markdown_path.read_bytes(), identical_markdown)
                 self.assertEqual(record['conversion']['method'], 'method-A')
             previous_a = copy.deepcopy(record)
-            with patch('text_documents.CONVERSION_METHOD', 'method-B'):
+            with patch('law_crawler.text_documents.CONVERSION_METHOD', 'method-B'):
                 self.assertTrue(store.upgrade_conversion(record))
                 self.assertEqual(markdown_path.read_bytes(), identical_markdown)
                 self.assertEqual(record['conversion']['method'], 'method-B')

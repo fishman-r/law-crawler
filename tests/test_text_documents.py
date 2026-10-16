@@ -2,7 +2,7 @@
 import json
 import unittest
 
-from text_documents import detect_text_document, render_markdown
+from law_crawler.text_documents import detect_text_document, render_markdown
 
 
 def metadata(**values):

@@ -1,6 +1,6 @@
 import unittest
 
-from platform_adapters.germany import GermanyAdapter
+from law_crawler.platform_adapters.germany import GermanyAdapter
 
 ROOT = 'https://www.gesetze-im-internet.de/'
 DETAIL = ROOT + 'gg/index.html'

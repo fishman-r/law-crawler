@@ -51,7 +51,7 @@ def configure(workspace, download_base, runtime_dir, provider_input=None):
     for directory in (workspace, download_base, runtime_dir):
         directory.mkdir(parents=True, exist_ok=True, mode=0o700)
     # 本机原有下载与批次记录不迁移；新服务器使用自己的明确目录。
-    for country in (ROOT/'countries').iterdir():
+    for country in (ROOT/'skills/law-crawler/countries').iterdir():
         if country.is_dir():
             output = workspace/'countries'/country.name/'index.md'
             output.parent.mkdir(parents=True, exist_ok=True)
@@ -82,7 +82,7 @@ def configure(workspace, download_base, runtime_dir, provider_input=None):
         environment.pop(name, None)
     settings['env'] = environment
     private_json(settings_path, settings)
-    install('claude', source=ROOT/'skills/download-official-regulations')
+    install('claude', source=ROOT/'skills/law-crawler')
     install_hooks(settings_path, runtime_dir, workspace, sys.executable)
 
     binary = Path.home()/'.local/bin/claude'

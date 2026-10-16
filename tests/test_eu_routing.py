@@ -5,10 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-from platform_adapters.base import Document
-import download_regulations as app
-
-
+from law_crawler.platform_adapters.base import Document
+from law_crawler import download_regulations as app
 class EURoutingTests(unittest.TestCase):
     def test_country_separation_scope_and_repeat(self):
         class German:

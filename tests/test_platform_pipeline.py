@@ -4,11 +4,9 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-from platform_adapters.base import Adapter, Document
-from crawl_store import CrawlStore, unknown_metadata
-import download_regulations as app
-
-
+from law_crawler.platform_adapters.base import Adapter, Document
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler import download_regulations as app
 class TestAdapter(Adapter):
     def __init__(self, host):
         self.platform=host

@@ -7,12 +7,12 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-import download_regulations as cli
-import import_browser_download as importer
-from crawl_store import CrawlStore
-from platform_adapters.base import document_url
-from platform_adapters.trade import TradeAdapter
-from platform_adapters.national import ADAPTERS as NATIONAL
+from law_crawler import download_regulations as cli
+from law_crawler import import_browser_download as importer
+from law_crawler.crawl_store import CrawlStore
+from law_crawler.platform_adapters.base import document_url
+from law_crawler.platform_adapters.trade import TradeAdapter
+from law_crawler.platform_adapters.national import ADAPTERS as NATIONAL
 
 RTF = b'{\\rtf1\\ansi Peraturan fixture}'
 ENTRY = 'https://jdih.kemendag.go.id/'

@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import patch
 
-from document_formats import identify_document
+from law_crawler.document_formats import identify_document
 
 
 def law_xml(kind='Statute'):
@@ -58,7 +58,7 @@ class CanadianXMLTests(unittest.TestCase):
                 identify_document(invalid)
 
     def test_size_limit(self):
-        with patch('document_formats.MAX_LAW_XML', 10), self.assertRaises(ValueError):
+        with patch('law_crawler.document_formats.MAX_LAW_XML', 10), self.assertRaises(ValueError):
             identify_document(law_xml())
 
 

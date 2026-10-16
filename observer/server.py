@@ -51,9 +51,9 @@ class Observer:
             pass
         if not isinstance(metadata, dict):
             metadata = {}
-        skill = self.settings_path.parent/'skills/download-official-regulations'
+        skill = self.settings_path.parent/'skills/law-crawler'
         return dict(claude_version=_safe_string(metadata.get('claude_version')) or None,
-                    skill_installed=all((skill/part).exists() for part in ('SKILL.md','scripts','references','assets')),
+                    skill_installed=all((skill/part).exists() for part in ('SKILL.md','scripts/law_crawler','references','countries')),
                     provider=provider, model=_safe_string(env.get('ANTHROPIC_MODEL')) or None,
                     api_key_configured=bool(env.get('ANTHROPIC_AUTH_TOKEN') or env.get('ANTHROPIC_API_KEY')),
                     hooks_installed=hooks_installed(self.settings_path))

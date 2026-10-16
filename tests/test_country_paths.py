@@ -8,9 +8,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-import download_regulations as app
-import import_browser_download as browser_import
-from platform_adapters.base import Document
+from law_crawler import download_regulations as app
+from law_crawler import import_browser_download as browser_import
+from law_crawler.platform_adapters.base import Document
 
 
 class CountryPathsTests(unittest.TestCase):

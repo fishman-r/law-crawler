@@ -235,7 +235,7 @@
     const renderKey = JSON.stringify(batches) + batches.map((batch) => relative(batch.updated_at)).join("|");
     if (state.batchListRenderKey === `${state.batchId}|${renderKey}`) return;
     state.batchListRenderKey = `${state.batchId}|${renderKey}`;
-    if (!batches.length) { $("batch-list").replaceChildren(emptyState("还没有采集批次", "先通过 SSH 运行 download-official-regulations skill。生成批次记录后会自动显示。")); return; }
+    if (!batches.length) { $("batch-list").replaceChildren(emptyState("还没有采集批次", "先通过 SSH 运行 law-crawler skill。生成批次记录后会自动显示。")); return; }
     $("batch-list").replaceChildren(...batches.map((batch) => {
       const button = node("button", `entity-button${batch.id === state.batchId ? " is-selected" : ""}`); button.type = "button"; button.setAttribute("aria-pressed", String(batch.id === state.batchId));
       const top = node("div", "entity-top"); top.append(node("span", "entity-title", text(batch.jurisdiction, "未记录地区")), badge(batch.status, batchStatuses));

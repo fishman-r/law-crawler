@@ -7,9 +7,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from crawl_store import CrawlStore, unknown_metadata
-from platform_adapters.base import Document, field
-from regulation_pipeline import execute
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler.platform_adapters.base import Document, field
+from law_crawler.regulation_pipeline import execute
 
 
 def metadata(url):
@@ -100,8 +100,8 @@ class BatchFixture:
             options.update(jurisdiction=None, mode=None, batch_id=None,
                            rerun_batch=self.batch_id)
         self.calls = []
-        with patch('regulation_pipeline.ADAPTERS', self.adapters), \
-                patch('download_regulations.fetch', side_effect=self.fetch):
+        with patch('law_crawler.regulation_pipeline.ADAPTERS', self.adapters), \
+                patch('law_crawler.download_regulations.fetch', side_effect=self.fetch):
             result = execute(argparse.Namespace(**options))
         attempts = sorted((self.batch_dir / 'attempts').iterdir())
         self.attempt_dir = attempts[-1]

@@ -3,9 +3,9 @@ import tempfile
 import unittest
 from pathlib import Path
 from copy import deepcopy
-from crawl_store import CrawlStore, unknown_metadata
-from platform_adapters.base import field
-from regulation_selection import select_latest
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler.platform_adapters.base import field
+from law_crawler.regulation_selection import select_latest
 
 XML=b'<Statute xmlns:lims="http://justice.gc.ca/lims" lims:id="1"><Identification><LongTitle>Law</LongTitle><Chapter><ConsolidatedNumber>A-1</ConsolidatedNumber></Chapter></Identification><Body><Section><Text>Provision text.</Text></Section></Body></Statute>'
 

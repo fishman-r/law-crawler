@@ -7,10 +7,10 @@ import tempfile
 import unittest
 from unittest.mock import patch, Mock
 from urllib.error import HTTPError
-from crawl_store import CrawlStore, unknown_metadata
-from platform_adapters.base import Document, field
-from regulation_pipeline import execute
-from regulation_selection import select_latest
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler.platform_adapters.base import Document, field
+from law_crawler.regulation_pipeline import execute
+from law_crawler.regulation_selection import select_latest
 
 HOST='www.gesetze-im-internet.de'
 BASE='https://'+HOST
@@ -61,7 +61,7 @@ class WorkflowTests(unittest.TestCase):
                 self.assertFalse(url.endswith('.pdf'))
                 self.assertTrue(list((root/'downloads/.batches').glob('*/plan.json')))
                 return b'page',url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=fetch):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=fetch):
                 self.assertEqual(execute(arguments(root,batch_id='metadata-test')),0)
             self.assertEqual(len(list((root/'downloads/Germany/catalog').glob('*.json'))),2)
             self.assertFalse(list((root/'downloads/Germany').glob('*.pdf')))
@@ -77,7 +77,7 @@ class WorkflowTests(unittest.TestCase):
                 calls.append(url)
                 if url.endswith('.pdf'):raise TimeoutError('temporary')
                 return b'page',url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=fail):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=fail):
                 # A completed catalog is useful but report must expose file failure.
                 execute(arguments(root,mode='content',batch_id='content-test'))
             self.assertEqual(calls.count(BASE+'/new.pdf'),3)
@@ -88,7 +88,7 @@ class WorkflowTests(unittest.TestCase):
             replay=[]
             def success(url,*a):
                 replay.append(url);self.assertEqual(url,BASE+'/new.pdf');return PDF,url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=success):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=success):
                 self.assertEqual(execute(arguments(root,jurisdiction=None,mode=None,rerun_batch='content-test')),0)
                 self.assertEqual(execute(arguments(root,jurisdiction=None,mode=None,rerun_batch='content-test')),0)
             self.assertEqual(replay,[BASE+'/new.pdf'])
@@ -105,7 +105,7 @@ class WorkflowTests(unittest.TestCase):
                 calls.append(url)
                 if url.endswith('.pdf'):raise HTTPError(url,403,'Forbidden',{},None)
                 return b'page',url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=denied):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=denied):
                 execute(arguments(root,mode='content'))
             self.assertEqual(calls.count(BASE+'/new.pdf'),1)
 
@@ -138,12 +138,12 @@ class WorkflowTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);workspace(root)
             def fetch(url,*a):return (PDF if url.endswith('.pdf') else b'page'),url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=fetch):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=fetch):
                 self.assertEqual(execute(arguments(root,mode='content',batch_id='repair-file')),0)
             original=next((root/'downloads/Germany').glob('*.pdf'));original.write_bytes(b'broken')
             calls=[]
             def repair(url,*a):calls.append(url);return PDF,url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=repair):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=repair):
                 self.assertEqual(execute(arguments(root,jurisdiction=None,mode=None,rerun_batch='repair-file')),0)
             self.assertEqual(calls,[BASE+'/new.pdf'])
             self.assertEqual(original.read_bytes(),PDF)
@@ -151,10 +151,10 @@ class WorkflowTests(unittest.TestCase):
     def test_failed_discovery_recovers_on_batch_rerun(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);workspace(root)
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=TimeoutError('directory offline')):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=TimeoutError('directory offline')):
                 self.assertEqual(execute(arguments(root,batch_id='recover-catalog')),1)
             original=(root/'downloads/.batches/recover-catalog/plan.json').read_bytes()
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=lambda u,*a:(b'page',u)):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=lambda u,*a:(b'page',u)):
                 self.assertEqual(execute(arguments(root,jurisdiction=None,mode=None,rerun_batch='recover-catalog')),0)
             self.assertEqual((root/'downloads/.batches/recover-catalog/plan.json').read_bytes(),original)
             self.assertEqual(len(json.loads((root/'downloads/.batches/recover-catalog/candidates.json').read_text())),2)

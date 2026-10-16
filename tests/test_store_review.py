@@ -7,8 +7,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
-import download_regulations as app
-from crawl_store import CrawlStore, canonical_url
+from law_crawler import download_regulations as app
+from law_crawler.crawl_store import CrawlStore, canonical_url
 
 
 PDF_A = b'%PDF-1.4\nreview fixture A\n%%EOF\n'

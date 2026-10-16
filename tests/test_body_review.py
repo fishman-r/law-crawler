@@ -5,9 +5,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from crawl_store import CrawlStore
-from import_body_review import import_body_reviews
-from platform_adapters.base import field
+from law_crawler.crawl_store import CrawlStore
+from law_crawler.import_body_review import import_body_reviews
+from law_crawler.platform_adapters.base import field
 
 
 class BodyReviewTests(unittest.TestCase):
@@ -85,17 +85,17 @@ class BodyReviewTests(unittest.TestCase):
 
     def test_batch_rerun_reports_registered_conflict_without_network(self):
         from tests.test_regulation_workflow import arguments, workspace, Fixture, PDF
-        from regulation_pipeline import execute
+        from law_crawler.regulation_pipeline import execute
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);workspace(root)
             def fetch(url,*args): return (PDF if url.endswith('.pdf') else b'page'),url
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('download_regulations.fetch',side_effect=fetch):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch('law_crawler.download_regulations.fetch',side_effect=fetch):
                 self.assertEqual(execute(arguments(root,mode='content',batch_id='review-rerun')),0)
             with CrawlStore(root/'downloads/Germany') as store:
                 record=store.records()[0]
                 store.register_body_review(record['file']['sha256'],self.review('catalogue_body_type_conflict'))
-            with patch('regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch(
-                    'download_regulations.fetch',side_effect=AssertionError('replay must not request valid file')):
+            with patch('law_crawler.regulation_pipeline.ADAPTERS',{'gesetze-im-internet.de':Fixture()}),patch(
+                    'law_crawler.download_regulations.fetch',side_effect=AssertionError('replay must not request valid file')):
                 self.assertEqual(execute(arguments(root,jurisdiction=None,mode=None,rerun_batch='review-rerun')),0)
             attempt=root/'downloads/.batches/review-rerun/attempts/0002'
             report=json.loads((attempt/'report.json').read_text())

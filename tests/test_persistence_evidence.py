@@ -5,8 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from crawl_store import CrawlStore, unknown_metadata
-from platform_adapters.base import field
+from law_crawler.crawl_store import CrawlStore, unknown_metadata
+from law_crawler.platform_adapters.base import field
 
 
 URL = 'https://official.example/law.pdf'

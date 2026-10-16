@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-from platform_adapters.ministries import ADAPTERS
+from law_crawler.platform_adapters.ministries import ADAPTERS
 
 
 FIXTURES = Path(__file__).parent / 'fixtures' / 'ministries'

@@ -2,7 +2,7 @@ import tempfile
 from pathlib import Path
 import unittest
 
-from jurisdiction_registry import resolve_jurisdiction, jurisdiction_registry
+from law_crawler.jurisdiction_registry import resolve_jurisdiction, jurisdiction_registry
 from tools.install_skill import install, skills_root
 
 

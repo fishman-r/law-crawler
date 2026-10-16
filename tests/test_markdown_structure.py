@@ -3,7 +3,7 @@ import json
 import re
 import unittest
 
-from text_documents import render_markdown
+from law_crawler.text_documents import render_markdown
 
 
 SOURCE = 'https://official.example/regulation.xml'

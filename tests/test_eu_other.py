@@ -1,5 +1,5 @@
 import unittest
-from platform_adapters.eu_other import LegifranceAdapter, NormattivaAdapter, WettenAdapter
+from law_crawler.platform_adapters.eu_other import LegifranceAdapter, NormattivaAdapter, WettenAdapter
 
 
 class OtherEUTests(unittest.TestCase):

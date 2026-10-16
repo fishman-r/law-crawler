@@ -1,2 +1,0 @@
-{"at_utc": "2026-10-14T16:44:47.741269+00:00", "method": "GET", "route": "/", "status": 200, "body_bytes": 758, "response_completed": true}
-{"at_utc": "2026-10-14T16:44:55.114242+00:00", "method": "GET", "route": "/attachment", "status": 200, "body_bytes": 128, "response_completed": true}

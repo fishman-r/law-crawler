@@ -55,7 +55,7 @@ python -X utf8 "SKILL_DIR/scripts/prepare_workspace.py" --root "WORK_ROOT" --jur
 
 先修改本工程`skills/download-official-regulations/`文档及独立辅助脚本；核心采集运行模块和platform_adapters源码位于工程根目录，scripts中的对应文件由`tools/sync_skill.py`打包。运行`python3 tools/sync_skill.py --check`检查漂移，再安装到选定agent目录，不仅修改安装副本。工作区准备和浏览器诊断辅助脚本直接维护在工程skill目录；`assets/global-config.properties`作为通用相对路径模板独立维护，不从工作区配置复制，避免把个人下载目录传播到安装包。
 
-2026-10-15通用性复验：263项测试通过；独立代理仅用完整skill包在中文含空格临时目录完成18条前向命令观察，所有skill命令0次网络尝试。详情见[通用性审查报告](reports/skill-generality-review-2026-10-15.md) / [HTML](reports/skill-generality-review-2026-10-15.html)。这不代表其他agent客户端界面、Windows实机或实时官网均已验收。
+2026-10-15通用性复验：263项测试通过；独立代理仅用完整skill包在中文含空格临时目录完成18条前向命令观察，所有skill命令0次网络尝试。通用性审查报告保存在本地 `reports/`，不随源码发布。这不代表其他agent客户端界面、Windows实机或实时官网均已验收。
 
 ## 执行逻辑
 
@@ -170,7 +170,7 @@ downloads/
 
 HTML/XML/JSON 必须先确认是法规原文，不能将导航、错误页、挑战页转换后当成成功法规。文本转换保留层级和内容，结果完整性仍受来源与格式限制；PDF/扫描图片不自动 OCR，其他二进制格式不自动转换。详见 [文件格式](skills/download-official-regulations/references/file-formats.md)。
 
-Markdown还需核对源结构，不能仅以文字片段存在或文件哈希正确验收。`structured_text_v2.3`字段标注仅显示名称和值，不追加`(XML 路径)`括号；保留日期角色、具名条款层级、表格行列/跨度、脚注及未知结构；加拿大登记日期、XML合并日期与制令日期分别标注，不混为公布日期。MathML保留源结构，缺失idref脚注标未解析。现有文件可用下述离线批次重建，旧Markdown及元数据保存在`conversion-history/`，原始字节、来源与请求计数保留；后续旧缓存也会自动升级。完整排查见 [Markdown结构修复报告](reports/markdown-structure-repair-2026-10-15.md) / [HTML报告](reports/markdown-structure-repair-2026-10-15.html)。此前加拿大文本存在检查没有覆盖这些结构问题，不能继续作为结构验收证据。
+Markdown还需核对源结构，不能仅以文字片段存在或文件哈希正确验收。`structured_text_v2.3`字段标注仅显示名称和值，不追加`(XML 路径)`括号；保留日期角色、具名条款层级、表格行列/跨度、脚注及未知结构；加拿大登记日期、XML合并日期与制令日期分别标注，不混为公布日期。MathML保留源结构，缺失idref脚注标未解析。现有文件可用下述离线批次重建，旧Markdown及元数据保存在`conversion-history/`，原始字节、来源与请求计数保留；后续旧缓存也会自动升级。Markdown结构修复报告保存在本地 `reports/`。此前加拿大文本存在检查没有覆盖这些结构问题，不能继续作为结构验收证据。
 
 ```sh
 python3 skills/download-official-regulations/scripts/rebuild_markdown.py \
@@ -202,7 +202,8 @@ python3 skills/download-official-regulations/scripts/rebuild_markdown.py \
 | `crawl_store.py`、`document_formats.py`、`regulation_metadata.py` | 存储、去重、格式和元数据基础能力。 |
 | `skills/download-official-regulations/scripts/`、`assets/` | 自动打包运行代码及模板。 |
 | `tools/install_skill.py` | 目标 agent 安装；不修改权限配置。 |
-| `tests/`、`reports/` | 自动验证与历史实跑证据。 |
+| `tests/` | 自动化测试与固定样本。 |
+| `reports/` | 本地验证报告与历史实跑证据，已加入 `.gitignore`，不纳入版本控制。 |
 
 ```sh
 python3 tools/sync_skill.py
@@ -224,21 +225,21 @@ python3 tools/install_skill.py --agent codex
 
 优化后加拿大两阶段、Markdown转换及批次重跑实测见 验证汇总（历史报告当前工作区缺失） 和 HTML汇总（历史报告当前工作区缺失）。
 
-2026-10-15重新验证见 [Markdown汇总](reports/canada-optimized-validation-2026-10-15.md) / [HTML汇总](reports/canada-optimized-validation-2026-10-15.html)：先保存8条目录且原文请求0，首轮下载4份XML并转Markdown。默认重跑暴露并修复缓存额度未计入导致多采3份的问题，问题轮和7对原XML/Markdown均保留；修复后默认复用4份、0原文请求，全项刷新4次均为内容重复。当前官方页面声明合并文本截至2026-09-21，公布日未知保留待确认，不宣称全站唯一最新。两种报告生成及静态结构核对通过，浏览器file URL预览受策略限制，未作视觉验收。
+2026-10-15加拿大重新验证（汇总报告保存在本地 `reports/`）：先保存8条目录且原文请求0，首轮下载4份XML并转Markdown。默认重跑暴露并修复缓存额度未计入导致多采3份的问题，问题轮和7对原XML/Markdown均保留；修复后默认复用4份、0原文请求，全项刷新4次均为内容重复。当前官方页面声明合并文本截至2026-09-21，公布日未知保留待确认，不宣称全站唯一最新。两种报告生成及静态结构核对通过，浏览器file URL预览受策略限制，未作视觉验收。
 
-优化后印尼两阶段验证见 [Markdown汇总](reports/indonesia-optimized-validation-2026-10-14.md) 和 [HTML汇总](reports/indonesia-optimized-validation-2026-10-14.html)：16条目录、14份PDF，默认重跑复用14份，刷新重跑14份内容重复。实际样本全部PDF，未发生印尼正文转Markdown；HTML/XML/JSON转换由离线回归覆盖。仍有4个平台存在TLS/403访问失败，JDIHN为显式官方dev备用链路。
+优化后印尼两阶段验证（汇总报告保存在本地 `reports/`）：16条目录、14份PDF，默认重跑复用14份，刷新重跑14份内容重复。实际样本全部PDF，未发生印尼正文转Markdown；HTML/XML/JSON转换由离线回归覆盖。仍有4个平台存在TLS/403访问失败，JDIHN为显式官方dev备用链路。
 
 首轮审查当时记录12份身份匹配、1份扫描件待核验，并仅凭卫生部PMK23/2022提取层的`RANCANGAN`记录目录正文类型冲突（该判断已在后续更正）。`import_body_review.py`登记显式证据，文件JSON与SQLite保存`body_review`；审核随原SHA保留。当时原件清单13条候选，历史原字节及批次报告保持保留。用法见 [印尼验证说明](skills/download-official-regulations/references/indonesia.md)。
 
-后续排查与更正见 [Markdown报告](reports/indonesia-recovery-followup-2026-10-14.md) / [HTML报告](reports/indonesia-recovery-followup-2026-10-14.html)。MK正常浏览器目录加CLI公开原件已补收PMK1/2026和PMK7/2025，显式128MiB离线导入，重跑existing2/content_duplicate2；CLI目录仍403。其余3个平台仍TLS/403受阻，DPR历史汇编不替代2025原件。
+后续排查与更正报告保存在本地 `reports/`。MK正常浏览器目录加CLI公开原件已补收PMK1/2026和PMK7/2025，显式128MiB离线导入，重跑existing2/content_duplicate2；CLI目录仍403。其余3个平台仍TLS/403受阻，DPR历史汇编不替代2025原件。
 
 此前两份异常已补核：PERMA2/2015扫描页视觉身份匹配；PMK23/2022的`RANCANGAN`为白色隐藏文字，正式渲染、公布/认证页支持身份，原先仅凭提取判冲突的结论已更正。`body_review_history`保留前次审核，原文件与旧批次报告不改写。国家目录现16份PDF全部完成限定页面身份核验；5份公布日期仍未知，不代表全站最新或效力已核实。同内容同来源的新目录未知字段不覆盖已有observed证据，新来源/字节不继承。
 
 `import_browser_download.py --acquisition-method official_cli_download`记录真实CLI取得方式，报告模式为`official_file_import`，默认浏览器行为兼容；取得方式和大小上限随批次计划冻结。`official_fetch(..., max_bytes=...)`可为已核实的大原件显式调整响应上限，标准CLI默认仍40MiB，白名单和TLS验证保持启用。
 
-三平台继续排查见 [Markdown报告](reports/indonesia-three-browser-recovery-2026-10-14.md) / [HTML报告](reports/indonesia-three-browser-recovery-2026-10-14.html)。IAB连接/标签/导航可用而DOM和截图读取超时，关闭大PDF未修复；本机Chrome原生读取与截图替代通道已实际验证。正常浏览器仍看到BPK Riau/E-PPID拒绝、DPR当前原件Akamai拒绝、peraturan连接关闭，本轮新增原件0，库存16份原字节保持一致。DPR印尼语数字详情与旧英语详情公布日25/26 February 2025差异保留，未猜测合并。流程见 [浏览器分层排障](skills/download-official-regulations/references/browser-workflow.md)。
+三平台继续排查报告保存在本地 `reports/`。IAB连接/标签/导航可用而DOM和截图读取超时，关闭大PDF未修复；本机Chrome原生读取与截图替代通道已实际验证。正常浏览器仍看到BPK Riau/E-PPID拒绝、DPR当前原件Akamai拒绝、peraturan连接关闭，本轮新增原件0，库存16份原字节保持一致。DPR印尼语数字详情与旧英语详情公布日25/26 February 2025差异保留，未猜测合并。流程见 [浏览器分层排障](skills/download-official-regulations/references/browser-workflow.md)。
 
-10月15日排查见 [Markdown报告](reports/indonesia-iab-repair-2026-10-15.md) / [HTML报告](reports/indonesia-iab-repair-2026-10-15.html)：IAB官网读取在50秒外层调用时限下已通过，后台DOM实测约30秒；明确附件响应的诊断文件实际下载并通过字节/SHA核对，普通download属性链接仍未返回事件。新增便携诊断服务直接维护在工程skill中，不计法规库存。Chrome新官方BPK地区入口、DPR3/2025原文及DJPP公报导航仍拒绝或断开，新增法规0；没有原字节时不扩展白名单或创建成功文件元数据。
+10月15日排查（报告保存在本地 `reports/`）：IAB官网读取在50秒外层调用时限下已通过，后台DOM实测约30秒；明确附件响应的诊断文件实际下载并通过字节/SHA核对，普通download属性链接仍未返回事件。新增便携诊断服务直接维护在工程skill中，不计法规库存。Chrome新官方BPK地区入口、DPR3/2025原文及DJPP公报导航仍拒绝或断开，新增法规0；没有原字节时不扩展白名单或创建成功文件元数据。
 
 跨agent浏览器分层对照可运行以下命令，用自己可用的浏览器工具访问stdout中返回的URL，并核对fixture.json中的marker和实际附件SHA；诊断文件保存在报告证据目录，不导入法规库：
 

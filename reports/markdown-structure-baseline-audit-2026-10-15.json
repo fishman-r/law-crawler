@@ -1,0 +1,2317 @@
+{
+  "schema_version": 1,
+  "audit_type": "independent_read_only_structure_baseline",
+  "created_at": "2026-10-15T02:33:01.517090+00:00",
+  "scope": "downloads所有国家已登记主文件及原始文本；HTML/Markdown报告、PDF不当作Markdown正文。无网络请求，无正文/sidecar/store/批次修改。仅此报告落盘。",
+  "evidence_snapshot": "/tmp/law-crawler-markdown-audit-snapshot-2026-10-15.json",
+  "sources_read": [
+    "skills/download-official-regulations/SKILL.md",
+    "skills/download-official-regulations/references/file-formats.md",
+    "text_documents.py (structured_text_v1 implementation)"
+  ],
+  "inventory": [
+    {
+      "country": "Canada",
+      "registered_primary_files": 7,
+      "registered_media_types": {
+        "text/markdown": 7
+      },
+      "raw_text_files": {
+        "xml": 7,
+        "html": 0,
+        "json": 0
+      },
+      "markdown_body_files": 7,
+      "excluded_markdown_reports": [
+        "downloads/Canada/last-run.md",
+        "downloads/Canada/validation-20261015.md"
+      ]
+    },
+    {
+      "country": "Indonesia",
+      "registered_primary_files": 16,
+      "registered_media_types": {
+        "application/pdf": 16
+      },
+      "raw_text_files": {
+        "xml": 0,
+        "html": 0,
+        "json": 0
+      },
+      "markdown_body_files": 0,
+      "excluded_markdown_reports": [
+        "downloads/Indonesia/official-file-import-last-run.md",
+        "downloads/Indonesia/last-run.md"
+      ]
+    }
+  ],
+  "summary": {
+    "markdown_body_files": 7,
+    "raw_xml_files": 7,
+    "raw_html_files": 0,
+    "raw_json_files": 0,
+    "countries_with_markdown_bodies": [
+      "Canada"
+    ],
+    "text_missing_files": 0,
+    "text_atoms_checked": 68654,
+    "text_atoms_missing": 0,
+    "semantic_structure_loss_files": 7,
+    "date_blocks": 17,
+    "table_count": 57,
+    "table_rows": 2578,
+    "table_entries": 7823,
+    "footnotes": 19,
+    "footnote_refs": 30,
+    "mathml_formulas": 5,
+    "images": 12,
+    "markdown_sidecar_hash_mismatch_files": 1
+  },
+  "issue_affected_files": {
+    "unlabelled_identification_values": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "date_role_and_composition_loss": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "provision_hierarchy_and_kind_loss": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "paragraph_subparagraph_clause_nesting_flattened": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "footnote_reference_target_loss": {
+      "count": 5,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "cross_reference_target_loss": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "mixed_text_inline_semantics_loss": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "definition_term_language_and_historical_note_role_loss": {
+      "count": 5,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md"
+      ]
+    },
+    "unmapped_tag_context_and_attribute_loss": {
+      "count": 7,
+      "paths": [
+        "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+        "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+        "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md"
+      ]
+    },
+    "table_row_column_header_span_loss": {
+      "count": 3,
+      "paths": [
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md"
+      ]
+    },
+    "image_source_attribute_loss": {
+      "count": 3,
+      "paths": [
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md"
+      ]
+    },
+    "related_not_in_force_boundary_loss": {
+      "count": 4,
+      "paths": [
+        "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+        "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+        "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md"
+      ]
+    },
+    "mathml_operator_script_fraction_structure_loss": {
+      "count": 1,
+      "paths": [
+        "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md"
+      ]
+    }
+  },
+  "important_limits": [
+    "原子文本存在与结构保真分开；零原子文本缺失不能证明整体文本无损。",
+    "当前下载库只有加拿大XML提供Markdown正文实样；HTML/JSON修复效果必须另以离线fixture验证，不可称实站验收。",
+    "原XML自身无idref的脚注引用不能凭字母重复推断配对。",
+    "root/Identification中的current-date、pit-date、inforce-start-date、lastAmendedDate等保留原字段名和证据，不能推断公布日期或现行效力。"
+  ],
+  "records": [
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md",
+      "sidecar_path": "downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.json",
+      "original_path": "downloads/Canada/raw/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.xml",
+      "title": "Accessible Canada Act ( S.C. 2019, c. 10)",
+      "markdown_sha256": "7ed95079a104cabf710b02d165bb0a0169fddd1a7817c6fc69dfe7c1c142c8d0",
+      "sidecar_markdown_sha256": "7ed95079a104cabf710b02d165bb0a0169fddd1a7817c6fc69dfe7c1c142c8d0",
+      "markdown_sidecar_hash_matches": true,
+      "original_sha256": "50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Statute": 1,
+        "Identification": 1,
+        "BillNumber": 1,
+        "Parliament": 1,
+        "Session": 1,
+        "Number": 1,
+        "RegnalYear": 1,
+        "Year-s": 2,
+        "Monarch": 1,
+        "LongTitle": 1,
+        "ShortTitle": 1,
+        "RunningHead": 1,
+        "BillHistory": 1,
+        "Stages": 2,
+        "Date": 2,
+        "YYYY": 3,
+        "MM": 2,
+        "DD": 2,
+        "Chapter": 1,
+        "ConsolidatedNumber": 1,
+        "AnnualStatuteId": 1,
+        "AnnualStatuteNumber": 1,
+        "BillRefNumber": 1,
+        "Introduction": 1,
+        "Preamble": 1,
+        "Provision": 7,
+        "MarginalNote": 425,
+        "Text": 755,
+        "XRefExternal": 97,
+        "Enacts": 1,
+        "Body": 1,
+        "Heading": 94,
+        "TitleText": 94,
+        "Section": 209,
+        "Label": 837,
+        "Definition": 10,
+        "DefinedTermEn": 13,
+        "DefinedTermFr": 10,
+        "XRefInternal": 397,
+        "Paragraph": 239,
+        "Subsection": 352,
+        "DefinitionRef": 12,
+        "HistoricalNote": 14,
+        "HistoricalNoteSubItem": 6,
+        "Subparagraph": 24,
+        "ContinuedParagraph": 1,
+        "ContinuedSectionSubsection": 1,
+        "FootnoteRef": 1,
+        "Footnote": 1,
+        "Emphasis": 1,
+        "RecentAmendments": 1,
+        "Amendment": 3,
+        "AmendmentCitation": 3,
+        "AmendmentDate": 3
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Statute/Identification[1]/BillNumber[1]",
+          "source_field": "BillNumber",
+          "value": "C-81",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Parliament[1]/Session[1]",
+          "source_field": "Session",
+          "value": "1",
+          "parent_field": "Parliament"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Parliament[1]/Number[1]",
+          "source_field": "Number",
+          "value": "42",
+          "parent_field": "Parliament"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Parliament[1]/RegnalYear[1]/Year-s[1]",
+          "source_field": "Year-s",
+          "value": "64-65-66-67-68",
+          "parent_field": "RegnalYear"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Parliament[1]/Year-s[1]",
+          "source_field": "Year-s",
+          "value": "2015-2016-2017-2018-2019",
+          "parent_field": "Parliament"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2023",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "5",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "4",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2019",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "21",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/ConsolidatedNumber[1]",
+          "source_field": "ConsolidatedNumber",
+          "value": "A-0.6",
+          "parent_field": "Chapter"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/AnnualStatuteId[1]/AnnualStatuteNumber[1]",
+          "source_field": "AnnualStatuteNumber",
+          "value": "10",
+          "parent_field": "AnnualStatuteId"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/AnnualStatuteId[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2019",
+          "parent_field": "AnnualStatuteId"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillRefNumber[1]",
+          "source_field": "BillRefNumber",
+          "value": "90878",
+          "parent_field": "Identification"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]",
+          "role": "Stages stage=consolidation",
+          "components": {
+            "YYYY": "2023",
+            "MM": "5",
+            "DD": "4"
+          },
+          "source_parent_attributes": {
+            "stage": "consolidation"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]",
+          "role": "Stages stage=assented-to",
+          "components": {
+            "YYYY": "2019",
+            "MM": "6",
+            "DD": "21"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2019-06-21",
+            "enacted-date": "2019-06-21",
+            "fid": "1153364",
+            "id": "1153364",
+            "stage": "assented-to"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 3147,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": false,
+        "footnote_reference_target_loss": true,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": false,
+        "image_source_attribute_loss": false,
+        "related_not_in_force_boundary_loss": false,
+        "definition_term_language_and_historical_note_role_loss": true,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 298,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Statute/Introduction[1]/Preamble[1]/Provision[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Whereas the Canadian Charter of Rights and Freedoms guarantees the right to the equal protection and equal benefit of the law without discrimination and, in particular, discriminat"
+        },
+        {
+          "source_path": "/Statute/Introduction[1]/Preamble[1]/Provision[2]/Text[1]",
+          "tag": "Text",
+          "sample": "Whereas the Canadian Human Rights Act recognizes that all individuals should have an opportunity equal with other individuals to make for themselves the lives that they are able an"
+        },
+        {
+          "source_path": "/Statute/Introduction[1]/Preamble[1]/Provision[3]/Text[1]",
+          "tag": "Text",
+          "sample": "Whereas a proactive and systemic approach for identifying, removing and preventing barriers to accessibility without delay complements the rights of persons with disabilities under"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[1]/Text[1]",
+          "tag": "Text",
+          "sample": "This Act may be cited as the Accessible Canada Act."
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Accessibility Commissioner means the member of the Canadian Human Rights Commission that is appointed under subsection 26(1) of the Canadian Human Rights Act and that is referred t"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[2]/Text[1]",
+          "tag": "Text",
+          "sample": "barrier means anything — including anything physical, architectural, technological or attitudinal, anything that is based on information or communications or anything that is the r"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[3]/Text[1]",
+          "tag": "Text",
+          "sample": "broadcasting undertaking has the same meaning as in subsection 2(1) of the Broadcasting Act. (entreprise de radiodiffusion)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[4]/Text[1]",
+          "tag": "Text",
+          "sample": "Canadian carrier has the same meaning as in subsection 2(1) of the Telecommunications Act. (entreprise canadienne)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[5]/Text[1]",
+          "tag": "Text",
+          "sample": "disability means any impairment, including a physical, mental, intellectual, cognitive, learning, communication or sensory impairment — or a functional limitation — whether permane"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[6]/Text[1]",
+          "tag": "Text",
+          "sample": "Minister means the member of the Queen’s Privy Council for Canada designated under section 4. (ministre)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[7]/Text[1]",
+          "tag": "Text",
+          "sample": "personal information has the same meaning as in section 3 of the Privacy Act. (renseignements personnels)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Definition[8]/Text[1]",
+          "tag": "Text",
+          "sample": "regulated entity means an entity or person referred to in subsection 7(1). (entité réglementée)"
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Statute": 1,
+        "Identification": 1,
+        "BillNumber": 1,
+        "Parliament": 1,
+        "Session": 1,
+        "Number": 1,
+        "RegnalYear": 1,
+        "Year-s": 2,
+        "Monarch": 1,
+        "RunningHead": 1,
+        "BillHistory": 1,
+        "Stages": 2,
+        "Date": 2,
+        "YYYY": 3,
+        "MM": 2,
+        "DD": 2,
+        "ConsolidatedNumber": 1,
+        "AnnualStatuteId": 1,
+        "AnnualStatuteNumber": 1,
+        "BillRefNumber": 1,
+        "Introduction": 1,
+        "Preamble": 1,
+        "Provision": 7,
+        "XRefExternal": 97,
+        "Enacts": 1,
+        "Body": 1,
+        "TitleText": 94,
+        "Label": 837,
+        "Definition": 10,
+        "DefinedTermEn": 13,
+        "DefinedTermFr": 10,
+        "XRefInternal": 397,
+        "DefinitionRef": 12,
+        "HistoricalNote": 14,
+        "HistoricalNoteSubItem": 6,
+        "Subparagraph": 24,
+        "ContinuedParagraph": 1,
+        "ContinuedSectionSubsection": 1,
+        "FootnoteRef": 1,
+        "Footnote": 1,
+        "Emphasis": 1,
+        "RecentAmendments": 1,
+        "Amendment": 3,
+        "AmendmentCitation": 3,
+        "AmendmentDate": 3
+      },
+      "source_footnote_refs_without_idref": 0,
+      "root_source_attributes": {
+        "pit-date": "2023-04-27",
+        "hasPreviousVersion": "true",
+        "lastAmendedDate": "2023-04-27",
+        "current-date": "2023-05-03",
+        "inforce-start-date": "2019-06-21",
+        "enacted-date": "2019-06-21",
+        "fid": "1153358",
+        "id": "1153358",
+        "bill-origin": "commons",
+        "bill-type": "govt-public",
+        "lang": "en"
+      }
+    },
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+      "sidecar_path": "downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.json",
+      "original_path": "downloads/Canada/raw/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.xml",
+      "title": "Canada Occupational Health and Safety Regulations ( SOR /86-304)",
+      "markdown_sha256": "50d999de4e5df20c78c9684d2bfd39f9ec52c88471c6b6cf6baf8a5a2ebab436",
+      "sidecar_markdown_sha256": "50d999de4e5df20c78c9684d2bfd39f9ec52c88471c6b6cf6baf8a5a2ebab436",
+      "markdown_sidecar_hash_matches": true,
+      "original_sha256": "56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 202,
+        "LongTitle": 1,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 118,
+        "Text": 2510,
+        "FootnoteRef": 9,
+        "Footnote": 7,
+        "Label": 2615,
+        "Body": 1,
+        "Heading": 328,
+        "TitleText": 331,
+        "Section": 492,
+        "Definition": 151,
+        "DefinedTermEn": 175,
+        "Paragraph": 1053,
+        "DefinedTermFr": 141,
+        "Repealed": 43,
+        "HistoricalNote": 432,
+        "HistoricalNoteSubItem": 627,
+        "Subsection": 720,
+        "Subparagraph": 191,
+        "ContinuedSectionSubsection": 2,
+        "Sup": 37,
+        "Schedule": 20,
+        "ScheduleFormHeading": 20,
+        "OriginatingRef": 16,
+        "TableGroup": 19,
+        "table": 19,
+        "title": 11,
+        "tgroup": 19,
+        "colspec": 71,
+        "thead": 12,
+        "row": 258,
+        "entry": 745,
+        "tbody": 19,
+        "LeaderRightJustified": 71,
+        "Sub": 9,
+        "Emphasis": 16,
+        "Language": 10,
+        "Clause": 2,
+        "DefinitionRef": 7,
+        "XRefInternal": 5,
+        "FormGroup": 2,
+        "ImageGroup": 6,
+        "AlternateText": 6,
+        "Image": 6,
+        "Leader": 8,
+        "FormBlank": 1,
+        "RegulationPiece": 3,
+        "Caption": 2,
+        "PageBreak": 1,
+        "RelatedOrNotInForce": 18,
+        "AmendedText": 22,
+        "SectionPiece": 9,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Regulation/Identification[1]/InstrumentNumber[1]",
+          "source_field": "InstrumentNumber",
+          "value": "SOR/86-304",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "1986",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "3",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "13",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2026",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "2",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "19",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/OrderNumber[1]",
+          "source_field": "OrderNumber",
+          "value": "1986-616",
+          "parent_field": "RegulationMakerOrder"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "1986",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "3",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "13",
+          "parent_field": "Date"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]",
+          "role": "RegistrationDate",
+          "components": {
+            "YYYY": "1986",
+            "MM": "3",
+            "DD": "13"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]",
+          "role": "ConsolidationDate",
+          "components": {
+            "YYYY": "2026",
+            "MM": "2",
+            "DD": "19"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2017-06-20"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]",
+          "role": "RegulationMakerOrder (order date; not assumed published/effective date)",
+          "components": {
+            "YYYY": "1986",
+            "MM": "3",
+            "DD": "13"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 7756,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": true,
+        "footnote_reference_target_loss": true,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": false,
+        "image_source_attribute_loss": true,
+        "related_not_in_force_boundary_loss": true,
+        "definition_term_language_and_historical_note_role_loss": true,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 468,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Her Excellency the Governor General in Council, on the recommendation of the Minister of Labour, pursuant to sections 82* and 83* and subsection 106(1)* of the Canada Labour Code, "
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[1]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Accident Investigation and Reporting Regulations, C.R.C., c. 993,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[2]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Boiler and Pressure Vessel Regulations, made by Order in Council P.C. 1979-1426 of May 9, 1979**,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[2]/Footnote[1]/Text[1]",
+          "tag": "Text",
+          "sample": "SOR/79-399, 1979 Canada Gazette Part II, p. 2069"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[3]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Building Safety Regulations, C.R.C., c. 995,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[4]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Confined Spaces Regulations, C.R.C., c. 996,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[5]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Dangerous Substances Regulations, C.R.C., c. 997,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[6]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Electrical Safety Regulations, C.R.C., c. 998,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[7]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Elevating Devices Regulations, made by Order in Council P.C. 1979-1428 of May 9, 1979***,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[7]/Footnote[1]/Text[1]",
+          "tag": "Text",
+          "sample": "SOR/79-401, 1979 Canada Gazette Part II, p. 2075"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[8]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada Fire Safety Regulations, C.R.C., c. 1000,"
+        },
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Provision[9]/Text[1]",
+          "tag": "Text",
+          "sample": "the Canada First-Aid Regulations, C.R.C., c. 1001,"
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 202,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 118,
+        "FootnoteRef": 9,
+        "Footnote": 7,
+        "Label": 2615,
+        "Body": 1,
+        "TitleText": 331,
+        "Definition": 151,
+        "DefinedTermEn": 175,
+        "DefinedTermFr": 141,
+        "Repealed": 43,
+        "HistoricalNote": 432,
+        "HistoricalNoteSubItem": 627,
+        "Subparagraph": 191,
+        "ContinuedSectionSubsection": 2,
+        "Sup": 37,
+        "ScheduleFormHeading": 20,
+        "OriginatingRef": 16,
+        "TableGroup": 19,
+        "table": 19,
+        "tgroup": 19,
+        "colspec": 71,
+        "thead": 12,
+        "row": 258,
+        "entry": 745,
+        "tbody": 19,
+        "LeaderRightJustified": 71,
+        "Sub": 9,
+        "Emphasis": 16,
+        "Language": 10,
+        "Clause": 2,
+        "DefinitionRef": 7,
+        "XRefInternal": 5,
+        "FormGroup": 2,
+        "ImageGroup": 6,
+        "AlternateText": 6,
+        "Image": 6,
+        "Leader": 8,
+        "FormBlank": 1,
+        "RegulationPiece": 3,
+        "Caption": 2,
+        "PageBreak": 1,
+        "RelatedOrNotInForce": 18,
+        "AmendedText": 22,
+        "SectionPiece": 9,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "source_footnote_refs_without_idref": 0,
+      "root_source_attributes": {
+        "pit-date": "2025-03-26",
+        "hasPreviousVersion": "true",
+        "lastAmendedDate": "2025-03-26",
+        "current-date": "2026-02-18",
+        "inforce-start-date": "2017-06-20",
+        "fid": "893041",
+        "id": "893041",
+        "regulation-type": "SOR",
+        "lang": "en"
+      }
+    },
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md",
+      "sidecar_path": "downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.json",
+      "original_path": "downloads/Canada/raw/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.xml",
+      "title": "Canadian Aviation Regulations ( SOR /96-433)",
+      "markdown_sha256": "e1f507cb5612a3f32ecd591ce5ac0c526b1e2b7191449ff63148580c2bd6edee",
+      "sidecar_markdown_sha256": "e1f507cb5612a3f32ecd591ce5ac0c526b1e2b7191449ff63148580c2bd6edee",
+      "markdown_sidecar_hash_matches": true,
+      "original_sha256": "628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 826,
+        "ShortTitle": 1,
+        "LongTitle": 1,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 290,
+        "Text": 10907,
+        "FootnoteRef": 18,
+        "Footnote": 9,
+        "Label": 11116,
+        "Body": 1,
+        "Heading": 1818,
+        "TitleText": 1824,
+        "Section": 1663,
+        "Subsection": 2430,
+        "Definition": 511,
+        "DefinedTermEn": 600,
+        "DefinedTermFr": 506,
+        "Paragraph": 4981,
+        "Repealed": 284,
+        "Sub": 44,
+        "Subparagraph": 1507,
+        "DefinitionRef": 3,
+        "IBR": 76,
+        "HistoricalNote": 1148,
+        "HistoricalNoteSubItem": 1622,
+        "ContinuedSectionSubsection": 1,
+        "Reserved": 200,
+        "Emphasis": 498,
+        "Schedule": 19,
+        "ScheduleFormHeading": 19,
+        "OriginatingRef": 16,
+        "ImageGroup": 2,
+        "AlternateText": 2,
+        "Image": 2,
+        "TableGroup": 37,
+        "table": 37,
+        "tgroup": 37,
+        "colspec": 142,
+        "tbody": 37,
+        "row": 2245,
+        "entry": 6928,
+        "FormBlank": 1,
+        "thead": 36,
+        "title": 27,
+        "LeaderRightJustified": 119,
+        "Caption": 26,
+        "XRefInternal": 347,
+        "Ins": 1,
+        "Clause": 188,
+        "List": 6,
+        "Item": 38,
+        "Sup": 4,
+        "Subclause": 17,
+        "LineBreak": 1,
+        "FormulaGroup": 5,
+        "Formula": 5,
+        "MathML": 5,
+        "math": 5,
+        "munder": 1,
+        "mrow": 22,
+        "mo": 31,
+        "mi": 35,
+        "msub": 19,
+        "FormulaConnector": 5,
+        "FormulaDefinition": 15,
+        "FormulaTerm": 15,
+        "FormulaParagraph": 8,
+        "mfrac": 2,
+        "munderover": 1,
+        "mn": 8,
+        "mspace": 1,
+        "RegulationPiece": 2,
+        "RelatedOrNotInForce": 20,
+        "MarginalNote": 1,
+        "AmendedText": 20,
+        "SectionPiece": 7,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Regulation/Identification[1]/InstrumentNumber[1]",
+          "source_field": "InstrumentNumber",
+          "value": "SOR/96-433",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "1996",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "9",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "10",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2026",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "18",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/OrderNumber[1]",
+          "source_field": "OrderNumber",
+          "value": "1996-1399",
+          "parent_field": "RegulationMakerOrder"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "1996",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "9",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "10",
+          "parent_field": "Date"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]",
+          "role": "RegistrationDate",
+          "components": {
+            "YYYY": "1996",
+            "MM": "9",
+            "DD": "10"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]",
+          "role": "ConsolidationDate",
+          "components": {
+            "YYYY": "2026",
+            "MM": "6",
+            "DD": "18"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2019-01-01"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]",
+          "role": "RegulationMakerOrder (order date; not assumed published/effective date)",
+          "components": {
+            "YYYY": "1996",
+            "MM": "9",
+            "DD": "10"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 37365,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": true,
+        "footnote_reference_target_loss": true,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": true,
+        "image_source_attribute_loss": true,
+        "related_not_in_force_boundary_loss": true,
+        "definition_term_language_and_historical_note_role_loss": true,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 1910,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Text[1]",
+          "tag": "Text",
+          "sample": "His Excellency the Governor General in Council, on the recommendation of the Minister of Transport, pursuant to subsections 4.3(2)a, 4.4(1)a, (2)a and (6)a, 4.6(2)a and 4.7(2)b, se"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[1]/Text[1]",
+          "tag": "Text",
+          "sample": "These Regulations may be cited as the Canadian Aviation Regulations."
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[1]/Text[1]",
+          "tag": "Text",
+          "sample": "ACAS or Airborne Collision Avoidance System means an aircraft system based on transponder signals that operates independently of ground-based equipment and is intended to provide a"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[2]/Text[1]",
+          "tag": "Text",
+          "sample": "Act means the Aeronautics Act; (Loi)"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[3]/Text[1]",
+          "tag": "Text",
+          "sample": "advanced ultra-light aeroplane means an aeroplane that has a type design that is in compliance with the standards specified in the manual entitled Design Standards for Advanced Ult"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[4]/Text[1]",
+          "tag": "Text",
+          "sample": "aerial work means a commercial air service other than an air transport service or a flight training service; (travail aérien)"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[5]/Text[1]",
+          "tag": "Text",
+          "sample": "aerial work zone means an area, delineated in an aerial work zone plan, in which aerial work is being conducted and that is over a built-up area of a city or town or over or adjace"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[6]/Text[1]",
+          "tag": "Text",
+          "sample": "aerial work zone plan means a risk management plan for proposed aerial work; (plan de zone de travail aérien)"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[7]/Text[1]",
+          "tag": "Text",
+          "sample": "aerobatic manoeuvre means a manoeuvre where a change in the attitude of an aircraft results in a bank angle greater than 60 degrees, an abnormal attitude or an abnormal acceleratio"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[8]/Text[1]",
+          "tag": "Text",
+          "sample": "aerodrome traffic means all traffic on the movement area of an aerodrome and all aircraft operating at or in the vicinity of the aerodrome; (circulation d’aérodrome)"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[9]/Text[1]",
+          "tag": "Text",
+          "sample": "aeroplane means a power-driven heavier-than-air aircraft that derives its lift in flight from aerodynamic reactions on surfaces that remain fixed during flight; (avion)"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[2]/Subsection[1]/Definition[10]/Text[1]",
+          "tag": "Text",
+          "sample": "AGL means above ground level; (AGL)"
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 826,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 290,
+        "FootnoteRef": 18,
+        "Footnote": 9,
+        "Label": 11116,
+        "Body": 1,
+        "TitleText": 1824,
+        "Definition": 511,
+        "DefinedTermEn": 600,
+        "DefinedTermFr": 506,
+        "Repealed": 284,
+        "Sub": 44,
+        "Subparagraph": 1507,
+        "DefinitionRef": 3,
+        "IBR": 76,
+        "HistoricalNote": 1148,
+        "HistoricalNoteSubItem": 1622,
+        "ContinuedSectionSubsection": 1,
+        "Reserved": 200,
+        "Emphasis": 498,
+        "ScheduleFormHeading": 19,
+        "OriginatingRef": 16,
+        "ImageGroup": 2,
+        "AlternateText": 2,
+        "Image": 2,
+        "TableGroup": 37,
+        "table": 37,
+        "tgroup": 37,
+        "colspec": 142,
+        "tbody": 37,
+        "row": 2245,
+        "entry": 6928,
+        "FormBlank": 1,
+        "thead": 36,
+        "LeaderRightJustified": 119,
+        "Caption": 26,
+        "XRefInternal": 347,
+        "Ins": 1,
+        "Clause": 188,
+        "List": 6,
+        "Item": 38,
+        "Sup": 4,
+        "Subclause": 17,
+        "LineBreak": 1,
+        "FormulaGroup": 5,
+        "Formula": 5,
+        "MathML": 5,
+        "math": 5,
+        "munder": 1,
+        "mrow": 22,
+        "mo": 31,
+        "mi": 35,
+        "msub": 19,
+        "FormulaConnector": 5,
+        "FormulaDefinition": 15,
+        "FormulaTerm": 15,
+        "FormulaParagraph": 8,
+        "mfrac": 2,
+        "munderover": 1,
+        "mn": 8,
+        "mspace": 1,
+        "RegulationPiece": 2,
+        "RelatedOrNotInForce": 20,
+        "AmendedText": 20,
+        "SectionPiece": 7,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "source_footnote_refs_without_idref": 8,
+      "root_source_attributes": {
+        "pit-date": "2026-06-17",
+        "hasPreviousVersion": "true",
+        "lastAmendedDate": "2026-06-17",
+        "current-date": "2026-06-17",
+        "inforce-start-date": "2019-01-01",
+        "fid": "987428",
+        "id": "987428",
+        "regulation-type": "SOR",
+        "lang": "en"
+      }
+    },
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+      "sidecar_path": "downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.json",
+      "original_path": "downloads/Canada/raw/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.xml",
+      "title": "Access to Information Act ( R.S.C. , 1985, c. A-1)",
+      "markdown_sha256": "71acf3206ac7d4e9aae9cd53f9cce8be7ed76db62fb530d3c889760e379ef906",
+      "sidecar_markdown_sha256": "71acf3206ac7d4e9aae9cd53f9cce8be7ed76db62fb530d3c889760e379ef906",
+      "markdown_sidecar_hash_matches": true,
+      "original_sha256": "ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Statute": 1,
+        "Identification": 1,
+        "LongTitle": 1,
+        "ShortTitle": 1,
+        "RunningHead": 1,
+        "BillHistory": 1,
+        "Stages": 1,
+        "Date": 1,
+        "YYYY": 1,
+        "MM": 1,
+        "DD": 1,
+        "Chapter": 1,
+        "ConsolidatedNumber": 1,
+        "Body": 1,
+        "Heading": 73,
+        "TitleText": 78,
+        "Section": 195,
+        "MarginalNote": 337,
+        "Label": 948,
+        "Text": 912,
+        "XRefExternal": 100,
+        "HistoricalNote": 172,
+        "HistoricalNoteSubItem": 318,
+        "Subsection": 234,
+        "Paragraph": 459,
+        "Definition": 42,
+        "DefinedTermEn": 50,
+        "DefinedTermFr": 42,
+        "DefinitionRef": 16,
+        "ContinuedSectionSubsection": 8,
+        "XRefInternal": 59,
+        "Subparagraph": 55,
+        "ContinuedParagraph": 1,
+        "Repealed": 5,
+        "Language": 19,
+        "Schedule": 4,
+        "ScheduleFormHeading": 4,
+        "OriginatingRef": 2,
+        "BilingualGroup": 82,
+        "BilingualItemEn": 228,
+        "BilingualItemFr": 228,
+        "TableGroup": 1,
+        "table": 1,
+        "tgroup": 1,
+        "colspec": 2,
+        "thead": 1,
+        "row": 75,
+        "entry": 150,
+        "tbody": 1,
+        "BillPiece": 2,
+        "RelatedOrNotInForce": 23,
+        "Emphasis": 3,
+        "AmendedText": 6,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2026",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "15",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/ConsolidatedNumber[1]",
+          "source_field": "ConsolidatedNumber",
+          "value": "A-1",
+          "parent_field": "Chapter"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]",
+          "role": "Stages stage=consolidation",
+          "components": {
+            "YYYY": "2026",
+            "MM": "6",
+            "DD": "15"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2018-12-13",
+            "stage": "consolidation"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 3674,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": true,
+        "footnote_reference_target_loss": false,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": false,
+        "image_source_attribute_loss": false,
+        "related_not_in_force_boundary_loss": true,
+        "definition_term_language_and_historical_note_role_loss": true,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 172,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Statute/Body[1]/Section[1]/Text[1]",
+          "tag": "Text",
+          "sample": "This Act may be cited as the Access to Information Act."
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[1]/Text[1]",
+          "tag": "Text",
+          "sample": "alternative format, with respect to a record, means a format that allows a person with a sensory disability to read or listen to that record; (support de substitution)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[2]/Text[1]",
+          "tag": "Text",
+          "sample": "business day means a day other than"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[2]/Paragraph[3]/Text[1]",
+          "tag": "Text",
+          "sample": "a day that falls during the Christmas recess, as defined in section 2 of the Federal Courts Rules; (jour ouvrable)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[3]/Text[1]",
+          "tag": "Text",
+          "sample": "Court means the Federal Court; (Cour)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[4]/Text[1]",
+          "tag": "Text",
+          "sample": "designated Minister means a person who is designated as the Minister under subsection 3.2(1); (ministre désigné)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[5]/Text[1]",
+          "tag": "Text",
+          "sample": "foreign state means any state other than Canada; (État étranger)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[6]/Text[1]",
+          "tag": "Text",
+          "sample": "government institution means"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[6]/Paragraph[2]/Text[1]",
+          "tag": "Text",
+          "sample": "any parent Crown corporation, and any wholly-owned subsidiary of such a corporation, within the meaning of section 83 of the Financial Administration Act; (institution fédérale)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[7]/Text[1]",
+          "tag": "Text",
+          "sample": "head, in respect of a government institution, means"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[7]/Paragraph[2]/Text[1]",
+          "tag": "Text",
+          "sample": "in any other case, either the person designated under subsection 3.2(2) to be the head of the institution for the purposes of this Act or, if no such person is designated, the chie"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[3]/Definition[8]/Text[1]",
+          "tag": "Text",
+          "sample": "Information Commissioner means the Commissioner appointed under section 54; (Commissaire à l’information)"
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Statute": 1,
+        "Identification": 1,
+        "RunningHead": 1,
+        "BillHistory": 1,
+        "Stages": 1,
+        "Date": 1,
+        "YYYY": 1,
+        "MM": 1,
+        "DD": 1,
+        "ConsolidatedNumber": 1,
+        "Body": 1,
+        "TitleText": 78,
+        "Label": 948,
+        "XRefExternal": 100,
+        "HistoricalNote": 172,
+        "HistoricalNoteSubItem": 318,
+        "Definition": 42,
+        "DefinedTermEn": 50,
+        "DefinedTermFr": 42,
+        "DefinitionRef": 16,
+        "ContinuedSectionSubsection": 8,
+        "XRefInternal": 59,
+        "Subparagraph": 55,
+        "ContinuedParagraph": 1,
+        "Repealed": 5,
+        "Language": 19,
+        "ScheduleFormHeading": 4,
+        "OriginatingRef": 2,
+        "BilingualGroup": 82,
+        "BilingualItemEn": 228,
+        "BilingualItemFr": 228,
+        "TableGroup": 1,
+        "table": 1,
+        "tgroup": 1,
+        "colspec": 2,
+        "thead": 1,
+        "row": 75,
+        "entry": 150,
+        "tbody": 1,
+        "BillPiece": 2,
+        "RelatedOrNotInForce": 23,
+        "Emphasis": 3,
+        "AmendedText": 6,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "source_footnote_refs_without_idref": 0,
+      "root_source_attributes": {
+        "pit-date": "2026-06-14",
+        "hasPreviousVersion": "true",
+        "lastAmendedDate": "2026-06-14",
+        "current-date": "2026-06-14",
+        "inforce-start-date": "2018-12-13",
+        "fid": "167",
+        "id": "167",
+        "bill-origin": "commons",
+        "bill-type": "govt-public",
+        "in-force": "yes",
+        "lang": "en"
+      }
+    },
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+      "sidecar_path": "downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.json",
+      "original_path": "downloads/Canada/raw/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.xml",
+      "title": "Canada Elections Act ( S.C. 2000, c. 9)",
+      "markdown_sha256": "78d6a7108c0869102e3b14383acbd2a41e9fe313dc4b4efb40fbc150dc2d23a4",
+      "sidecar_markdown_sha256": "78d6a7108c0869102e3b14383acbd2a41e9fe313dc4b4efb40fbc150dc2d23a4",
+      "markdown_sidecar_hash_matches": true,
+      "original_sha256": "b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Statute": 1,
+        "Identification": 1,
+        "LongTitle": 1,
+        "ShortTitle": 1,
+        "RunningHead": 1,
+        "BillHistory": 1,
+        "Stages": 2,
+        "Date": 2,
+        "YYYY": 3,
+        "MM": 2,
+        "DD": 2,
+        "Chapter": 1,
+        "ConsolidatedNumber": 1,
+        "AnnualStatuteId": 1,
+        "AnnualStatuteNumber": 1,
+        "Introduction": 1,
+        "Enacts": 1,
+        "Provision": 198,
+        "Text": 5601,
+        "Body": 1,
+        "Heading": 308,
+        "TitleText": 330,
+        "Section": 1172,
+        "MarginalNote": 2329,
+        "Label": 5946,
+        "XRefExternal": 238,
+        "Subsection": 1951,
+        "Definition": 127,
+        "DefinedTermEn": 163,
+        "DefinedTermFr": 117,
+        "Paragraph": 2440,
+        "Subparagraph": 234,
+        "Repealed": 326,
+        "DefinitionRef": 73,
+        "HistoricalNote": 792,
+        "HistoricalNoteSubItem": 1218,
+        "Emphasis": 24,
+        "ContinuedSectionSubsection": 23,
+        "XRefInternal": 80,
+        "Clause": 7,
+        "ContinuedDefinition": 1,
+        "Language": 4,
+        "Schedule": 5,
+        "ScheduleFormHeading": 10,
+        "FormGroup": 5,
+        "OriginatingRef": 7,
+        "LeaderRightJustified": 3,
+        "Leader": 12,
+        "ImageGroup": 4,
+        "AlternateText": 4,
+        "Image": 4,
+        "DocumentInternal": 2,
+        "Group": 14,
+        "GroupHeading": 14,
+        "Sup": 1,
+        "BillPiece": 1,
+        "RelatedOrNotInForce": 47,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2000",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "5",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "31",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2026",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "9",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "22",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/ConsolidatedNumber[1]",
+          "source_field": "ConsolidatedNumber",
+          "value": "E-2.01",
+          "parent_field": "Chapter"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/AnnualStatuteId[1]/AnnualStatuteNumber[1]",
+          "source_field": "AnnualStatuteNumber",
+          "value": "9",
+          "parent_field": "AnnualStatuteId"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/Chapter[1]/AnnualStatuteId[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2000",
+          "parent_field": "AnnualStatuteId"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[1]/Date[1]",
+          "role": "Stages stage=assented-to",
+          "components": {
+            "YYYY": "2000",
+            "MM": "5",
+            "DD": "31"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2018-12-21",
+            "fid": "203464",
+            "id": "203464",
+            "stage": "assented-to"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Statute/Identification[1]/BillHistory[1]/Stages[2]/Date[1]",
+          "role": "Stages stage=consolidation",
+          "components": {
+            "YYYY": "2026",
+            "MM": "9",
+            "DD": "22"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2018-12-21",
+            "stage": "consolidation"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 16638,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": false,
+        "footnote_reference_target_loss": false,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": false,
+        "image_source_attribute_loss": true,
+        "related_not_in_force_boundary_loss": true,
+        "definition_term_language_and_historical_note_role_loss": true,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 450,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Statute/Body[1]/Section[1]/Text[1]",
+          "tag": "Text",
+          "sample": "This Act may be cited as the Canada Elections Act."
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[1]/Text[1]",
+          "tag": "Text",
+          "sample": "advance poll means a vote held under Part 10. (vote par anticipation)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[2]/Text[1]",
+          "tag": "Text",
+          "sample": "advance polling station means a polling station established under subsection 168(3). (bureau de vote par anticipation)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[3]/Text[1]",
+          "tag": "Text",
+          "sample": "broadcaster means a person who is licensed by the Canadian Radio-television and Telecommunications Commission under the Broadcasting Act to carry on a programming undertaking. (rad"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[4]/Text[1]",
+          "tag": "Text",
+          "sample": "broadcasting means broadcasting, as defined in subsection 2(1) of the Broadcasting Act, that is regulated and supervised by the Canadian Radio-television and Telecommunications Com"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[5]/Text[1]",
+          "tag": "Text",
+          "sample": "Broadcasting Arbitrator means the person appointed as Broadcasting Arbitrator under subsection 332(1). (arbitre)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[6]/Text[1]",
+          "tag": "Text",
+          "sample": "by-election means an election other than a general election. (élection partielle)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[7]/Text[1]",
+          "tag": "Text",
+          "sample": "candidate means a person whose nomination as a candidate at an election has been confirmed under subsection 71(1) and who, or whose official agent, has not yet complied with sectio"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[8]/Text[1]",
+          "tag": "Text",
+          "sample": "capital asset means any property with a commercial value of more than $200 that"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[8]/Paragraph[3]/Text[1]",
+          "tag": "Text",
+          "sample": "in the case of a leadership contestant, is normally used outside a leadership contest other than for the purposes of a leadership contest. (bien immobilisé)"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[9]/Text[1]",
+          "tag": "Text",
+          "sample": "chief agent means the chief agent named in the application of a political party to become a registered party as required under paragraph 385(2)(h) or a chief agent’s replacement ap"
+        },
+        {
+          "source_path": "/Statute/Body[1]/Section[2]/Subsection[1]/Definition[10]/Text[1]",
+          "tag": "Text",
+          "sample": "close of nominations means the deadline for the receipt of nominations set out in subsection 70(2). (clôture des candidatures)"
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Statute": 1,
+        "Identification": 1,
+        "RunningHead": 1,
+        "BillHistory": 1,
+        "Stages": 2,
+        "Date": 2,
+        "YYYY": 3,
+        "MM": 2,
+        "DD": 2,
+        "ConsolidatedNumber": 1,
+        "AnnualStatuteId": 1,
+        "AnnualStatuteNumber": 1,
+        "Introduction": 1,
+        "Enacts": 1,
+        "Provision": 198,
+        "Body": 1,
+        "TitleText": 330,
+        "Label": 5946,
+        "XRefExternal": 238,
+        "Definition": 127,
+        "DefinedTermEn": 163,
+        "DefinedTermFr": 117,
+        "Subparagraph": 234,
+        "Repealed": 326,
+        "DefinitionRef": 73,
+        "HistoricalNote": 792,
+        "HistoricalNoteSubItem": 1218,
+        "Emphasis": 24,
+        "ContinuedSectionSubsection": 23,
+        "XRefInternal": 80,
+        "Clause": 7,
+        "ContinuedDefinition": 1,
+        "Language": 4,
+        "ScheduleFormHeading": 10,
+        "FormGroup": 5,
+        "OriginatingRef": 7,
+        "LeaderRightJustified": 3,
+        "Leader": 12,
+        "ImageGroup": 4,
+        "AlternateText": 4,
+        "Image": 4,
+        "DocumentInternal": 2,
+        "Group": 14,
+        "GroupHeading": 14,
+        "Sup": 1,
+        "BillPiece": 1,
+        "RelatedOrNotInForce": 47,
+        "RecentAmendments": 1,
+        "Amendment": 10,
+        "AmendmentCitation": 10,
+        "AmendmentDate": 10
+      },
+      "source_footnote_refs_without_idref": 0,
+      "root_source_attributes": {
+        "pit-date": "2026-09-16",
+        "hasPreviousVersion": "true",
+        "lastAmendedDate": "2026-09-16",
+        "current-date": "2026-09-21",
+        "inforce-start-date": "2018-12-21",
+        "fid": "203458",
+        "id": "203458",
+        "bill-origin": "commons",
+        "bill-type": "govt-public",
+        "in-force": "yes",
+        "lang": "en"
+      }
+    },
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+      "sidecar_path": "downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.json",
+      "original_path": "downloads/Canada/raw/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.xml",
+      "title": "“MV Sonia” Remission Order, 2007 ( SOR /2007-151)",
+      "markdown_sha256": "8023c29cf660f114bdd0264ed31a78213be40f7fa4f17419cc9cfb489e74d45b",
+      "sidecar_markdown_sha256": "31b5436153ff0a98e7ce253a5a46813eeb81fbb3d3b31731592e0c0a415def01",
+      "markdown_sidecar_hash_matches": false,
+      "original_sha256": "3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 4,
+        "LongTitle": 1,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 1,
+        "Text": 7,
+        "FootnoteRef": 1,
+        "Footnote": 1,
+        "Label": 6,
+        "Body": 1,
+        "Heading": 3,
+        "TitleText": 3,
+        "Section": 3,
+        "Paragraph": 2
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Regulation/Identification[1]/InstrumentNumber[1]",
+          "source_field": "InstrumentNumber",
+          "value": "SOR/2007-151",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2007",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "14",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2026",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "15",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/LongTitle[1]",
+          "source_field": "LongTitle",
+          "value": "“MV Sonia” Remission Order, 2007",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/OrderNumber[1]",
+          "source_field": "OrderNumber",
+          "value": "2007-1002",
+          "parent_field": "RegulationMakerOrder"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2007",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "14",
+          "parent_field": "Date"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]",
+          "role": "RegistrationDate",
+          "components": {
+            "YYYY": "2007",
+            "MM": "6",
+            "DD": "14"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]",
+          "role": "ConsolidationDate",
+          "components": {
+            "YYYY": "2026",
+            "MM": "6",
+            "DD": "15"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2007-06-14"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]",
+          "role": "RegulationMakerOrder (order date; not assumed published/effective date)",
+          "components": {
+            "YYYY": "2007",
+            "MM": "6",
+            "DD": "14"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 37,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": false,
+        "footnote_reference_target_loss": true,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": false,
+        "image_source_attribute_loss": false,
+        "related_not_in_force_boundary_loss": false,
+        "definition_term_language_and_historical_note_role_loss": false,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 2,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Her Excellency the Governor General in Council, on the recommendation of the Minister of Finance, pursuant to section 115 of the Customs Tariffa, hereby makes the annexed “MV Sonia"
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Remission is granted to British Columbia Ferry Services Inc., Victoria, British Columbia, in the amount representing the customs duties paid or payable under the Customs Tariff in "
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 4,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 1,
+        "FootnoteRef": 1,
+        "Footnote": 1,
+        "Label": 6,
+        "Body": 1,
+        "TitleText": 3
+      },
+      "source_footnote_refs_without_idref": 0,
+      "root_source_attributes": {
+        "pit-date": "2007-06-14",
+        "lastAmendedDate": "2007-06-14",
+        "current-date": "2026-06-14",
+        "inforce-start-date": "2007-06-14",
+        "fid": "734629",
+        "id": "734629",
+        "gazette-part": "II",
+        "regulation-type": "SOR",
+        "lang": "en"
+      }
+    },
+    {
+      "country": "Canada",
+      "markdown_path": "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md",
+      "sidecar_path": "downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.json",
+      "original_path": "downloads/Canada/raw/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.xml",
+      "title": "“SeaRose FPSO” Remission Order, 2004 ( SOR /2004-96)",
+      "markdown_sha256": "d1844925d4e20467050f2799ed3d75b90db49f550a2b5b3f4a5e41671d7c408a",
+      "sidecar_markdown_sha256": "d1844925d4e20467050f2799ed3d75b90db49f550a2b5b3f4a5e41671d7c408a",
+      "markdown_sidecar_hash_matches": true,
+      "original_sha256": "dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93",
+      "original_sidecar_hash_matches": true,
+      "conversion_method": "structured_text_v1",
+      "node_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 4,
+        "LongTitle": 1,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 1,
+        "Text": 7,
+        "FootnoteRef": 1,
+        "Footnote": 1,
+        "Label": 6,
+        "Body": 1,
+        "Heading": 3,
+        "TitleText": 3,
+        "Section": 3,
+        "Paragraph": 2
+      },
+      "numeric_identification_fields": [
+        {
+          "source_path": "/Regulation/Identification[1]/InstrumentNumber[1]",
+          "source_field": "InstrumentNumber",
+          "value": "SOR/2004-96",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2004",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "4",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "27",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2019",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "6",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "22",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/LongTitle[1]",
+          "source_field": "LongTitle",
+          "value": "“SeaRose FPSO” Remission Order, 2004",
+          "parent_field": "Identification"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/OrderNumber[1]",
+          "source_field": "OrderNumber",
+          "value": "2004-493",
+          "parent_field": "RegulationMakerOrder"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/YYYY[1]",
+          "source_field": "YYYY",
+          "value": "2004",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/MM[1]",
+          "source_field": "MM",
+          "value": "4",
+          "parent_field": "Date"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]/DD[1]",
+          "source_field": "DD",
+          "value": "27",
+          "parent_field": "Date"
+        }
+      ],
+      "dates": [
+        {
+          "source_path": "/Regulation/Identification[1]/RegistrationDate[1]/Date[1]",
+          "role": "RegistrationDate",
+          "components": {
+            "YYYY": "2004",
+            "MM": "4",
+            "DD": "27"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/ConsolidationDate[1]/Date[1]",
+          "role": "ConsolidationDate",
+          "components": {
+            "YYYY": "2019",
+            "MM": "6",
+            "DD": "22"
+          },
+          "source_parent_attributes": {
+            "inforce-start-date": "2006-03-22"
+          },
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        },
+        {
+          "source_path": "/Regulation/Identification[1]/RegulationMakerOrder[1]/Date[1]",
+          "role": "RegulationMakerOrder (order date; not assumed published/effective date)",
+          "components": {
+            "YYYY": "2004",
+            "MM": "4",
+            "DD": "27"
+          },
+          "source_parent_attributes": {},
+          "baseline_rendering": "年月日逐项输出为空白行分隔数字；未显示字段或日期角色"
+        }
+      ],
+      "text_preservation": {
+        "method": "每个原XML节点text/tail的非空文字，撤销Markdown转义并忽略空白后检索；仅验证原子文字存在，不证明出现次数、顺序、关系、数字语义或结构",
+        "checked_atoms": 37,
+        "missing_atom_count": 0,
+        "missing_atoms": []
+      },
+      "issues": {
+        "unlabelled_identification_values": true,
+        "date_role_and_composition_loss": true,
+        "provision_hierarchy_and_kind_loss": true,
+        "paragraph_subparagraph_clause_nesting_flattened": true,
+        "table_row_column_header_span_loss": false,
+        "footnote_reference_target_loss": true,
+        "cross_reference_target_loss": true,
+        "mixed_text_inline_semantics_loss": true,
+        "mathml_operator_script_fraction_structure_loss": false,
+        "image_source_attribute_loss": false,
+        "related_not_in_force_boundary_loss": false,
+        "definition_term_language_and_historical_note_role_loss": false,
+        "unmapped_tag_context_and_attribute_loss": true
+      },
+      "mixed_content_node_count": 2,
+      "mixed_content_examples": [
+        {
+          "source_path": "/Regulation/Order[1]/Provision[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Her Excellency the Governor General in Council, on the recommendation of the Minister of Finance, pursuant to section 115 of the Customs Tariffa, hereby makes the annexed “SeaRose "
+        },
+        {
+          "source_path": "/Regulation/Body[1]/Section[1]/Text[1]",
+          "tag": "Text",
+          "sample": "Subject to section 2, remission is hereby granted to Husky Oil Operations Limited, Calgary, Alberta, and Petro Canada, Calgary, Alberta, in the amount representing the customs duti"
+        }
+      ],
+      "unmapped_tag_counts": {
+        "Regulation": 1,
+        "Identification": 1,
+        "InstrumentNumber": 1,
+        "RegistrationDate": 1,
+        "Date": 3,
+        "YYYY": 3,
+        "MM": 3,
+        "DD": 3,
+        "ConsolidationDate": 1,
+        "EnablingAuthority": 1,
+        "XRefExternal": 4,
+        "RegulationMakerOrder": 1,
+        "RegulationMaker": 1,
+        "OrderNumber": 1,
+        "Order": 1,
+        "Provision": 1,
+        "FootnoteRef": 1,
+        "Footnote": 1,
+        "Label": 6,
+        "Body": 1,
+        "TitleText": 3
+      },
+      "source_footnote_refs_without_idref": 0,
+      "root_source_attributes": {
+        "pit-date": "2006-03-22",
+        "lastAmendedDate": "2006-03-22",
+        "current-date": "2019-06-21",
+        "inforce-start-date": "2006-03-22",
+        "fid": "714288",
+        "id": "714288",
+        "regulation-type": "SOR",
+        "lang": "en"
+      }
+    }
+  ],
+  "inventory_counting_note": "原inventory.raw_text_files.json按*.json误计7个XML metadata侧车，现修正：raw/*.xml.metadata.json不是法规原JSON；全库法规原JSON=0。基线正文、哈希、结构与文字核验结果未改变。"
+}

@@ -1,0 +1,248 @@
+{
+  "timestamp_utc": "2026-10-14T15:40:37.792225+00:00",
+  "author_role": "three_official_routes subagent",
+  "scope": "Additional official navigation and file routes for remaining Peraturan, BPK and DPR. Browser owned by root agent.",
+  "inputs_read": [
+    "skills/download-official-regulations/SKILL.md",
+    "skills/download-official-regulations/references/network-troubleshooting.md",
+    "reports/network-routes-followup-2026-10-14.json"
+  ],
+  "policy": {
+    "tls_verification": true,
+    "normal_cookiejar": true,
+    "official_referer_if_available": true,
+    "no_system_network_changes": true,
+    "no_challenge_bypass": true,
+    "timeout_seconds": 12,
+    "max_response_bytes": 41943040,
+    "credentials_or_cookie_values_saved": false,
+    "same_failure_without_new_information_not_retried": true
+  },
+  "result": {
+    "local_cli_requests": 8,
+    "original_bytes_downloaded": 0,
+    "temporary_pdf_downloads": 0,
+    "persistent_downloads": 0,
+    "automatic_routes_recovered": 0,
+    "adapter_changes": false,
+    "store_or_skill_or_core_changes": false
+  },
+  "platforms": [
+    {
+      "platform": "peraturan.go.id",
+      "status": "no_new_formal_original_route_verified",
+      "prior_failure": "TLS EOF/timeout. Prior main/www/original/TLS1.2/direct tests intentionally not repeated.",
+      "official_navigation_source": "https://djpp.kemenkum.go.id/index.php",
+      "previously_downloaded_navigation_evidence": "/tmp/law-network-routes/5be7da35444378b6.html",
+      "new_research": "Official DJPP homepage continues to link national regulation categories directly to peraturan.go.id. Reviewed official portal names; no independently hosted formal-regulation catalogue/file endpoint was verified.",
+      "official_portals_observed": [
+        "https://peraturan.go.id/",
+        "https://e-pengundangan.peraturan.go.id/",
+        "https://e-pengumuman.kemenkum.go.id/",
+        "https://e-penerjemahan.peraturan.go.id/",
+        "https://e-jurnal.peraturan.go.id/"
+      ],
+      "scope_exclusions": [
+        "e-pengumuman handles corporate/foundation announcements rather than a verified national formal-law catalogue",
+        "e-jurnal is journal navigation; no formal-law original chain established",
+        "e-penerjemahan is translation service; no publicly verified original download chain established",
+        "DJPP KUHAP draft and committee files remain excluded",
+        "Unofficial Pasal.id/other mirrored discovery API excluded"
+      ],
+      "cli_requests_this_subtask": 0,
+      "claim_limit": "No recovery claimed and no new host guessed solely from DNS or name."
+    },
+    {
+      "platform": "bpk.go.id",
+      "status": "new_official_attachment_routes_found_but_local_403",
+      "scope": "BPK own legal products and official institution regional publications; narrower than comprehensive peraturan.bpk.go.id.",
+      "routes": [
+        {
+          "name": "Riau official SPKN publication",
+          "navigation_chain": [
+            "https://jdih.bpk.go.id/Page/ac17ad72-a4f1-4914-a7f6-297d9b61ea29",
+            "https://riau.bpk.go.id/spkn-2026/",
+            "https://riau.bpk.go.id/wp-content/uploads/2026/09/SPKN-2026.pdf"
+          ],
+          "navigation_evidence": "JDIH BPK UJDIH Perwakilan page lists Riau member; Riau Publikasi menu contains SPKN2026; detail links Unduh Dokumen SPKN2026 Selengkapnya di sini.",
+          "search_reader_observation": {
+            "pdf_pages": 126,
+            "formal_regulation_identity": {
+              "type": "Peraturan Badan Pemeriksa Keuangan",
+              "number": "1",
+              "year": "2026",
+              "subject": "Standar Pemeriksaan Keuangan Negara"
+            },
+            "identity_physical_page": 8,
+            "promulgation_certification_physical_page": 14,
+            "promulgated_date_observed": "2026-04-10",
+            "gazette_observed": "Lembaran Negara 2026 6/BPK",
+            "contains": "Formal rule, explanation and seven annexes embedded in official SPKN publication",
+            "local_body_review_status": "not_performed_no_local_pdf"
+          },
+          "local_result": "Page403 and observed PDF403; no bytes acquired"
+        },
+        {
+          "name": "BPK E-PPID formal copy among formation materials",
+          "navigation_chain": [
+            "https://e-ppid.bpk.go.id/p/rancangan-peraturan-bpk-tentang-standar-pemeriksaan-keuangan-negara-2026",
+            "https://e-ppid.bpk.go.id/admin/library/files/pusat/Monev_2026/Informasi_tentang_peraturan/II__5__Salinan_Peraturan_BPK_No_1_tahun_2026_SPKN.pdf"
+          ],
+          "navigation_evidence": "Official table row5 is Salinan Peraturan BPK Nomor1 Tahun2026 tentang SPKN and links this exact PDF; rows1-4 are formation material and not accepted as formal originals.",
+          "search_reader_observation": {
+            "pdf_pages": 53,
+            "subsequent_reader_reopen": "Timeout",
+            "local_body_review_status": "not_performed_no_local_pdf"
+          },
+          "local_result": "Page403 and observed PDF403; no bytes acquired"
+        }
+      ],
+      "related_official_detail_identity_check": "https://jdih.bpk.go.id/Dokumen/Peraturan/275160ed-be4b-4c07-ba71-2a75fff2d017",
+      "other_candidates_excluded": [
+        {
+          "url": "https://www.bpk.go.id/assets/files/storage/2025/10/Renstra-BPK-2025-2029.pdf",
+          "reason": "Search reader first page states Rancangan Akhir; excluded without local download"
+        },
+        {
+          "url": "https://gorontalo.bpk.go.id/wp-content/uploads/2025/09/Rancangan-Akhir-Renstra-BPK-2025-2029_versi_Pemutakhiran-Perpres-801.pdf",
+          "reason": "Explicit Rancangan Akhir draft filename/title"
+        },
+        {
+          "url": "https://sulbar.bpk.go.id/category/informasi-hukum/matriks-hukum/",
+          "reason": "Comparative matrices; no original regulation identity/download chain established"
+        }
+      ],
+      "claim_limit": "Search reader can inspect official PDFs but is not a local download, persistent original, or working automatic adapter."
+    },
+    {
+      "platform": "dpr.go.id",
+      "status": "current_formal_original_still_403",
+      "routes": [
+        {
+          "name": "Indonesian-language numeric PerDPR1/2025 detail",
+          "detail_url": "https://jdih.dpr.go.id/setjen/detail-dokumen/tipe/peraturan_dpr/id/56",
+          "official_download_observed": "https://berkas.dpr.go.id/jdih/document/peraturan_dpr/2025perdpr001.pdf?t=20261013045224",
+          "why_new": "Prior followup long-slug response showed English identity/title. Numeric detail56 observed Indonesian PerDPR1/2025 and actual download address, not a guessed filename.",
+          "search_reader_identity": {
+            "type": "Peraturan DPR",
+            "number": "1",
+            "year": "2025",
+            "subject": "Perubahan atas Peraturan DPR Nomor1 Tahun2020 tentang Tata Tertib",
+            "language": "Indonesia",
+            "date_conflict": "Numeric detail says25February2025; prior long-slug English detail says26February2025. No original obtained; preserve conflict rather than choose date."
+          },
+          "local_result": "Detail12s read timeout; original sans transient cache query403 Akamai with numeric official Referer and normal CookieJar"
+        },
+        {
+          "name": "PPID Peraturan DPR navigation",
+          "navigation_chain": [
+            "https://ppid.dpr.go.id/index/publik/id/3",
+            "https://www.dpr.go.id/jdih/peraturan-dpr"
+          ],
+          "navigation_evidence": "Official PPID public-information page sectionB Peraturan DPR KUNJUNGI links legacy www.dpr.go.id/jdih/peraturan-dpr.",
+          "local_result": "PPID403; legacy routeHTTP200 with Page Not Found404 application body; not a live legal catalogue.",
+          "pending_browser_only": "PPID page also shows Rencana Strategis DPRRI2025-2029 LIHAT button; search-reader text does not expose its target. Do not guess target or count it as original."
+        }
+      ],
+      "excluded": "Accessible 2020 official repository compilation still cannot replace current PerDPR2025 original.",
+      "claim_limit": "No successful browser or original-download claim from this subtask."
+    }
+  ],
+  "local_requests": [
+    {
+      "url": "https://riau.bpk.go.id/spkn-2026/",
+      "timestamp_utc": "2026-10-14T15:37:38.875525+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": null,
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "response_hint": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Access Denied / Akses Ditolak</title>\n  <style>\n    body { font-family: Calibri, Calibri; background: #f5f7fa; text-align: center; padding: 50px; }\n    h1 { color: #000000; margin-bottom: 10px; }\n    p { color: #444; }\n    .info { background: #ffffff; padding: 12px; border-radius: 10px; text-align: center; margin-top: 10px; max-width: 400px; margin: 30px auto;}\n    .btn { margin-top: 5px; padding: 3px 10px; font-size: 10px; cursor: po"
+    },
+    {
+      "url": "https://riau.bpk.go.id/wp-content/uploads/2026/09/SPKN-2026.pdf",
+      "timestamp_utc": "2026-10-14T15:37:39.712324+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": "https://riau.bpk.go.id/spkn-2026/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "response_hint": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Access Denied / Akses Ditolak</title>\n  <style>\n    body { font-family: Calibri, Calibri; background: #f5f7fa; text-align: center; padding: 50px; }\n    h1 { color: #000000; margin-bottom: 10px; }\n    p { color: #444; }\n    .info { background: #ffffff; padding: 12px; border-radius: 10px; text-align: center; margin-top: 10px; max-width: 400px; margin: 30px auto;}\n    .btn { margin-top: 5px; padding: 3px 10px; font-size: 10px; cursor: po"
+    },
+    {
+      "url": "https://e-ppid.bpk.go.id/p/rancangan-peraturan-bpk-tentang-standar-pemeriksaan-keuangan-negara-2026",
+      "timestamp_utc": "2026-10-14T15:37:38.876244+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": null,
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "response_hint": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Access Denied / Akses Ditolak</title>\n  <style>\n    body { font-family: Calibri, Calibri; background: #f5f7fa; text-align: center; padding: 50px; }\n    h1 { color: #000000; margin-bottom: 10px; }\n    p { color: #444; }\n    .info { background: #ffffff; padding: 12px; border-radius: 10px; text-align: center; margin-top: 10px; max-width: 400px; margin: 30px auto;}\n    .btn { margin-top: 5px; padding: 3px 10px; font-size: 10px; cursor: po"
+    },
+    {
+      "url": "https://e-ppid.bpk.go.id/admin/library/files/pusat/Monev_2026/Informasi_tentang_peraturan/II__5__Salinan_Peraturan_BPK_No_1_tahun_2026_SPKN.pdf",
+      "timestamp_utc": "2026-10-14T15:37:39.990409+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": "https://e-ppid.bpk.go.id/p/rancangan-peraturan-bpk-tentang-standar-pemeriksaan-keuangan-negara-2026",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "response_hint": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Access Denied / Akses Ditolak</title>\n  <style>\n    body { font-family: Calibri, Calibri; background: #f5f7fa; text-align: center; padding: 50px; }\n    h1 { color: #000000; margin-bottom: 10px; }\n    p { color: #444; }\n    .info { background: #ffffff; padding: 12px; border-radius: 10px; text-align: center; margin-top: 10px; max-width: 400px; margin: 30px auto;}\n    .btn { margin-top: 5px; padding: 3px 10px; font-size: 10px; cursor: po"
+    },
+    {
+      "url": "https://jdih.dpr.go.id/setjen/detail-dokumen/tipe/peraturan_dpr/id/56",
+      "timestamp_utc": "2026-10-14T15:37:38.876409+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": null,
+      "error": "TimeoutError: The read operation timed out"
+    },
+    {
+      "url": "https://berkas.dpr.go.id/jdih/document/peraturan_dpr/2025perdpr001.pdf",
+      "timestamp_utc": "2026-10-14T15:37:51.992101+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": "https://jdih.dpr.go.id/setjen/detail-dokumen/tipe/peraturan_dpr/id/56",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "response_hint": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;berkas&#46;dpr&#46;go&#46;id&#47;jdih&#47;document&#47;peraturan&#95;dpr&#47;2025perdpr001&#46;pdf\" on this server.<P>\nReference&#32;&#35;18&#46;a622c17&#46;1791992272&#46;19adc1b5\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;a622c17&#46;1791992272&#46;19adc1b5</P>\n</BODY>\n</HTML>\n"
+    },
+    {
+      "url": "https://ppid.dpr.go.id/index/publik/id/3",
+      "timestamp_utc": "2026-10-14T15:39:16.613497+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": null,
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "response_hint": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;ppid&#46;dpr&#46;go&#46;id&#47;index&#47;publik&#47;id&#47;3\" on this server.<P>\nReference&#32;&#35;18&#46;7622c17&#46;1791992356&#46;68b02fb1\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;7622c17&#46;1791992356&#46;68b02fb1</P>\n</BODY>\n</HTML>\n"
+    },
+    {
+      "url": "https://www.dpr.go.id/jdih/peraturan-dpr",
+      "timestamp_utc": "2026-10-14T15:39:17.587171+00:00",
+      "client": "urllib verified TLS, normal CookieJar, downloader UA, official Referer if present",
+      "timeout_seconds": 12,
+      "max_response_bytes": 41943040,
+      "official_referer": "https://ppid.dpr.go.id/index/publik/id/3",
+      "status": 200,
+      "final_url": "https://www.dpr.go.id/jdih/peraturan-dpr",
+      "content_type": "text/html",
+      "bytes": 7168,
+      "complete": true,
+      "pdf": false,
+      "sha256": "2fb2a9d2172e6c138027fda9107b35d32fad8bd08a01450800bc8aad0a237b76",
+      "temporary_path": "/tmp/law-three-official-routes/204eb661cb47f35e.html",
+      "body_classification": "Application page not found; HTTP 200 is not a live legal catalogue",
+      "visible_error": "We apologize – Page Not Found (404)"
+    }
+  ],
+  "search_service_evidence_note": "Public official-page navigation and search-reader PDF text used for discovery only. Tool refs not persistent citations; URLs listed in report are sources. No search-reader content counted as bytes written to configured download directory.",
+  "recovery_conditions": "Need accessible verified official original transport or functional normal browser download. BPK Riau/E-PPID links are concrete new browser candidates. Peraturan still lacks independently verified alternate formal source; DPR linked current originals remain blocked."
+}

@@ -1,0 +1,241 @@
+/Artifact <</Subtype /Background /Type /Pagination >>BDC 
+q
+0.3200073 0 0 0.3200073 255.6000061 772.3200073 cm
+/GS0 gs
+/Fm0 Do
+Q
+EMC 
+/P <</MCID 0 >>BDC 
+EMC 
+/P <</MCID 1 >>BDC 
+EMC 
+/P <</MCID 2 >>BDC 
+EMC 
+/P <</MCID 3 >>BDC 
+EMC 
+/P <</MCID 4 >>BDC 
+EMC 
+BT
+/P <</MCID 5 >>BDC 
+1 g
+/TT0 1 Tf
+-0.01 Tc 0.01 Tw 12 0 0 12 267.84 755.1 Tm
+[(RANC)-5 (ANG)-5 (AN)]TJ
+0 Tc 0 Tw 6.365 0 Td
+( )Tj
+EMC 
+/P <</MCID 6 >>BDC 
+0 g
+/TT1 1 Tf
+-17.975 -1.76 Td
+[(PERATURAN )40 (MENTERI )40 (KESE)-5 (HATAN )40 (REPUBLIK )40 (INDONESIA )]TJ
+8.65 -1.755 Td
+(NOMOR)Tj
+EMC 
+/Span <</MCID 7 >>BDC 
+( 23 )Tj
+EMC 
+/Span <</MCID 8 >>BDC 
+(TAHUN)Tj
+EMC 
+/Span <</MCID 9 >>BDC 
+( 2022 )Tj
+EMC 
+/P <</MCID 11 >>BDC 
+-0.01 Tc 0.01 Tw 3.715 -1.75 Td
+[(TENT)-5 (ANG)]TJ
+0 Tc 0 Tw 4.86 0 Td
+( )Tj
+EMC 
+/P <</MCID 12 >>BDC 
+-22.025 -1.775 Td
+(PENANGGULANGAN )Tj
+/TT0 1 Tf
+10.4 0 Td
+[(HUMAN )20 (I)10 (MMUNODEF)-10 (I)20 (C)-15 (I)15 (E)-5 (NC)-5 (Y )]TJ
+-0.02 Tc 0.02 Tw 14.75 0 Td
+[(V)-30 (IR)-25 (U)-20 (S)]TJ
+/TT1 1 Tf
+0 Tc 0 Tw 3.055 0 Td
+(, )Tj
+/TT0 1 Tf
+0.6 0 Td
+[(ACQU)-10 (I)20 (R)-5 (E)-5 (D )10 (I)20 (M)-5 (MUN)-5 (O- )]TJ
+-23.435 -1.765 Td
+[(DEF)-10 (I)20 (C)-15 (I)15 (E)-5 (N)-5 (CY SYNDROME)]TJ
+/TT1 1 Tf
+(, DAN INFEKSI MENULAR SEKSUAL)Tj
+EMC 
+/Span <</MCID 13 >>BDC 
+( )Tj
+EMC 
+ET
+/P <</MCID 15 >>BDC 
+EMC 
+BT
+/P <</MCID 16 >>BDC 
+12 0 0 12 173.22 607.26 Tm
+(DENGAN RAHMAT TUHAN YANG MAHA ESA )Tj
+-0.67 -3.52 Td
+[(MENTERI )50 (KESEHATAN )55 (REPUBLIK )55 (INDONESIA, )]TJ
+EMC 
+ET
+/P <</MCID 17 >>BDC 
+EMC 
+BT
+/P <</MCID 18 >>BDC 
+12 0 0 12 70.86 501.66 Tm
+(Menimbang)Tj
+18 0 0 12 139.74 501.66 Tm
+( )Tj
+12 0 0 12 149.52 501.66 Tm
+(: )Tj
+EMC 
+/Span <</MCID 19 >>BDC 
+0.165 Tw 0.805 0 Td
+(  )Tj
+EMC 
+/Span <</MCID 20 >>BDC 
+0 Tw (a.)Tj
+18 0 0 12 181.68 501.66 Tm
+[( )-223 ( )]TJ
+12 0 0 12 198.42 501.66 Tm
+(bahwa)Tj
+18 0 0 12 237.06 501.66 Tm
+( )Tj
+/TT0 1 Tf
+12 0 0 12 255.54 501.66 Tm
+[(hum)-5 (a)10 (n)]TJ
+18 0 0 12 295.8 501.66 Tm
+( )Tj
+12 0 0 12 313.8 501.66 Tm
+[(i)5 (mmunode)-5 (f)-10 (i)10 (c)-5 (i)10 (ency)]TJ
+18 0 0 12 417.18 501.66 Tm
+( )Tj
+12 0 0 12 435.18 501.66 Tm
+[(v)-5 (i)10 (rus)]TJ
+/TT1 1 Tf
+(,)Tj
+18 0 0 12 467.52 501.66 Tm
+( )Tj
+/TT0 1 Tf
+12 0 0 12 486.12 501.66 Tm
+[(a)5 (cqu)-5 (i)10 (red)-5 ( )]TJ
+-23.975 -1.76 Td
+[(i)5 (mmuno-)]TJ
+0.895 Tw [(d)-5 (e)5 (f)-10 (i)10 (c)-5 (i)5 (ency)-5 ( syndrome)]TJ
+/TT1 1 Tf
+0.905 Tw (, dan infeksi menular )Tj
+0 Tw 0 -1.765 TD
+(seksual )Tj
+0.865 Tw 4.925 0 Td
+[(masih menjadi masalah kesehatan yang)-5 ( )]TJ
+0.615 Tw -4.925 -1.76 Td
+[(berdampak pada )5 (penurunan kualitas sumber daya )]TJ
+0.395 Tw 0 -1.76 TD
+[(manusia yang dapat menimbulkan berbagai masalah)5 ( )]TJ
+1.725 Tw T*
+[(sosial ekonomi, sehingga diperlukan upay)-5 (a)-5 ( )]TJ
+-0.01 Tc 0.01 Tw T*
+[(pena)-5 (ngg)-5 (ul)-5 (anga)-5 (n;)]TJ
+0 Tc 0 Tw 8.315 0 Td
+( )Tj
+EMC 
+/LBody <</MCID 23 >>BDC 
+-0.035 Tc 0.035 Tw -10.675 -1.77 Td
+(b.)Tj
+0 Tc 0.47 Tw 2.36 0 Td
+(bahwa dalam rangka melaksanakan penanggulangan)Tj
+/TT0 1 Tf
+0.975 Tw 0 -1.755 TD
+[(hum)-5 (a)10 (n )-5 (immunode)5 (f)-5 (i)5 (c)-5 (i)5 (ency v)-5 (i)5 (rus)]TJ
+/TT1 1 Tf
+0 Tw (, )Tj
+/TT0 1 Tf
+0.98 Tw 18.54 0 Td
+[(a)10 (c)-5 (qu)-5 (i)10 (red immuno)]TJ
+0 Tw 9.235 0 Td
+[(-)-5 ( )]TJ
+0.725 Tw -27.775 -1.765 Td
+[(de)5 (f)-10 (i)10 (c)-5 (i)5 (ency)-5 ( syndrome)]TJ
+/TT1 1 Tf
+0.735 Tw [(, dan infeksi menular seksu)-5 (a)-5 (l)-5 ( )]TJ
+0.545 Tw 0 -1.76 TD
+[(diperlukan dukungan lintas sektor dan ma)5 (sy)]TJ
+0 Tw (arakat )Tj
+-0.06 Tw T*
+[(untuk mencapai eli)5 (minasi )]TJ
+/TT0 1 Tf
+[(hum)-5 (a)10 (n )-5 (i)5 (mmu)-5 (node)5 (f)-10 (i)10 (c)-5 (i)5 (en)-5 (cy v)-5 (i)10 (rus)]TJ
+/TT1 1 Tf
+0 Tw 27.775 0 Td
+[(,)-5 ( )]TJ
+/TT0 1 Tf
+-27.775 -1.765 Td
+[(a)10 (c)-5 (qu)-5 (i)5 (red)-5 ( )-920 (i)10 (mmuno)-5 (-de)5 (f)-10 (i)10 (c)-5 (i)5 (enc)-5 (y )-890 (syndrome)]TJ
+/TT1 1 Tf
+[(, )-895 (dan )-895 (infeksi)-5 ( )]TJ
+T*
+(menular seksual; )Tj
+EMC 
+/LBody <</MCID 27 >>BDC 
+-0.035 Tc 0.035 Tw -2.36 -1.76 Td
+(c.)Tj
+0 Tc 0.43 Tw 2.36 0 Td
+(bahwa pengaturan mengenai penanggulangan )Tj
+/TT0 1 Tf
+0 Tw [(hum)-5 (a)5 (n)]TJ
+0 -1.765 TD
+[(i)5 (mmuno-)]TJ
+0.83 Tw [(d)-5 (e)5 (f)-10 (i)10 (c)-5 (i)5 (ency)-5 ( v)-5 (i)10 (rus, a)10 (c)-5 (qu)-5 (i)5 (red)-5 ( )]TJ
+0 Tw 19.15 0 Td
+[(i)10 (mmuno)-5 (-de)5 (f)-10 (i)10 (c)-5 (i)5 (enc)-5 (y)]TJ
+-19.15 -1.76 Td
+(syndrome)Tj
+/TT1 1 Tf
+0.21 Tw [(, dan infe)-5 (ksi menular)]TJ
+0 Tw [( )-210 (seksual )]TJ
+0.21 Tw 20.695 0 Td
+[(saat ini)-5 ( diatur)]TJ
+0.635 Tw -20.695 -1.76 Td
+[(dalam beberapa peraturan menteri dan ke)-5 (putusan)]TJ
+0.195 Tw 0 -1.76 TD
+[(menteri sudah tidak sesuai )5 (dengan kebutuhan hukum)]TJ
+0.27 Tw T*
+[(dan teknis penanggulangan, sehingga perlu dil)5 (akukan)]TJ
+0 Tw T*
+(penataan, )Tj
+EMC 
+/Span <</MCID 28 >>BDC 
+5.405 0 Td
+( )Tj
+EMC 
+/Span <</MCID 29 >>BDC 
+0.51 0 Td
+[(simplifi)5 (kasi, )-190 (dan)5 ( )]TJ
+EMC 
+/Span <</MCID 30 >>BDC 
+8.805 0 Td
+( )Tj
+EMC 
+/Span <</MCID 31 >>BDC 
+0.51 0 Td
+[(penyesu)5 (aian )]TJ
+EMC 
+/Span <</MCID 32 >>BDC 
+6.68 0 Td
+( )Tj
+EMC 
+/Span <</MCID 33 >>BDC 
+0.51 0 Td
+[(pen)5 (gatura)-5 (n)]TJ
+EMC 
+ET
+/Artifact <</Contents (jdih.kemkes.go.id)/Subtype /Header /Type /Pagination >>BDC 
+q
+1 0 0 1 453.5960083 35.0999451 cm
+/GS0 gs
+/TT1 1 Tf
+/Fm1 Do
+Q
+EMC 

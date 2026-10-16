@@ -1,0 +1,58 @@
+{
+  "checked_at": "2026-10-14T14:36:05.831366+00:00",
+  "jurisdiction": "Indonesia",
+  "checks": [
+    {
+      "name": "indonesia-metadata-validation-20261014/0001: terminal states/reasons/attempt caps",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "indonesia-metadata-validation-20261014/0001: MD and HTML include every state",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "indonesia-metadata-validation-20261014/0001: MD and HTML include every reason",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "indonesia-metadata-validation-20261014/0001: HTML fixed responsive format",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "indonesia-metadata-validation-20261014/0001: every candidate has catalog metadata",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "indonesia-metadata-validation-20261014/0001: metadata phase schedules zero body downloads",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "batches": [
+    {
+      "batch_id": "indonesia-metadata-validation-20261014",
+      "attempt_number": 1,
+      "mode": "metadata",
+      "result": "completed_with_errors",
+      "metadata_count": 16,
+      "file_count": 0,
+      "counts": {},
+      "states_by_status": {
+        "fail": 3,
+        "success": 32
+      },
+      "body_request_events": 0,
+      "actual_max_attempt": 0,
+      "publication_unverified": 4
+    }
+  ],
+  "files": [],
+  "file_count": 0,
+  "formats": {},
+  "all_checks_passed": true
+}

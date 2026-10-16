@@ -1,0 +1,4 @@
+interface:
+  display_name: "官方法规采集"
+  short_description: "确认法域与目录或原文模式，按批次采集官方法规，保留来源并生成可读报告。"
+  default_prompt: "使用 $download-official-regulations 采集当前工程已登记法域的官方法规；先确认适用国家/法域，除非我明确要求原文，否则询问是否先仅采集目录元数据。"

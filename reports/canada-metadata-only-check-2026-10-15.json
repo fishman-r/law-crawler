@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-15T01:48:44.992834+00:00",
+  "batch_id": "canada-metadata-validation-20261015",
+  "mode": "metadata",
+  "metadata_candidates": 8,
+  "raw_xml": 0,
+  "markdown_originals": 0,
+  "execution_report_markdown": "downloads/Canada/last-run.md",
+  "files_in_metadata_report": [],
+  "file_jobs": [],
+  "original_request_events": 0,
+  "counting_rule": "法规正文仅计64位SHA文件名及文件元数据；last-run.md为执行报告，排除"
+}

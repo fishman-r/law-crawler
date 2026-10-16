@@ -1,0 +1,125 @@
+{
+  "batch_id": "canada-content-validation-20261015",
+  "files": [
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.json",
+      "bytes": 16061,
+      "sha256": "5fcaaf1661342bd531cd8e9ac67c2e1a70596286c5f1f70b47d379c8dd7eb4dd"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md",
+      "bytes": 1195,
+      "sha256": "31b5436153ff0a98e7ce253a5a46813eeb81fbb3d3b31731592e0c0a415def01"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.json",
+      "bytes": 14671,
+      "sha256": "45ccae72abd6d669fe5b2dd2e1bbbb8597d0364513c1d82bceac38744a3043bc"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md",
+      "bytes": 390269,
+      "sha256": "50d999de4e5df20c78c9684d2bfd39f9ec52c88471c6b6cf6baf8a5a2ebab436"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.json",
+      "bytes": 15566,
+      "sha256": "a7272dc7050425cbf3a1d43049e3f8a70883cbffea5cffca93b0cdfa3031109b"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md",
+      "bytes": 202797,
+      "sha256": "71acf3206ac7d4e9aae9cd53f9cce8be7ed76db62fb530d3c889760e379ef906"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.json",
+      "bytes": 13904,
+      "sha256": "b4be948e7a0513be4a7b3895e6a47e1839eb0fe45a8fc5a6d2047b401343d56b"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md",
+      "bytes": 1070842,
+      "sha256": "78d6a7108c0869102e3b14383acbd2a41e9fe313dc4b4efb40fbc150dc2d23a4"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/362c7714ff1d70824e134d6321a8d81bb43f37e6d9688a7ea39a2cd329cff64c.json",
+      "bytes": 5167,
+      "sha256": "bed7958314e9005ab1bd50514ae12e7b6b9cafe69774fa542de16f76b4ec5d4e"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/379c69441615021ed923f5ff7456463150a8697aabffe7ae2cc7b707e021a298.json",
+      "bytes": 5545,
+      "sha256": "99a02021d8232df66b8f3019ec6fb0133958b0e67a881cd182c724c68facb399"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/4ef5ffe06d9e7237efd91ffaf008ca46d98f1406c308c917a6a79a2da0fd0795.json",
+      "bytes": 4841,
+      "sha256": "7858d1ebd5d7745a921052ad39087abe84cc1d72751423d461c7a6a95fc49a72"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/aa5463bd5a5e3da996bf299cad986034873fcfe409cd2889c261b9d51e58e5a4.json",
+      "bytes": 5008,
+      "sha256": "1f03b4cf1c9376d5b9509db48ab4c5ae63ff649c1957b000bed485df8d8d34f1"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/db9a9ab83f95a7803e08b6061a8b02b7c87425193f74d4a4389d063b05491c6d.json",
+      "bytes": 4668,
+      "sha256": "bf6acbeaf8ef77094cc5bcbbfad32298b304a5eb47a9deaa7d0afef3ec5997c6"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/e5333f665b614bca3421e8950e6033f81d22da7fe2c9fc82a48b2670bfa10bbc.json",
+      "bytes": 4451,
+      "sha256": "ad0dd3baf6b8719b796f34f5de8e2c89023d1354fbe5b658168b059053eb8071"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/e59ecb840ffd14c002fd7529d8e5ffa1f8710498e9091cfc263608a50f28ce3a.json",
+      "bytes": 5101,
+      "sha256": "fd0e02574692159dee585b3fcb365363e84a4d33b3841334af2e3a2257105686"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/catalog/ef0d176402a86ac0d67b5680124e2f630398685428809e692148af4333707e4a.json",
+      "bytes": 5382,
+      "sha256": "e7f08baf84e6e91429dbcb5ad8b20ce167ea037af4f1bc99c2c3857750447b16"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.xml",
+      "bytes": 3875,
+      "sha256": "3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.xml.metadata.json",
+      "bytes": 5380,
+      "sha256": "60eef6bfd12d1ee18a7817fd5eb7715b5333a9cbd437a9506033d576524f8f7b"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.xml",
+      "bytes": 979314,
+      "sha256": "56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.xml.metadata.json",
+      "bytes": 4941,
+      "sha256": "a60d67a8058e4ea530708d26069d6c4e73ec598a6dfa733631bf1894c6d6717f"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.xml",
+      "bytes": 488623,
+      "sha256": "ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.xml.metadata.json",
+      "bytes": 5229,
+      "sha256": "0f37af7b7c882830515f4c96ce401f310acdbf5f4a2ec82d26fa94a36467330d"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.xml",
+      "bytes": 2461283,
+      "sha256": "b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b"
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Canada/raw/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.xml.metadata.json",
+      "bytes": 4693,
+      "sha256": "62cd69655a62da46e19977459986670615f310a17bebd2d106976caf22fb1392"
+    }
+  ]
+}

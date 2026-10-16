@@ -1,0 +1,148 @@
+[
+  {
+    "platform": "mkri.id",
+    "local_file": "/Users/rpy/home/github/law-crawler/tmp/pdfs/recovery-mk-pmk1-2026.pdf",
+    "detail_url": "https://www.mkri.id/peraturan/peraturan-mk",
+    "download_url": "https://s.mkri.id/public/content/pmk/PMK%201%20tahun%202026.pdf",
+    "final_url": "https://s.mkri.id/public/content/pmk/PMK%201%20tahun%202026.pdf",
+    "final_url_verified": true,
+    "metadata": {
+      "title": {
+        "value": "Peraturan Mahkamah Konstitusi Nomor 1 Tahun 2026 tentang Tahapan, Kegiatan, dan Jadwal Penanganan Permohonan Mengenai Perselisihan Hasil Pemilihan Umum Presiden dan Wakil Presiden Tahun 2024 yang Diajukan Pada Tahun 2026",
+        "raw": "Peraturan Mahkamah Konstitusi Nomor 1 Tahun 2026 tentang Tahapan, Kegiatan, dan Jadwal Penanganan Permohonan Mengenai Perselisihan Hasil Pemilihan Umum Presiden dan Wakil Presiden Tahun 2024 yang Diajukan Pada Tahun 2026",
+        "source_label": "官方浏览器Peraturan MK列表 Judul / Tentang",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "正常浏览器实际观察列表标题与主题，非CLI自动目录采集。"
+      },
+      "published_at": {
+        "value": null,
+        "raw": null,
+        "source_label": null,
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "not_provided",
+        "meaning": "法规公布日期，非下载时间"
+      },
+      "updated_at": {
+        "value": null,
+        "raw": null,
+        "source_label": null,
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "not_provided",
+        "meaning": "官网明确提供的更新时间，非本地抓取时间"
+      },
+      "effective_region": {
+        "value": null,
+        "raw": null,
+        "source_label": null,
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "not_provided",
+        "meaning": "需官方明确适用地区，不能从制定地点推断"
+      },
+      "legal_status": "not_verified",
+      "legal_identity": {
+        "value": {
+          "jurisdiction": "ID",
+          "issuer": "Mahkamah Konstitusi",
+          "type": "Peraturan Mahkamah Konstitusi",
+          "number": "1",
+          "year": "2026"
+        },
+        "raw": "Peraturan Mahkamah Konstitusi Nomor 1 Tahun 2026 tentang Tahapan, Kegiatan, dan Jadwal Penanganan Permohonan Mengenai Perselisihan Hasil Pemilihan Umum Presiden dan Wakil Presiden Tahun 2024 yang Diajukan Pada Tahun 2026",
+        "source_label": "官方列表身份与机关",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "正式法规身份；效力待核验。"
+      },
+      "document_type": {
+        "value": "regulation",
+        "raw": "Peraturan Mahkamah Konstitusi",
+        "source_label": "Peraturan MK",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "公开列表中的正式法规；不作为裁决。"
+      },
+      "source_route": {
+        "value": "browser_catalogue_cli_original",
+        "raw": "IAB目录可读；原件由CLI公开请求取得",
+        "source_label": "本轮实际采集路径",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "浏览器辅助公开目录加CLI原文补收，不表示CLI目录403已恢复。"
+      }
+    }
+  },
+  {
+    "platform": "mkri.id",
+    "local_file": "/tmp/law-network-routes/mk-pmk7-2025-complete.pdf",
+    "detail_url": "https://www.mkri.id/peraturan/peraturan-mk",
+    "download_url": "https://s.mkri.id/public/content/pmk/3%20Gab%20PMK%20no.%207%202025.pdf",
+    "final_url": "https://s.mkri.id/public/content/pmk/3%20Gab%20PMK%20no.%207%202025.pdf",
+    "final_url_verified": true,
+    "metadata": {
+      "title": {
+        "value": "Peraturan Mahkamah Konstitusi Nomor 7 Tahun 2025 tentang Tata Beracara dalam Perkara Pengujian Undang-Undang",
+        "raw": "Peraturan Mahkamah Konstitusi Nomor 7 Tahun 2025 tentang Tata Beracara dalam Perkara Pengujian Undang-Undang",
+        "source_label": "官方浏览器Peraturan MK列表 Judul / Tentang",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "正常浏览器实际观察列表标题与主题，非CLI自动目录采集。"
+      },
+      "published_at": {
+        "value": null,
+        "raw": null,
+        "source_label": null,
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "not_provided",
+        "meaning": "法规公布日期，非下载时间"
+      },
+      "updated_at": {
+        "value": null,
+        "raw": null,
+        "source_label": null,
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "not_provided",
+        "meaning": "官网明确提供的更新时间，非本地抓取时间"
+      },
+      "effective_region": {
+        "value": null,
+        "raw": null,
+        "source_label": null,
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "not_provided",
+        "meaning": "需官方明确适用地区，不能从制定地点推断"
+      },
+      "legal_status": "not_verified",
+      "legal_identity": {
+        "value": {
+          "jurisdiction": "ID",
+          "issuer": "Mahkamah Konstitusi",
+          "type": "Peraturan Mahkamah Konstitusi",
+          "number": "7",
+          "year": "2025"
+        },
+        "raw": "Peraturan Mahkamah Konstitusi Nomor 7 Tahun 2025 tentang Tata Beracara dalam Perkara Pengujian Undang-Undang",
+        "source_label": "官方列表身份与机关",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "正式法规身份；效力待核验。"
+      },
+      "document_type": {
+        "value": "regulation",
+        "raw": "Peraturan Mahkamah Konstitusi",
+        "source_label": "Peraturan MK",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "公开列表中的正式法规；不作为裁决。"
+      },
+      "source_route": {
+        "value": "browser_catalogue_cli_original",
+        "raw": "IAB目录可读；原件由CLI公开请求取得",
+        "source_label": "本轮实际采集路径",
+        "source_url": "https://www.mkri.id/peraturan/peraturan-mk",
+        "status": "observed",
+        "meaning": "浏览器辅助公开目录加CLI原文补收，不表示CLI目录403已恢复。"
+      }
+    }
+  }
+]

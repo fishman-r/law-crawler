@@ -1,0 +1,204 @@
+{
+  "method": "pypdf extraction and original content stream inspection; pdftoppm rendering plus manual visual review; official alternative lookup",
+  "reviewed_at": "2026-10-14T15:13:16.106875+00:00",
+  "scope": "Identity review only; enacting/promulgation dates transcribed from actual PDF pages; no current legal status or newest-version decision",
+  "previous_audit_preserved": "reports/indonesia-pdf-identity-audit-2026-10-14.json",
+  "files": [
+    {
+      "file": "downloads/Indonesia/ab3b0edf0fe45f77bd755bed70552ea8a1a3d3529e7e37e718b94a07f3a3bfa1.pdf",
+      "sha256": "ab3b0edf0fe45f77bd755bed70552ea8a1a3d3529e7e37e718b94a07f3a3bfa1",
+      "pages": 119,
+      "metadata_identity": {
+        "jurisdiction": "ID",
+        "issuer": "Indonesia.Kementerian Kesehatan",
+        "type": "Peraturan Menteri",
+        "number": "23",
+        "year": "2022"
+      },
+      "text_review": "title_type_number_year_match",
+      "number_year_match": true,
+      "reason": "真实渲染第1页显示正式Peraturan Menteri Kesehatan 23/2022标题及主题；第3页MEMUTUSKAN/Menetapkan与正文一致，第31页完整制定、公布、BN2022/831及Salinan认证章，第32页附件身份和第119页签署认证一致。首次提取的RANCANGAN为第1页白色隐藏文字（1 g），随后标题恢复黑色（0 g），仅提取层可见；综合证据支持隐藏模板残留解释，不能单凭该词判为草案，也不是单凭签名消除冲突。保留该词原字节与首次冲突审计。本次只确认正文身份及列明页面，不确认全文逐字完整、法律效力或最新版本。",
+      "visual_pages": [
+        1,
+        3,
+        31,
+        32,
+        119
+      ],
+      "render_evidence": [
+        {
+          "file": "reports/evidence/indonesia-body-followup/pmk-first.png",
+          "sha256": "be58655745e15545831794a4e97128c09223d3cf954c8d387f2d1995d52afaeb"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/pmk-enacting.png",
+          "sha256": "dca845deeedea67ab0bb956e6e3ce486ef2489a156014a43192f5789540d9685"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/pmk-signature.png",
+          "sha256": "b3f78b1dfd90dba142e196d2d05f980984c030550f66bca35caa6f4302d6ac3a"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/pmk-attachment-first.png",
+          "sha256": "7cdbd8c4822d07e5c8105a6d5ecd529b586e70820b441c2b1404276edadc99d9"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/pmk-last.png",
+          "sha256": "27bf5f245eb0d7c603eaa9be13c40ac38e79ccd4682cb048d795a711dfaaef1b"
+        }
+      ],
+      "hidden_text_evidence": {
+        "word": "RANCANGAN",
+        "pdf_page": 1,
+        "text_matrix": [
+          12,
+          0,
+          0,
+          12,
+          267.84,
+          755.1
+        ],
+        "fill_color_operator": "1 g",
+        "meaning": "DeviceGray non-stroking color 1 = white",
+        "following_title_color": "0 g",
+        "visible_on_render": false,
+        "total_extracted_occurrences": 1,
+        "content_stream_file": "reports/evidence/indonesia-body-followup/pmk-first-content-stream.txt",
+        "content_stream_sha256": "276b8031b69850676629d93bb2d294756a6cfc9dc6c2244819767a3e07c8370a",
+        "interpretation": "Hidden template residue inferred from white text, formal rendered identity, promulgation and certified copy evidence; not an explicit statement from the issuer"
+      },
+      "observed_dates": {
+        "enacted_at": {
+          "value": "2022-08-31",
+          "raw": "31 Agustus 2022",
+          "source_label": "Ditetapkan di Jakarta pada tanggal",
+          "pdf_page": 31,
+          "source_url": "https://jdih.kemkes.go.id/storage/documents/pdfs/2022permenkes023.pdf",
+          "method": "manual visual transcription from rendered original PDF",
+          "status": "observed"
+        },
+        "promulgated_at": {
+          "value": "2022-09-01",
+          "raw": "1 September 2022",
+          "source_label": "Diundangkan di Jakarta pada tanggal",
+          "pdf_page": 31,
+          "source_url": "https://jdih.kemkes.go.id/storage/documents/pdfs/2022permenkes023.pdf",
+          "method": "manual visual transcription from rendered original PDF",
+          "status": "observed"
+        }
+      },
+      "observed_promulgation": {
+        "series": "Berita Negara Republik Indonesia",
+        "year": "2022",
+        "number": "831",
+        "pdf_page": 31
+      },
+      "signatories": {
+        "enacting": "BUDI G. SADIKIN",
+        "promulgating": "YASONNA H. LAOLY",
+        "certified_copy": "Indah Febrianti, S.H., M.H.",
+        "pdf_page": 31
+      },
+      "preserved_previous_review": {
+        "audit_file": "reports/indonesia-pdf-identity-audit-2026-10-14.json",
+        "status": "catalogue_body_type_conflict",
+        "correction_basis": "Initial text-only assessment did not inspect visible page or white text color"
+      },
+      "official_alternative": {
+        "detail_url": "https://peraturan.bpk.go.id/Details/245543/permenkes-no-23-tahun-2022",
+        "download_url": "https://peraturan.bpk.go.id/Download/301566/Permenkes%20Nomor%2023%20Tahun%202022.pdf",
+        "provider": "Badan Pemeriksa Keuangan",
+        "web_pdf_retrieval": "Web tool retrieved application/pdf, 119 pages, formal BN831/2022 and PMK23/2022 identity; no local bytes obtained",
+        "local_download_status": "http_403",
+        "local_path": null,
+        "downloaded_replacement": false
+      },
+      "known_scope_limitations": [
+        "Hidden template residue is an evidence-based interpretation, not issuer confirmation",
+        "No full page-by-page or legal status review",
+        "Original page 3 visibly contains 2107 for cited PP12 year; retained unchanged"
+      ]
+    },
+    {
+      "file": "downloads/Indonesia/547d9ca31e80fa63b01dd0d3174e394f63527945ae28daff8910e65fc1264689.pdf",
+      "sha256": "547d9ca31e80fa63b01dd0d3174e394f63527945ae28daff8910e65fc1264689",
+      "pages": 15,
+      "metadata_identity": {
+        "jurisdiction": "ID",
+        "issuer": "Mahkamah Agung",
+        "type": "Peraturan Mahkamah Agung",
+        "number": "2",
+        "year": "2015"
+      },
+      "text_review": "title_type_number_year_match",
+      "number_year_match": true,
+      "reason": "该PDF为扫描件，文字提取无文字不等于身份未知。人工真实渲染第1页明确显示PERATURAN MAHKAMAH AGUNG REPUBLIK INDONESIA NOMOR 2 TAHUN 2015及TATA CARA PENYELESAIAN GUGATAN SEDERHANA；第2页为对应序言延续，第14页Ditetapkan 7 Agustus 2015/MUHAMMAD HATTA ALI，第15页Diundangkan 7 Agustus 2015/YASONNA H. LAOLY、BN2015/1172及认证章。身份与metadata匹配；本次未做OCR、不确认全文逐字完整、法律效力或最新版本。",
+      "visual_pages": [
+        1,
+        2,
+        14,
+        15
+      ],
+      "render_evidence": [
+        {
+          "file": "reports/evidence/indonesia-body-followup/perma-first.png",
+          "sha256": "17c3120e8e766f0cee67e5fa7d720f6656c8d2187eaca96fa9fc684c6e0c23ce"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/perma-second.png",
+          "sha256": "11c18250e446fa63a0c4538712c018a235a49df97f453b80f0e01eff318a6bc5"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/perma-penultimate.png",
+          "sha256": "19620d8df8ec5e5d1987e04a0a759bb94d25cdadc4aed7268fecb8d694d83797"
+        },
+        {
+          "file": "reports/evidence/indonesia-body-followup/perma-last.png",
+          "sha256": "c7cc68f06fff48f17b93fee91ea9066197874ed7080f3759be70db8f86b0b92f"
+        }
+      ],
+      "observed_dates": {
+        "enacted_at": {
+          "value": "2015-08-07",
+          "raw": "7 Agustus 2015",
+          "source_label": "Ditetapkan di Jakarta pada tanggal",
+          "pdf_page": 14,
+          "source_url": "https://kepaniteraan.mahkamahagung.go.id/images/peraturan/perma/PERMA_02_2015_FIX4.pdf",
+          "method": "manual visual transcription from rendered original PDF",
+          "status": "observed"
+        },
+        "promulgated_at": {
+          "value": "2015-08-07",
+          "raw": "7 Agustus 2015",
+          "source_label": "Diundangkan di Jakarta pada tanggal",
+          "pdf_page": 15,
+          "source_url": "https://kepaniteraan.mahkamahagung.go.id/images/peraturan/perma/PERMA_02_2015_FIX4.pdf",
+          "method": "manual visual transcription from rendered original PDF",
+          "status": "observed"
+        }
+      },
+      "observed_promulgation": {
+        "series": "Berita Negara Republik Indonesia",
+        "year": "2015",
+        "number": "1172",
+        "pdf_page": 15
+      },
+      "signatories": {
+        "enacting": "MUHAMMAD HATTA ALI",
+        "promulgating": "YASONNA H. LAOLY",
+        "certified_copy": "RIDWAN MANSYUR",
+        "enacting_page": 14,
+        "promulgating_page": 15
+      },
+      "preserved_previous_review": {
+        "audit_file": "reports/indonesia-pdf-identity-audit-2026-10-14.json",
+        "status": "unknown_no_extractable_text_first_two_pages",
+        "correction_basis": "Actual rendered scan permits manual visual identity review"
+      },
+      "known_scope_limitations": [
+        "No OCR",
+        "No full page-by-page or legal status review"
+      ]
+    }
+  ]
+}

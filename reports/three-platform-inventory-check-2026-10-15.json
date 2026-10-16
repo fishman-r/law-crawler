@@ -1,0 +1,174 @@
+{
+  "checked_at": "2026-10-14T16:49:45.247904+00:00",
+  "directory": "/Users/rpy/home/github/law-crawler/downloads/Indonesia",
+  "files": [
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/07271816d9864f6b7eca29222b5fcd73d6d37a8132aa5516c0a8eedddbfb0764.pdf",
+      "sha256": "07271816d9864f6b7eca29222b5fcd73d6d37a8132aa5516c0a8eedddbfb0764",
+      "size_bytes": 1235175,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/07271816d9864f6b7eca29222b5fcd73d6d37a8132aa5516c0a8eedddbfb0764.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/0b71537a88b072676a30e1847b011ac66e89b27f818e952c0a7108629cac4b8f.pdf",
+      "sha256": "0b71537a88b072676a30e1847b011ac66e89b27f818e952c0a7108629cac4b8f",
+      "size_bytes": 7137483,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/0b71537a88b072676a30e1847b011ac66e89b27f818e952c0a7108629cac4b8f.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/0cd51f332efbc1fdb0e8607d82d1da26d5dc7571c5a16e4e9ea29216fbf64aed.pdf",
+      "sha256": "0cd51f332efbc1fdb0e8607d82d1da26d5dc7571c5a16e4e9ea29216fbf64aed",
+      "size_bytes": 1363263,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/0cd51f332efbc1fdb0e8607d82d1da26d5dc7571c5a16e4e9ea29216fbf64aed.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/48222f800fe476548501f8f8b5a9e60bc95684e34196dad8e204d049741d5f9c.pdf",
+      "sha256": "48222f800fe476548501f8f8b5a9e60bc95684e34196dad8e204d049741d5f9c",
+      "size_bytes": 1091058,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/48222f800fe476548501f8f8b5a9e60bc95684e34196dad8e204d049741d5f9c.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/52b6bb8ee41bf28cb090614a0050258c1f4555be416ec6b8734415ec94db1baa.pdf",
+      "sha256": "52b6bb8ee41bf28cb090614a0050258c1f4555be416ec6b8734415ec94db1baa",
+      "size_bytes": 2818703,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/52b6bb8ee41bf28cb090614a0050258c1f4555be416ec6b8734415ec94db1baa.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/547d9ca31e80fa63b01dd0d3174e394f63527945ae28daff8910e65fc1264689.pdf",
+      "sha256": "547d9ca31e80fa63b01dd0d3174e394f63527945ae28daff8910e65fc1264689",
+      "size_bytes": 501892,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/547d9ca31e80fa63b01dd0d3174e394f63527945ae28daff8910e65fc1264689.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/649a98a88c8bb9e55499bc536bcdd5874acee4f12f2219dfe2d3ffd40e51cc43.pdf",
+      "sha256": "649a98a88c8bb9e55499bc536bcdd5874acee4f12f2219dfe2d3ffd40e51cc43",
+      "size_bytes": 1973507,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/649a98a88c8bb9e55499bc536bcdd5874acee4f12f2219dfe2d3ffd40e51cc43.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/66dc780c12e2a378d45215a0d01de18b30b6cd923ceb597e5dad824099f856b4.pdf",
+      "sha256": "66dc780c12e2a378d45215a0d01de18b30b6cd923ceb597e5dad824099f856b4",
+      "size_bytes": 1812360,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/66dc780c12e2a378d45215a0d01de18b30b6cd923ceb597e5dad824099f856b4.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/689f9ed97f43900c64be3c44f8eef9f91091e3a6a48691943ceb6788a99931d2.pdf",
+      "sha256": "689f9ed97f43900c64be3c44f8eef9f91091e3a6a48691943ceb6788a99931d2",
+      "size_bytes": 1971666,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/689f9ed97f43900c64be3c44f8eef9f91091e3a6a48691943ceb6788a99931d2.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/ab3b0edf0fe45f77bd755bed70552ea8a1a3d3529e7e37e718b94a07f3a3bfa1.pdf",
+      "sha256": "ab3b0edf0fe45f77bd755bed70552ea8a1a3d3529e7e37e718b94a07f3a3bfa1",
+      "size_bytes": 1775952,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/ab3b0edf0fe45f77bd755bed70552ea8a1a3d3529e7e37e718b94a07f3a3bfa1.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/b037b9b357ab682c45ae3d53ec82d9710bdd687dea12847ae930deef6a058aec.pdf",
+      "sha256": "b037b9b357ab682c45ae3d53ec82d9710bdd687dea12847ae930deef6a058aec",
+      "size_bytes": 1408265,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/b037b9b357ab682c45ae3d53ec82d9710bdd687dea12847ae930deef6a058aec.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/b400e7e8ecb1494aa98ecb21fc771eff76067a396fe122b749bb2d686b7f3a57.pdf",
+      "sha256": "b400e7e8ecb1494aa98ecb21fc771eff76067a396fe122b749bb2d686b7f3a57",
+      "size_bytes": 74168413,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/b400e7e8ecb1494aa98ecb21fc771eff76067a396fe122b749bb2d686b7f3a57.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/d0a96228b5de6228d388731fc4070fd10e2774b2ea43f2c7bb23b8d1f436bb1b.pdf",
+      "sha256": "d0a96228b5de6228d388731fc4070fd10e2774b2ea43f2c7bb23b8d1f436bb1b",
+      "size_bytes": 119790543,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/d0a96228b5de6228d388731fc4070fd10e2774b2ea43f2c7bb23b8d1f436bb1b.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/dab7d3f02b6b4755c4f64eb3859ea6d717559465fc7947b0f10d0cb79a884483.pdf",
+      "sha256": "dab7d3f02b6b4755c4f64eb3859ea6d717559465fc7947b0f10d0cb79a884483",
+      "size_bytes": 13974767,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/dab7d3f02b6b4755c4f64eb3859ea6d717559465fc7947b0f10d0cb79a884483.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/f30c5a276be4c7fc4169536ab135b605908929174130c5f9a576d2843d5f4c7e.pdf",
+      "sha256": "f30c5a276be4c7fc4169536ab135b605908929174130c5f9a576d2843d5f4c7e",
+      "size_bytes": 1591984,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/f30c5a276be4c7fc4169536ab135b605908929174130c5f9a576d2843d5f4c7e.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    },
+    {
+      "file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/f8994734b8cf35cda8bf15ed7f8cc130b5941491a2d8c4d055a5e6075bc0e1ad.pdf",
+      "sha256": "f8994734b8cf35cda8bf15ed7f8cc130b5941491a2d8c4d055a5e6075bc0e1ad",
+      "size_bytes": 1529565,
+      "metadata_file": "/Users/rpy/home/github/law-crawler/downloads/Indonesia/f8994734b8cf35cda8bf15ed7f8cc130b5941491a2d8c4d055a5e6075bc0e1ad.json",
+      "body_review": "title_type_number_year_match",
+      "matches_filename": true,
+      "matches_metadata": true,
+      "matches_prior": true
+    }
+  ],
+  "counts": {
+    "pdf_files": 16,
+    "metadata_files": 16,
+    "identity_matched": 16
+  },
+  "unchanged_vs_prior": true,
+  "prior_report": "/Users/rpy/home/github/law-crawler/reports/three-platform-inventory-check-2026-10-14.json",
+  "new_original_files": 0
+}

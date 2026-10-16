@@ -1,0 +1,24 @@
+{
+  "kind": "browser_healthcheck_fixture",
+  "synthetic": true,
+  "is_regulation": false,
+  "marker": "BROWSER-HEALTH-4c4d5433d5cf1b97368fee7d",
+  "host": "127.0.0.1",
+  "port": 54159,
+  "duration_seconds": 300.0,
+  "urls": {
+    "page": "http://127.0.0.1:54159/",
+    "marker": "http://127.0.0.1:54159/marker",
+    "inline": "http://127.0.0.1:54159/inline.txt",
+    "attachment": "http://127.0.0.1:54159/attachment"
+  },
+  "attachment": {
+    "filename": "browser-healthcheck-BROWSER-HEALTH-4c4d5433d5cf1b97368fee7d.txt",
+    "expected_bytes": 128,
+    "sha256": "e3f68a369165ffc4279f6a055fd91bf4a855c50a691b755b15ce022482f8d803",
+    "content_type": "text/plain; charset=utf-8"
+  },
+  "output_dir": "/Users/rpy/home/github/law-crawler/reports/browser-healthcheck-2026-10-15-run1",
+  "fixture_path": "/Users/rpy/home/github/law-crawler/reports/browser-healthcheck-2026-10-15-run1/fixture.json",
+  "requests_path": "/Users/rpy/home/github/law-crawler/reports/browser-healthcheck-2026-10-15-run1/requests.jsonl"
+}

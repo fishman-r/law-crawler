@@ -1,0 +1,43 @@
+{
+  "evidence_type": "snapshot_from_actual_main_run",
+  "source_report": "/Users/rpy/home/github/law-crawler/downloads/last-run.json",
+  "run_started_at": "2026-10-13T15:03:15.639429+00:00",
+  "run_finished_at": "2026-10-13T15:05:26.357638+00:00",
+  "interpretation": {
+    "list_discovery": "succeeded",
+    "detail_parsing": "succeeded_for_3_details",
+    "pdf_download": "all_3_attempts_http_403",
+    "note": "Earlier list requests also returned 403, but this later run succeeded at list and detail stages. This is a dated observation, not a claim of permanent unavailability."
+  },
+  "platform_record": {
+    "platform": "dpr.go.id",
+    "entries": [
+      "https://jdih.dpr.go.id/setjen/index/id/Peraturan-DPR-BAGIAN-PERTIMBANGAN-DAN-DOKUMENTASI-INFORMASI-HUKUM"
+    ],
+    "status": "no_downloads",
+    "detail_pages": 3,
+    "files": [],
+    "errors": [
+      {
+        "platform": "dpr.go.id",
+        "url": "https://berkas.dpr.go.id/jdih/document/peraturan_dpr/2025perdpr001.pdf?t=20261013220419",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      {
+        "platform": "dpr.go.id",
+        "url": "https://berkas.dpr.go.id/jdih/document/peraturan_dpr/2025perdpr002.pdf?t=20261013220423",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      {
+        "platform": "dpr.go.id",
+        "url": "https://berkas.dpr.go.id/jdih/document/peraturan_dpr/2025perdpr003.pdf?t=20261013220428",
+        "error": "HTTP Error 403: Forbidden"
+      }
+    ],
+    "checked_at": "2026-10-13T15:04:10.513151+00:00"
+  },
+  "fixture_provenance": {
+    "dpr-list.html": "Captured earlier /index/peraturan-dpr page; contains catalog links and serves as a negative parser fixture.",
+    "dpr-detail-parser.html": "Synthetic compact parser fixture from official rendered metadata; not a captured main-run HTTP response."
+  }
+}

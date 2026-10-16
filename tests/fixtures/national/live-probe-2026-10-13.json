@@ -1,0 +1,40 @@
+{
+  "kind": "network_probe_evidence_not_parser_fixture",
+  "date": "2026-10-13",
+  "timeout_seconds": 20,
+  "network_pdf_download_verified": false,
+  "urllib": [
+    {"url": "https://peraturan.go.id/", "result": "SSL UNEXPECTED_EOF_WHILE_READING"},
+    {"url": "https://www.peraturan.go.id/", "result": "SSL UNEXPECTED_EOF_WHILE_READING"},
+    {"url": "https://peraturan.bpk.go.id/", "result": "HTTP 403 Forbidden"},
+    {"url": "https://peraturan.bpk.go.id/Search", "result": "HTTP 403 Forbidden"},
+    {"url": "https://jdihn.go.id/", "result": "SSL UNEXPECTED_EOF_WHILE_READING"},
+    {"url": "https://www.jdihn.go.id/", "result": "SSL UNEXPECTED_EOF_WHILE_READING"},
+    {"url": "https://peraturan.bpk.go.id/Details/352154/pmk-no-53-tahun-2026", "result": "HTTP 403 Forbidden"},
+    {"url": "https://peraturan.bpk.go.id/Download/415963/2026pmkeuangan053.pdf", "result": "HTTP 403 Forbidden"},
+    {"url": "https://peraturan.go.id/files/pp-no-4-tahun-2026.pdf", "result": "SSL UNEXPECTED_EOF_WHILE_READING"},
+    {"url": "https://jdihn.go.id/files/423/2025pg005145.pdf", "result": "SSL UNEXPECTED_EOF_WHILE_READING"}
+  ],
+  "curl_standard_tls": [
+    {"url": "https://peraturan.go.id/", "result": "curl 35 LibreSSL SSL_ERROR_SYSCALL"},
+    {"url": "https://peraturan.bpk.go.id/?p_no=1", "result": "HTTP 403, 3151 bytes of error HTML"},
+    {"url": "https://jdihn.go.id/pencarian", "result": "curl 35 LibreSSL SSL_ERROR_SYSCALL"},
+    {"url": "http://peraturan.go.id/", "result": "HTTP 502"},
+    {"url": "http://jdihn.go.id/", "result": "HTTP 502"}
+  ],
+  "browser_tool": [
+    {"operation": "createBrowserTab iab peraturan.go.id", "result": "Browser is not available: iab"},
+    {"operation": "createBrowserTab chrome peraturan.go.id", "result": "30 second tool timeout, kernel reset"},
+    {"operation": "getState", "result": "30 second tool timeout, kernel reset"}
+  ],
+  "official_link_evidence": [
+    "https://peraturan.go.id/",
+    "https://peraturan.bpk.go.id/",
+    "https://peraturan.bpk.go.id/Details/352154/pmk-no-53-tahun-2026",
+    "https://peraturan.bpk.go.id/Download/415963/2026pmkeuangan053.pdf",
+    "https://jdihn.go.id/pencarian/detail/2194567/peraturan-menteri-perdagangan-republik-indonesia-nomor-2-tahun-2026-tentang-perubahan-kedua-atas-peraturan-menteri-perdagangan-nomor-32-tahun-2019-tentang-laporan-harta-kekayaan-penyelenggara-negara-di-lingkungan-kementerian-perdagangan",
+    "https://jdihn.go.id/pencarian/detail/2203416/peraturan-menteri-perhubungan-republik-indonesia-nomor-pm-1-tahun-2026-tentang-standar-kegiatan-usaha-dan-atau-standar-produk-jasa-pada-penyelenggaraan-perizinan-berusaha-berbasis-risiko-sektor-transportasi",
+    "https://jdihn.go.id/pencarian/detail/2156907/peraturan-gubernur-jawa-tengah-nomor-4-tahun-2026-tentang-peraturan-gubernur-nomor-4-tahun-2026-tentang-pembentukan%2C-kedudukan%2C-tugas-dan-fungsi%2C-susunan-organisasi-serta-tata-kerja-cabang-dinas"
+  ],
+  "evidence_limit": "Web search/open exposed official rendered metadata, routes and BPK PDF text. Local HTTP clients could not retrieve source HTML or official PDF binary. The parser HTML fixtures are explicitly synthetic, not captured production HTML. Browser tool connection failed before visible page verification."
+}

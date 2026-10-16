@@ -1,0 +1,79 @@
+{
+  "checked_at": "2026-10-15T00:05:06.805559+00:00",
+  "routes": [
+    {
+      "platform": "bpk.go.id",
+      "url": "https://kalbar.bpk.go.id/spkn-2026/",
+      "kind": "detail",
+      "status": "access_denied",
+      "reason": "真实Chrome显示BPK-RI拒绝"
+    },
+    {
+      "platform": "bpk.go.id",
+      "url": "https://kalbar.bpk.go.id/wp-content/uploads/2026/08/SPKN-2026-publikasi.pdf",
+      "kind": "original",
+      "status": "access_denied",
+      "reason": "直接打开已观察到的官方附件仍拒绝，未取得文件"
+    },
+    {
+      "platform": "bpk.go.id",
+      "url": "https://yogyakarta.bpk.go.id/tentang-perwakilan/rencana-strategis-bpk-ri-2006-2010/",
+      "kind": "detail",
+      "status": "access_denied",
+      "reason": "当前官方Renstra入口仍拒绝"
+    },
+    {
+      "platform": "bpk.go.id",
+      "url": "https://yogyakarta.bpk.go.id/wp-content/uploads/2025/12/Renstra-2025-2029.pdf",
+      "kind": "original",
+      "status": "access_denied",
+      "reason": "当前正式候选原件拒绝，搜索解析不算本地文件"
+    },
+    {
+      "platform": "dpr.go.id",
+      "url": "https://jdih.dpr.go.id/setjen/detail-dokumen/tipe/peraturan_dpr/perubahan-atas-peraturan-dewan-perwakilan-rakyat-republik-indonesia-nomor-2-tahun-2015-tentang-tata-beracara-mahkamah-kehormatan-dewan-perwakilan-rakyat-republik-indonesia",
+      "kind": "detail",
+      "status": "success",
+      "reason": "正式印尼语PerDPR3/2025详情可读，编号/类型/制定及公布日期可见"
+    },
+    {
+      "platform": "dpr.go.id",
+      "url": "https://berkas.dpr.go.id/jdih/document/peraturan_dpr/2025perdpr003.pdf?t=20261014233608",
+      "kind": "original",
+      "status": "access_denied",
+      "reason": "正常点击UNDUH BERKAS后新标签显示Akamai Access Denied"
+    },
+    {
+      "platform": "peraturan.go.id",
+      "url": "https://djpp.kemenkum.go.id/index.php",
+      "kind": "navigation",
+      "status": "success",
+      "reason": "真实DJPP官网导航可读；从可见e-Pengundangan链接正常点击"
+    },
+    {
+      "platform": "peraturan.go.id",
+      "url": "https://e-pengundangan.peraturan.go.id/",
+      "kind": "navigation",
+      "status": "connection_closed",
+      "reason": "真实Chrome显示ERR_CONNECTION_CLOSED；不冒充已经到达原件"
+    },
+    {
+      "platform": "bpk.go.id",
+      "url": "https://sumut.bpk.go.id/publikasi/standar-pemeriksaan-keuangan-negara/",
+      "kind": "detail",
+      "status": "access_denied",
+      "reason": "用户解锁后真实Chrome显示BPK Access Denied；此前导航后的Mac锁定中断保留在历史轮次"
+    },
+    {
+      "platform": "bpk.go.id",
+      "url": "https://sumut.bpk.go.id/wp-content/uploads/2026/08/SPKN-2026-publikasi.pdf",
+      "kind": "original",
+      "status": "access_denied",
+      "reason": "解锁后直接打开已观察的官方附件，Chrome显示BPK拒绝，未取得原字节"
+    }
+  ],
+  "originals_downloaded": 0,
+  "browser_observations_confirmed": 10,
+  "unconfirmed_observations": 0,
+  "cleanup": "7 task Chrome tabs closed after per-tab URL verification; original 6 tabs preserved; IAB list empty after automatic cleanup"
+}

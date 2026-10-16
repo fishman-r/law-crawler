@@ -1,0 +1,79 @@
+# Markdown结构缺失排查与Skill修复报告（2026-10-15）
+
+> 本报告记录本次执行结果；下载成功不代表法律效力已核验。
+
+## 执行信息
+
+| 项目 | 值 |
+| --- | --- |
+| 报告版本 | 1 |
+| 结束时间（UTC） | 2026-10-15T02:59:30.007640+00:00 |
+| 适用国家/法域 | Canada |
+| 结论 | 普遍性问题：全部7份现有加拿大Markdown均存在字段、条款或表格/脚注语义丢失；已从保存的官方XML离线重建并通过结构核对。 |
+| 根因 | 旧转换将XML节点文本依次摊平，丢弃字段名、日期父节点、条款类型、表格行列和引用关系。此前68,654个文字片段存在，不足以证明转换保留了结构。 |
+| 扫描范围 | 全downloads已登记正文：Canada 7份XML→Markdown；Indonesia 16份PDF不经过本转换器。HTML/JSON没有本地真实法规原件，侧车metadata.json及报告不计为法规原JSON/HTML。 |
+| 示例修复 | MV Sonia：登记日期（RegistrationDate）2007-06-14；XML合并日期（ConsolidationDate）2026-06-15；命令日期（RegulationMakerOrder/Date）2007-06-14；法规编号SOR/2007-151，命令编号2007-1002。它们不代填公布日期。 |
+| XML修复 | 具名字段和ISO日期、条款类型及编号、完整深层源路径、CALS表格坐标及跨格关系、脚注与交叉引用、未知XML标签/路径/属性；MathML保留惰性源结构。 |
+| 其他格式修复 | HTML字段列表保留dt/dd及dl边界，多项按源序不猜配对；sup/sub具名，time datetime标为源属性，img只保留alt/src。JSON保留字段键和数组路径。对应HTML/JSON结果仅为离线用例验证。 |
+| 缓存和去重 | 新增离线rebuild\_markdown.py，冻结国家/原始身份/转换来源/目标版本；按文件备份、重建、同步元数据与SQLite。旧缓存复用自动升级，原始SHA作为去重身份不变。输出变化须升转换版本，新转换器不改写旧目标批次。 |
+| 批次证据 | canada-markdown-structure-v22-20261015第1轮重建7份、第2轮already\_current 7份；原下载批次canada-content-validation-20261015第7轮previous\_success 4份，无新增原件、原文请求事件为0。 |
+| 历史快照缺口 | 独立审查发现3份v2.1历史完整元数据快照因同MD哈希文件名碰撞未保存，现存备份为更早v2；已按批次登记mismatch/snapshot\_unavailable，不补造converted\_at等易变字段。当前完整元数据、MD和原XML完好。后续元数据备份按完整快照SHA独立命名，回归测试已覆盖相同MD跨版本。 |
+| 转换历史说明 | 本次v1→v2→v2.1→v2.2修复分别留痕，每份3条旧派生转换历史；不是新增3个法律版本。v2.2仅补HTML规则，加拿大XML输出与v2.1逐份SHA相同。原计划、历史报告不改写。 |
+| 完整性异常 | MV Sonia旧Markdown存在额外前导制表符，旧文件实际SHA与侧车预期不同；已备份实际旧字节与旧元数据，明确记录差异。原XML始终完整。 |
+| 验证 | 全套241项测试通过；独立审查7份真实XML/Markdown结构、原件与源字段、索引一致、请求表/版本表原样不变。HTML/JSON为离线用例，不冒充官网实测。 |
+| 代理分工 | structured\_markdown\_renderer实现转换；markdown\_structure\_tests编写独立结构/迁移回归；markdown\_structure\_audit全库独立审查；主代理完成存储升级、批次工具、真实迁移、缓存重跑、Skill文档与报告整合。 |
+| 能力边界 | 8个脚注引用在源XML缺idref，明确未解析；5个MathML仅保存源结构，12张图片仅保留引用未下载/OCR。46张多行表头保留全部行/thead路径，Markdown第一行作为语法表头，不复现原始多级视觉分组。无公布日期仍为null，不作法律效力或最新公布版本判断。 |
+| 技能源码 | /Users/rpy/home/github/law-crawler/skills/download-official-regulations/SKILL.md |
+| 基线审查 | /Users/rpy/home/github/law-crawler/reports/markdown-structure-baseline-audit-2026-10-15.json |
+| 最终独立审查 | /Users/rpy/home/github/law-crawler/reports/markdown-structure-final-audit-2026-10-15.json |
+
+## 数量汇总
+
+| 状态 | 数量 |
+| --- | --- |
+| 有结构问题的原Markdown | 7 |
+| 已重建并核验 | 7 |
+| 日期块 | 17 |
+| 深层条款完整路径 | 280 |
+| 表格 | 57 |
+| 表格行 | 2578 |
+| 表格单元格 | 7823 |
+| 源脚注引用 | 30 |
+| 源缺idref引用 | 8 |
+| 本次离线原文请求 | 0 |
+| 重跑新建备份 | 0 |
+| 通过测试 | 241 |
+| 历史元数据快照缺口 | 3 |
+
+## 法规目录与元数据
+
+无记录。
+
+## 逐文件执行状态
+
+无记录。
+
+## 下载文件
+
+| 法规 | 主文件 | 原件SHA256 | Markdown实际SHA256 | 转换版本 | 派生转换历史条数 | 历史元数据缺口 | 核验结果 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| “MV Sonia” Remission Order, 2007 ( SOR /2007-151) | /Users/rpy/home/github/law-crawler/downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md | 3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393 | e962d33bee90946fca00d7a0f82adaa5753b624c38af84219e40f21857f259d4 | structured\_text\_v2.2 | 3 | 1 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+| Accessible Canada Act ( S.C. 2019, c. 10) | /Users/rpy/home/github/law-crawler/downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md | 50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2 | 38aa8038de0caa93dc7fb81f6156c9ad7f86dcf493e55fd4723adbb89ae4a134 | structured\_text\_v2.2 | 3 | 1 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+| Canada Occupational Health and Safety Regulations ( SOR /86-304) | /Users/rpy/home/github/law-crawler/downloads/Canada/56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9.md | 56876b7d3830941705abe912e3b32caf92ee6846b1bcb0de5ad7acda697683c9 | b01486cd6f091fcee93de1126b2137853deda925e453aa2c299ea0d48f24972e | structured\_text\_v2.2 | 3 | 0 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+| Canadian Aviation Regulations ( SOR /96-433) | /Users/rpy/home/github/law-crawler/downloads/Canada/628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b.md | 628e52f0762affec2a160758afdd60152877d58f3b9acc1ee99a4700ba1a5a9b | 0d62b481780e4b6a6f0cecfc7d745a055ab3afa47344d654f5bb743f3f9ffa13 | structured\_text\_v2.2 | 3 | 0 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+| Access to Information Act ( R.S.C. , 1985, c. A-1) | /Users/rpy/home/github/law-crawler/downloads/Canada/ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847.md | ac631ba9e6a1bdaa997464176f631ccd2a05d3e6225cb68503e0cff0cec78847 | bfe22acc7d1f39943c6e76716450d73c1e2c00e62be7adb4f7130aed206cb9d7 | structured\_text\_v2.2 | 3 | 0 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+| Canada Elections Act ( S.C. 2000, c. 9) | /Users/rpy/home/github/law-crawler/downloads/Canada/b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b.md | b29737e36630460e3641ddeb69afa8598517d4d7063d3aa889790b28bededf4b | 233ed9e1c4f205b7acc8e0188b53775302686aa8b8a8c0865e94cad5ea9e6cea | structured\_text\_v2.2 | 3 | 0 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+| “SeaRose FPSO” Remission Order, 2004 ( SOR /2004-96) | /Users/rpy/home/github/law-crawler/downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md | dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93 | b55ecd75e61dc23b303738e602439759f04382f067be7ab7e1fade2c57223acb | structured\_text\_v2.2 | 3 | 1 | 原XML、来源及日期未变，当前MD及历史MD字节有效；历史元数据缺口另列 |
+
+## 错误与原因
+
+| 本地文件 | check | detail |
+| --- | --- | --- |
+| downloads/Canada/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2.md | all\_history\_metadata\_conversion\_methods\_match\_events | \[{"actual\_backup\_metadata\_method": "structured\_text\_v2", "backup\_markdown": "conversion-history/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2/38aa8038de0caa93dc7fb81f6156c9ad7f86dcf493e55fd4723adbb89ae4a134.md", "backup\_markdown\_sha\_matches\_observed": true, "backup\_metadata": "conversion-history/50b57cf283b3b8a1830084c680bab980005b48a55f0c5b0ebebaffc76c3626a2/38aa8038de0caa93dc7fb81f6156c9ad7f86dcf493e55fd4723adbb89ae4a134.json", "backup\_metadata\_method\_matches\_event": false, "backup\_metadata\_sha\_matches\_event": true, "method": "structured\_text\_v2.1"}\] |
+| downloads/Canada/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393.md | all\_history\_metadata\_conversion\_methods\_match\_events | \[{"actual\_backup\_metadata\_method": "structured\_text\_v2", "backup\_markdown": "conversion-history/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393/e962d33bee90946fca00d7a0f82adaa5753b624c38af84219e40f21857f259d4.md", "backup\_markdown\_sha\_matches\_observed": true, "backup\_metadata": "conversion-history/3ca714dcb0688ed4f2f5ab94b93d308d225039ec6bcd78a21eb161494441c393/e962d33bee90946fca00d7a0f82adaa5753b624c38af84219e40f21857f259d4.json", "backup\_metadata\_method\_matches\_event": false, "backup\_metadata\_sha\_matches\_event": true, "method": "structured\_text\_v2.1"}\] |
+| downloads/Canada/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93.md | all\_history\_metadata\_conversion\_methods\_match\_events | \[{"actual\_backup\_metadata\_method": "structured\_text\_v2", "backup\_markdown": "conversion-history/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93/b55ecd75e61dc23b303738e602439759f04382f067be7ab7e1fade2c57223acb.md", "backup\_markdown\_sha\_matches\_observed": true, "backup\_metadata": "conversion-history/dae0538f1a0189a33ed5979f709c27445ec652ed833ce141e1fe3d2e9d6a0e93/b55ecd75e61dc23b303738e602439759f04382f067be7ab7e1fade2c57223acb.json", "backup\_metadata\_method\_matches\_event": false, "backup\_metadata\_sha\_matches\_event": true, "method": "structured\_text\_v2.1"}\] |
+
+## 平台结果
+
+无记录。
+

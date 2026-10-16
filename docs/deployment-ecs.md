@@ -1,6 +1,6 @@
 # 阿里云 Linux 部署：Claude Code + DeepSeek + 只读看板
 
-本部署让 Claude Code 在独立的 `lawcrawler` 用户下运行完整 skill，并用 Python 标准库提供中文观测页。看板只监听 `127.0.0.1:8765`，通过 SSH 隧道访问，每 5 秒刷新。没有网页命令执行入口，也不需要 Docker、Node.js 或前端构建服务。
+本部署让 Claude Code 在独立的 `lawcrawler` 用户下运行完整 skill，并用 Python 标准库提供中文观测页。看板后端只监听 `127.0.0.1:8765`，可通过 SSH 隧道访问，或配置下面的 HTTPS 公网入口。网页每 5 秒刷新，没有命令执行入口，也不需要 Docker、Node.js 或前端构建服务。启用公网入口后，查看看板不需要在本地启动项目或保持 SSH 隧道。
 
 ## 环境与目录
 
@@ -81,9 +81,51 @@ ssh -N -L 8765:127.0.0.1:8765 root@SERVER_IP
 
 打开 [本地观测台](http://127.0.0.1:8765)。若本地 8765 已占用，把命令中第一个 `8765` 换成空闲端口，并使用对应地址。服务器公网不需要放行 8765。
 
+## 使用服务器 IP 直接访问
+
+公网入口由独立的 `law-crawler-web.service` 提供，Nginx 在 443 端口终止 HTTPS，所有看板、API 和下载均要求独立的 HTTP Basic 用户名和密码。80 端口只用于证书验证和跳转 HTTPS；原后端仍只监听本机。浏览器直接打开 `https://SERVER_IP/`，输入看板凭据即可，不能使用 SSH root 密码代替。
+
+安装前先完成上面的后端部署，确认云防火墙允许公网 TCP 80、443，且没有其他服务占用这两个端口。在服务器以 root 安装依赖和独立的证书客户端：
+
+```sh
+dnf install -y nginx httpd-tools python3-pip
+python3 -m venv /opt/law-crawler/certbot
+/opt/law-crawler/certbot/bin/pip install certbot==5.8.0
+bash deploy/install-public-web.sh bootstrap SERVER_IP
+htpasswd -cB -C 10 /etc/law-crawler-web/htpasswd admin
+chown root:nginx /etc/law-crawler-web/htpasswd
+chmod 0640 /etc/law-crawler-web/htpasswd
+```
+
+`htpasswd` 隐藏输入密码；首次使用 `-c` 建立文件，增加用户或更改密码时去掉 `-c`，避免覆盖其他用户。此凭据独立于系统账户、Claude 和 DeepSeek API Key，不放进仓库或 URL。
+
+[Let's Encrypt 支持可信 IP 证书](https://letsencrypt.org/2026/03/11/shorter-certs-certbot)，需使用短期证书配置和支持 IP 的客户端。首次申请时阅读并接受证书服务协议，或使用你已有的 ACME 账户：
+
+```sh
+/opt/law-crawler/certbot/bin/certbot certonly \
+  --webroot --webroot-path /var/lib/law-crawler-web/acme \
+  --ip-address SERVER_IP --preferred-profile shortlived \
+  --cert-name law-crawler-web
+bash deploy/install-public-web.sh activate SERVER_IP
+```
+
+公网配置保存在 `/etc/law-crawler-web/nginx.conf`，证书由 `/etc/letsencrypt/live/law-crawler-web/` 提供。安装器在替换配置前检查 Nginx 语法；应用失败会恢复原配置。已激活 HTTPS 后，重复 `bootstrap` 不会回退到未启用 HTTPS 的配置。此安装器不替换现有看板源码，不重装 skill，也不移动下载数据。
+
+IP 证书有效期约 6 天，`law-crawler-cert-renew.timer` 每天两次检查续期，证书更新后先验证配置再重载 Web 服务：
+
+```sh
+systemctl status law-crawler-web --no-pager
+systemctl list-timers law-crawler-cert-renew.timer
+systemctl start law-crawler-cert-renew.service
+/opt/law-crawler/certbot/bin/certbot renew --cert-name law-crawler-web --dry-run
+journalctl -u law-crawler-cert-renew -n 30 --no-pager
+```
+
+公网代理先验证 Host 和 Origin，再向后端固定本机 Host，并清除登录凭据和客户端伪造的代理头。PDF Range、HEAD、下载文件名和后端 CSP 保留；日志不记录请求参数或认证头。重新启动 Web 服务不影响正在进行的 Claude 会话。
+
 ## 下载批次与浏览法规文件
 
-在“采集批次”中选中原文下载批次，点击“打包下载本批次”。浏览器将 ZIP 保存到本机下载目录；压缩包生成需要片刻，请保持 SSH 隧道连接。打包范围来自该批次实际完成报告中的成功文件，包含法规文件、对应元数据和 `manifest.json` 清单。仅采集元数据的批次没有法规原件，打包按钮不可用；最新执行轮次尚未结束时也会暂时禁用。存在采集失败项的批次可导出成功原件，清单会保留失败提示。
+在“采集批次”中选中原文下载批次，点击“打包下载本批次”。浏览器将 ZIP 保存到本机下载目录；压缩包生成需要片刻，请保持网络连接，通过 SSH 隧道访问时还需保持隧道连接。打包范围来自该批次实际完成报告中的成功文件，包含法规文件、对应元数据和 `manifest.json` 清单。仅采集元数据的批次没有法规原件，打包按钮不可用；最新执行轮次尚未结束时也会暂时禁用。存在采集失败项的批次可导出成功原件，清单会保留失败提示。
 
 “法规文件”提供服务器法规库的资源浏览器：按国家筛选、按标题或文件名搜索、翻页查看，并可下载单个文件及其元数据。选中文件可在页面预览 PDF、栅格图片或 Markdown；转换后的 Markdown 另有“下载原始响应”入口，ZIP 同时保留原始响应与转换文本。浏览器不支持嵌入 PDF 时可使用新窗口预览。HTML 等可执行内容只提供下载。文件列表按需加载，可手动刷新。
 

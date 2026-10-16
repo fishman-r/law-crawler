@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="法规采集工作区的只读会话、批次与部署观测台。">
+    <title>采集观测台 · Law Crawler</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转至内容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#overview" aria-label="采集观测台首页">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>采集观测台<span class="brand-subtitle">LAW CRAWLER</span></span>
+        </a>
+        <nav class="main-nav" aria-label="页面导航">
+          <a href="#sessions">智能体会话</a>
+          <a href="#batches">采集批次</a>
+          <a href="#deployment">部署状态</a>
+        </nav>
+        <span class="readonly-label">只读工作区</span>
+      </div>
+    </header>
+
+    <main id="main" class="page-shell">
+      <section id="overview" class="page-intro" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow"><span class="tiny-square" aria-hidden="true"></span> WORKSPACE OBSERVER</div>
+          <h1 id="page-title">让每次采集都有迹可循。</h1>
+          <p class="intro-text"><span id="workspace-name">正在连接工作区</span><span class="intro-divider" aria-hidden="true">/</span>会话、执行记录与采集进度，一处查看。</p>
+        </div>
+        <div class="refresh-cluster">
+          <div class="refresh-line"><span id="connection-status" class="status-badge tone-neutral"><span class="status-dot" aria-hidden="true"></span><span id="connection-label">正在连接</span></span><button id="refresh-button" class="button button-secondary" type="button"><span class="refresh-icon" aria-hidden="true">↻</span><span id="refresh-label">刷新</span></button></div>
+          <p id="last-updated" class="update-note" aria-live="polite">每 5 秒自动刷新</p>
+        </div>
+      </section>
+
+      <div id="connection-banner" class="notice notice-error" role="status" hidden></div>
+      <div id="overview-warnings" class="notice notice-warning" role="status" hidden></div>
+
+      <section class="metrics-grid" aria-label="工作区概览">
+        <article class="metric-card"><div class="metric-label">智能体会话<span class="metric-symbol" aria-hidden="true">◎</span></div><div class="metric-value" id="metric-sessions">—</div><div class="metric-footnote">已记录的 Claude Code 会话</div></article>
+        <article class="metric-card"><div class="metric-label">活动会话<span class="metric-symbol green" aria-hidden="true">◌</span></div><div class="metric-value" id="metric-active">—</div><div class="metric-footnote">以服务端活动状态统计为准</div></article>
+        <article class="metric-card"><div class="metric-label">采集批次<span class="metric-symbol" aria-hidden="true">▤</span></div><div class="metric-value" id="metric-batches">—</div><div class="metric-footnote">来自本地批次记录</div></article>
+        <article class="metric-card"><div class="metric-label">已结束批次<span class="metric-symbol blue" aria-hidden="true">✓</span></div><div class="metric-value" id="metric-finished">—</div><div class="metric-footnote">包含存在失败项的已结束批次</div></article>
+      </section>
+
+      <section id="sessions" class="dashboard-section" aria-labelledby="sessions-title">
+        <div class="section-heading"><div><div class="section-kicker">01 / AGENT ACTIVITY</div><h2 id="sessions-title">智能体会话</h2><p>从工具调用到子代理活动，查看已接入的执行记录。</p></div><span id="session-count" class="section-count">等待数据</span></div>
+        <div class="panel session-layout">
+          <div class="entity-list-pane"><div class="pane-heading">会话记录<span class="muted small-text">按最近活动排序</span></div><div id="session-list" class="entity-list" aria-label="选择会话"><div class="empty-state compact"><span class="loading-ring" aria-hidden="true"></span><p>正在读取会话…</p></div></div></div>
+          <div id="session-detail" class="detail-pane"><div class="empty-state"><div class="empty-symbol" aria-hidden="true">◎</div><h3>等待会话记录</h3><p>接入后，这里会显示工具事件和子代理活动。</p></div></div>
+        </div>
+      </section>
+
+      <section id="batches" class="dashboard-section" aria-labelledby="batches-title">
+        <div class="section-heading"><div><div class="section-kicker">02 / COLLECTION BATCHES</div><h2 id="batches-title">采集批次</h2><p>保留每次尝试的结果，清楚区分完成、失败和未完成。</p></div><span id="batch-count" class="section-count">等待数据</span></div>
+        <div class="panel batch-layout">
+          <div class="entity-list-pane"><div class="pane-heading">批次目录<span class="muted small-text">按最近更新排序</span></div><div id="batch-list" class="entity-list" aria-label="选择批次"><div class="empty-state compact"><span class="loading-ring" aria-hidden="true"></span><p>正在读取批次…</p></div></div></div>
+          <div class="detail-pane batch-detail-pane">
+            <div id="batch-placeholder" class="empty-state"><div class="empty-symbol" aria-hidden="true">▤</div><h3>等待采集批次</h3><p>在服务器通过 SSH 运行采集 skill 后，这里会显示批次及任务状态。</p></div>
+            <div id="batch-detail-content" hidden>
+              <div class="detail-heading"><div class="min-width-zero"><div class="detail-kicker">BATCH DETAIL</div><h3 id="batch-detail-title" class="break-word"></h3><p id="batch-detail-id" class="mono muted small-text break-word"></p></div><div id="batch-detail-status"></div></div>
+              <div id="batch-detail-error" class="notice notice-error detail-notice" role="status" hidden></div>
+              <div id="batch-detail-warnings" class="notice notice-warning detail-notice" hidden></div>
+              <div id="batch-counts" class="batch-counts"></div>
+              <dl id="batch-facts" class="fact-grid batch-facts"></dl>
+              <div id="batch-report" class="report-strip" hidden></div>
+              <div id="batch-attempts" class="attempts-line" hidden></div>
+              <div id="batch-errors" class="batch-errors" hidden></div>
+              <div class="table-toolbar"><h4>任务状态<span id="task-count" class="muted small-text"></span></h4><div class="table-filters"><label class="sr-only" for="state-search">搜索任务</label><input id="state-search" type="search" placeholder="搜索任务或原因" autocomplete="off"><label class="sr-only" for="state-filter">筛选任务状态</label><select id="state-filter"><option value="all">全部状态</option><option value="failed">失败</option><option value="pending">待处理</option><option value="running">未结束</option><option value="success">成功</option><option value="skipped">跳过</option><option value="unknown">其他状态</option></select></div></div>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="批次任务状态表"><table class="state-table"><thead><tr><th scope="col">任务 / 平台</th><th scope="col">状态</th><th scope="col">原因 / 最近检查</th><th scope="col" class="number-cell">尝试</th></tr></thead><tbody id="state-table-body"></tbody></table></div>
+              <div class="table-footer"><span id="state-table-note" class="muted small-text"></span><button id="show-more-states" class="text-button" type="button" hidden>再显示 100 项 ↓</button></div>
+              <p class="record-note">“未结束”表示任务记录尚未收敛；批次是否完成以持久化结果为准。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="deployment" class="dashboard-section" aria-labelledby="deployment-title">
+        <div class="section-heading"><div><div class="section-kicker">03 / ENVIRONMENT</div><h2 id="deployment-title">运行环境</h2><p>检查观测链路与主机资源，配置状态不包含凭据内容。</p></div></div>
+        <div class="support-grid">
+          <article class="panel support-panel"><div class="panel-title"><h3>部署检查</h3><span class="panel-mark" aria-hidden="true">⌘</span></div><dl id="setup-checks" class="check-list"><div class="muted">正在读取部署状态…</div></dl></article>
+          <article class="panel support-panel"><div class="panel-title"><h3>系统资源</h3><span id="hostname" class="host-label mono">—</span></div><div id="system-resources"><div class="muted">正在读取主机状态…</div></div></article>
+        </div>
+      </section>
+      <footer class="page-footer"><span><span class="footer-dot" aria-hidden="true"></span> LAW CRAWLER OBSERVER</span><p>采集完成表示技术流程已结束，正文质量与法规效力需另行核验。</p><span>只读 · 自动刷新 5s</span></footer>
+    </main>
+    <noscript><div class="noscript-message">观测台需要 JavaScript 才能读取会话和批次状态。请启用 JavaScript 后刷新。</div></noscript>
+  </body>
+</html>

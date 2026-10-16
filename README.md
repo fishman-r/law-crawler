@@ -29,6 +29,8 @@ python3 tools/install_skill.py --agent workbuddy
 
 ## 使用前需要确认什么
 
+如需在云服务器运行 Claude Code、接入 DeepSeek 并查看智能体与批次状态，参见[阿里云部署与只读 Web 看板](docs/deployment-ecs.md)。
+
 | 必须确认 | 规则 |
 | --- | --- |
 | 适用国家/法域 | 用户显式提供；不能根据平台域名、历史任务或默认索引猜测。 |

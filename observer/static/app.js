@@ -253,6 +253,7 @@
     updateUrl(); renderBatchList(); await fetchBatch();
   }
   async function fetchBatch() {
+    window.dispatchEvent(new CustomEvent("observer:batch-selection", { detail: { batchId: state.batchId } }));
     if (!state.batchId) { renderBatchDetail(); return; }
     const id = state.batchId; const token = ++state.batchRequest;
     state.batchLoading = true; renderBatchDetail();

@@ -5,9 +5,11 @@ from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import re
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 from observer.events import hooks_installed, session_detail, session_list
+from observer.library import (CHUNK_BYTES, LibraryError, LibraryReader,
+                              content_disposition, parse_range)
 from observer.snapshot import SnapshotReader, host_metrics
 
 
@@ -18,10 +20,11 @@ def _safe_string(value, limit=120):
 class Observer:
     def __init__(self, workspace, download_base, runtime_dir, settings_path=None):
         self.workspace = Path(workspace).resolve()
-        self.download_base = Path(download_base).resolve()
+        self.download_base = Path(download_base).absolute()
         self.runtime_dir = Path(runtime_dir).resolve()
         self.settings_path = Path(settings_path or Path.home()/'.claude/settings.json')
         self.reader = SnapshotReader(self.workspace, self.download_base)
+        self.library = LibraryReader(self.download_base)
 
     def setup(self):
         """只返回必要配置和布尔值；永不返回配置文件的 env 或凭据。"""
@@ -85,20 +88,75 @@ class Handler(BaseHTTPRequestHandler):
     server_version = 'LawCrawlerObserver/1'
     sys_version = ''
 
-    def _send(self, code, data, content_type='application/json; charset=utf-8'):
+    def setup(self):
+        super().setup()
+        self.connection.settimeout(30)
+
+    def _send(self, code, data, content_type='application/json; charset=utf-8', headers=None):
         if isinstance(data, (dict,list)):
             data = json.dumps(data, ensure_ascii=False).encode('utf-8')
         elif isinstance(data, str):
             data = data.encode('utf-8')
+        self._headers(code, len(data), content_type, headers)
+        if self.command != 'HEAD':
+            self.wfile.write(data)
+
+    def _headers(self, code, length, content_type, headers=None, inline=False):
         self.send_response(code)
         self.send_header('Content-Type', content_type)
-        self.send_header('Content-Length', str(len(data)))
+        self.send_header('Content-Length', str(length))
         self.send_header('Cache-Control', 'no-store')
         self.send_header('X-Content-Type-Options', 'nosniff')
         self.send_header('Referrer-Policy', 'no-referrer')
-        self.send_header('Content-Security-Policy', "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'; form-action 'none'")
+        if inline:
+            # Chromium 的内置 PDF 查看器使用插件对象；只允许已验证原文的同源对象。
+            policy = "default-src 'none'; object-src 'self'; frame-src 'self'; base-uri 'none'; frame-ancestors 'self'; form-action 'none'"
+        else:
+            policy = "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+        self.send_header('Content-Security-Policy', policy)
+        for key, value in (headers or {}).items():
+            self.send_header(key, str(value))
         self.end_headers()
-        self.wfile.write(data)
+
+    def _stream(self, prepared, inline=False, allow_range=False):
+        headers = {'Content-Disposition': content_disposition(prepared.name, inline)}
+        start, end, code = 0, prepared.size - 1, 200
+        if allow_range:
+            headers['Accept-Ranges'] = 'bytes'
+            values = self.headers.get_all('Range', [])
+            try:
+                requested = parse_range(values[0] if len(values) == 1 else (',' if values else None), prepared.size)
+            except LibraryError as exc:
+                return self._send(exc.status, {'error': exc.message, 'code': exc.code},
+                                  headers={'Content-Range': f'bytes */{prepared.size}', 'Accept-Ranges': 'bytes'})
+            if requested is not None:
+                start, end = requested
+                code = 206
+                headers['Content-Range'] = f'bytes {start}-{end}/{prepared.size}'
+        length = max(0, end - start + 1)
+        media_type = prepared.media_type if inline or prepared.media_type == 'application/zip' else 'application/octet-stream'
+        self._headers(code, length, media_type, headers, inline=inline)
+        if self.command == 'HEAD':
+            return
+        prepared.stream.seek(start)
+        remaining = length
+        while remaining:
+            chunk = prepared.stream.read(min(CHUNK_BYTES, remaining))
+            if not chunk:
+                break
+            self.wfile.write(chunk)
+            remaining -= len(chunk)
+
+    def _library_query(self, query):
+        values = parse_qs(query, keep_blank_values=True, strict_parsing=True, max_num_fields=8)
+        if any(key not in ('country', 'q', 'offset', 'limit') or len(value) != 1
+               for key, value in values.items()):
+            raise LibraryError(400, '资源查询参数无效', 'invalid_query')
+        offset, limit = values.get('offset', ['0'])[0], values.get('limit', ['50'])[0]
+        if not re.fullmatch(r'[0-9]{1,7}', offset) or not re.fullmatch(r'[0-9]{1,3}', limit):
+            raise LibraryError(400, '分页参数无效', 'invalid_query')
+        return dict(country=values.get('country', [''])[0] or None,
+                    q=values.get('q', [''])[0], offset=int(offset), limit=int(limit))
 
     def do_GET(self):
         """固定路由与本机 Host 校验，拒绝任意文件读取及 DNS rebinding。"""
@@ -111,13 +169,37 @@ class Handler(BaseHTTPRequestHandler):
         origin = self.headers.get('Origin')
         if origin and origin != f'http://{self.headers.get("Host")}' and origin != f'https://{self.headers.get("Host")}':
             return self._send(403, {'error':'不允许跨站请求'})
-        target = unquote(urlsplit(self.path).path)
         observer = self.server.observer
         try:
+            split = urlsplit(self.path)
+            target = unquote(split.path, errors='strict')
             if target == '/healthz':
                 return self._send(200, {'status':'ok','read_only':True})
             if target == '/api/overview':
                 return self._send(200, observer.overview())
+            if target == '/api/library':
+                return self._send(200, observer.library.listing(**self._library_query(split.query)))
+            match = re.fullmatch(r'/api/library/files/([A-Za-z0-9_-]{1,1024})/(download|preview|metadata)', target)
+            if match:
+                identifier, action = match.groups()
+                if action == 'metadata':
+                    raw, name = observer.library.metadata(identifier)
+                    return self._send(200, raw, headers={'Content-Disposition': content_disposition(name)})
+                with observer.library.prepare(identifier) as prepared:
+                    if action == 'download':
+                        return self._stream(prepared)
+                    if prepared.preview_kind == 'text':
+                        return self._send(200, observer.library.text_preview(prepared))
+                    if prepared.preview_kind in ('pdf', 'image'):
+                        return self._stream(prepared, inline=True, allow_range=True)
+                    raise LibraryError(415, '此文件格式仅支持下载', 'preview_unavailable')
+            match = re.fullmatch(r'/api/batches/([A-Za-z0-9][A-Za-z0-9_-]{0,119})/(files|archive\.zip)', target)
+            if match:
+                identifier, action = match.groups()
+                if action == 'files':
+                    return self._send(200, observer.library.batch_files(identifier))
+                with observer.library.archive(identifier) as prepared:
+                    return self._stream(prepared)
             match = re.fullmatch(r'/api/(sessions|batches)/([A-Za-z0-9][A-Za-z0-9_.-]{0,127})', target)
             if match:
                 if match[1] == 'sessions':
@@ -132,12 +214,19 @@ class Handler(BaseHTTPRequestHandler):
                       '/app.js':('app.js','text/javascript; charset=utf-8'),
                       '/style.css':('style.css','text/css; charset=utf-8'),
                       '/static/app.js':('app.js','text/javascript; charset=utf-8'),
-                      '/static/style.css':('style.css','text/css; charset=utf-8')}
+                      '/static/style.css':('style.css','text/css; charset=utf-8'),
+                      '/static/library.js':('library.js','text/javascript; charset=utf-8'),
+                      '/static/library.css':('library.css','text/css; charset=utf-8')}
             if target in static:
                 filename, content_type = static[target]
                 path = Path(__file__).parent/'static'/filename
                 return self._send(200, path.read_bytes(), content_type)
             return self._send(404, {'error':'未找到'})
+        except (BrokenPipeError, ConnectionResetError, TimeoutError):
+            # 客户端断开时 context manager 已关闭临时文件与原件 FD。
+            return
+        except LibraryError as exc:
+            return self._send(exc.status, {'error': exc.message, 'code': exc.code})
         except FileNotFoundError:
             return self._send(404, {'error':'记录不存在'})
         except (ValueError, TypeError, KeyError):
@@ -147,8 +236,9 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(503, {'error':'暂时无法读取状态，请稍后刷新'})
 
     def _read_only(self):
-        self._send(405, {'error':'看板只提供 GET 查询'})
+        self._send(405, {'error':'看板只提供 GET / HEAD 查询'})
 
+    do_HEAD = do_GET
     do_POST = do_PUT = do_DELETE = do_PATCH = _read_only
 
     def log_message(self, format, *args):

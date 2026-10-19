@@ -4,18 +4,27 @@
 
 用户必须明确提供适用国家/法域，且该法域已记录在工程索引中。除非用户明确要求下载法规原文，agent 必须先询问是否只采集元数据（目录），获得选择后执行。采集结果不代表法规已核实为现行有效。
 
+工程按四个顶层目录组织：
+
+| 目录 | 内容 |
+| --- | --- |
+| `skill/` | 完整法规采集Skill、兼容命令和采集测试。 |
+| `web/` | Web看板、资源浏览器、智能体观测和看板测试。 |
+| `deploy/` | 安装、服务器配置、统一启动/测试工具及工程文档。 |
+| `data/` | 本地法规资料、报告、临时文件和运行状态；除目录说明外不进入Git。 |
+
 ## Agent 支持与安装
 
-同一个 [SKILL.md](skills/law-crawler/SKILL.md) 使用通用 Agent Skills 格式。运行代码只依赖完整Python 3.10+标准库（含ssl、sqlite3及系统文件锁）；浏览器辅助使用所在agent提供的工具，核心CLI无须专有连接器或当前对话。macOS/Linux使用POSIX锁，Windows使用msvcrt锁；当前完成macOS实跑与Windows分支模拟，尚无Windows实机验收。完整可维护源码统一位于`skills/law-crawler/`，复制整个目录即可使用；安装位置仅用于运行，不另行维护。
+同一个 [SKILL.md](skill/law-crawler/SKILL.md) 使用通用 Agent Skills 格式。运行代码只依赖完整Python 3.10+标准库（含ssl、sqlite3及系统文件锁）；浏览器辅助使用所在agent提供的工具，核心CLI无须专有连接器或当前对话。macOS/Linux使用POSIX锁，Windows使用msvcrt锁；当前完成macOS实跑与Windows分支模拟，尚无Windows实机验收。完整可维护源码统一位于`skill/law-crawler/`，复制整个目录即可使用；安装位置仅用于运行，不另行维护。
 
 直接检查并安装完整skill，无须打包或生成代码：
 
 ```sh
-python3 tools/check_skill.py
-python3 tools/install_skill.py --agent codex
-python3 tools/install_skill.py --agent claude
-python3 tools/install_skill.py --agent opencode
-python3 tools/install_skill.py --agent workbuddy
+python3 deploy/tools/check_skill.py
+python3 deploy/tools/install_skill.py --agent codex
+python3 deploy/tools/install_skill.py --agent claude
+python3 deploy/tools/install_skill.py --agent opencode
+python3 deploy/tools/install_skill.py --agent workbuddy
 ```
 
 | Agent | 默认用户级安装目录 | 项目级安装目录 |
@@ -29,18 +38,18 @@ python3 tools/install_skill.py --agent workbuddy
 
 ## 使用前需要确认什么
 
-如需在云服务器运行 Claude Code、接入 DeepSeek 并查看智能体与批次状态，参见[阿里云部署与只读 Web 看板](docs/deployment-ecs.md)。
+如需在云服务器运行 Claude Code、接入 DeepSeek 并查看智能体与批次状态，参见[阿里云部署与只读 Web 看板](deploy/docs/deployment-ecs.md)。
 
 | 必须确认 | 规则 |
 | --- | --- |
 | 适用国家/法域 | 用户显式提供；不能根据平台域名、历史任务或默认索引猜测。 |
-| 索引登记 | skill随附`skills/law-crawler/countries/*/index.md`；已有工作区countries优先。EU 中明确列出的成员国章节也有效。未知法域在网络请求和任务创建前拒绝。 |
+| 索引登记 | skill随附`skill/law-crawler/countries/*/index.md`；已有工作区countries优先。EU 中明确列出的成员国章节也有效。未知法域在网络请求和任务创建前拒绝。 |
 | 采集模式 | 未明确要求原文时，agent 询问“是否先只下载元数据（目录）？”，等待选择 `metadata` 或 `content`。 |
-| 工作区与配置 | 工作区countries优先；源码工程无根countries时读取skill内索引与默认配置，下载相对路径仍按显式`--root`解析。 |
+| 工作区与配置 | 工作区countries优先；源码工程读取skill内索引和默认配置时，相对下载输出集中到`data/`。独立包和显式用户配置仍按指定工作区解析。 |
 
 目前索引包含印度尼西亚、加拿大和 EU 聚合入口；EU 成员覆盖以文件实际章节为准，目前列有德国、法国、荷兰、意大利。EU 索引不代表全部 27 国、欧盟自身法规或所有平台都已适配。中文、规范英文及已登记 ISO 别名可用；别名不会绕过索引登记检查。
 
-新工作区按包内[工作区准备](skills/law-crawler/references/workspace.md)执行。将SKILL_DIR替换为当前SKILL.md所在目录、WORK_ROOT替换为用户选定的绝对路径，选择实际Python 3.10+解释器：
+新工作区按包内[工作区准备](skill/law-crawler/references/workspace.md)执行。将SKILL_DIR替换为当前SKILL.md所在目录、WORK_ROOT替换为用户选定的绝对路径，选择实际Python 3.10+解释器：
 
 ```text
 python -X utf8 "SKILL_DIR/scripts/prepare_workspace.py" --root "WORK_ROOT" --jurisdiction Canada
@@ -55,9 +64,9 @@ python -X utf8 "SKILL_DIR/scripts/prepare_workspace.py" --root "WORK_ROOT" --jur
 
 将生成来源标记放在`metadata.agent_created: "true"`，遵循[Agent Skills规范](https://agentskills.io/specification)的字符串映射扩展，而非新增私有顶层字段。SKILL.md不依赖会话历史、本机绝对路径、指定浏览器接口或本仓库旧报告；字段/URL等领域规则来自随包参考资料和用户工作区的真实索引，机器目录与工具能力在运行时解析。
 
-将整个skill直接维护在[`skills/law-crawler/`](skills/law-crawler/)，包括说明、参考资料、国家索引、默认配置和运行代码。运行实现的唯一位置是[`scripts/law_crawler/`](skills/law-crawler/scripts/law_crawler/)，六个`scripts/*.py`仅作命令入口；不再生成代码副本或生成清单。根目录`law_crawler/__init__.py`仅为兼容导入桥，直接加载skill中的同一套模块。不要从外部工作区复制个人配置。目录职责、兼容入口与开发流程见[源码结构说明](docs/development.md)。
+将整个skill直接维护在[`skill/law-crawler/`](skill/law-crawler/)，包括说明、参考资料、国家索引、默认配置和运行代码。运行实现的唯一位置是[`scripts/law_crawler/`](skill/law-crawler/scripts/law_crawler/)，六个`scripts/*.py`仅作命令入口；不再生成代码副本或生成清单。`skill/law_crawler/__init__.py`仅为兼容导入桥，直接加载skill中的同一套模块。不要从外部工作区复制个人配置。目录职责、兼容入口与开发流程见[源码结构说明](deploy/docs/development.md)。
 
-2026-10-15通用性复验：263项测试通过；独立代理仅用完整skill包在中文含空格临时目录完成18条前向命令观察，所有skill命令0次网络尝试。通用性审查报告保存在本地 `reports/`，不随源码发布。这不代表其他agent客户端界面、Windows实机或实时官网均已验收。
+2026-10-15通用性复验：263项测试通过；独立代理仅用完整skill包在中文含空格临时目录完成18条前向命令观察，所有skill命令0次网络尝试。通用性审查报告保存在本地 `data/reports/`，不随源码发布。这不代表其他agent客户端界面、Windows实机或实时官网均已验收。
 
 ## 执行逻辑
 
@@ -99,29 +108,29 @@ flowchart TD
 
 ```sh
 # 加拿大目录元数据
-python3 -m law_crawler download \
+python3 deploy/run.py skill download \
   --root "$PWD" --jurisdiction Canada --mode metadata \
   --platform all --limit 6 --per-platform-limit 2 --max-details 4
 
 # 印尼原文：每平台限量1份
-python3 -m law_crawler download \
+python3 deploy/run.py skill download \
   --root "$PWD" --jurisdiction Indonesia --mode content \
   --platform all --limit 11 --per-platform-limit 1 --max-details 3
 
 # EU索引按成员国分流
-python3 -m law_crawler download \
+python3 deploy/run.py skill download \
   --root "$PWD" --jurisdiction EU --mode content \
   --platform all --limit 4 --per-platform-limit 1 --max-details 2
 
 # 仅生成计划，不访问网络
-python3 -m law_crawler download \
+python3 deploy/run.py skill download \
   --root "$PWD" --jurisdiction Germany --mode metadata --plan-only
 
 # 同一批次重跑失败和待执行项，沿用计划内法域与模式
-python3 -m law_crawler download --root "$PWD" --rerun-batch BATCH_ID
+python3 deploy/run.py skill download --root "$PWD" --rerun-batch BATCH_ID
 ```
 
-独立命令入口为 `skills/law-crawler/scripts/download_regulations.py`，安装副本中的相对路径相同。新批次 CLI 强制显式提供 `--jurisdiction`（兼容显式 `--country` 别名）及 `--mode`，不会默认原文下载。`--index` 如指定须匹配法域登记索引。
+独立命令入口为 `skill/law-crawler/scripts/download_regulations.py`，安装副本中的相对路径相同。新批次 CLI 强制显式提供 `--jurisdiction`（兼容显式 `--country` 别名）及 `--mode`，不会默认原文下载。`--index` 如指定须匹配法域登记索引。
 
 | 参数 | 含义 |
 | --- | --- |
@@ -138,20 +147,22 @@ python3 -m law_crawler download --root "$PWD" --rerun-batch BATCH_ID
 | `--refresh` | 重取已知原文 URL，检查内容变化并保留历史。 |
 | `--experimental-sources` | 显式启用 JDIHN 官方开发部署备用路径，成功不代表正式入口恢复。 |
 
-详见 [批次工作流](skills/law-crawler/references/batch-workflow.md)。
+详见 [批次工作流](skill/law-crawler/references/batch-workflow.md)。
 
 ## 保存位置与输出
 
-源码工程的默认配置位于`skills/law-crawler/countries/global-config.properties`；独立用户工作区的配置位于其`countries/global-config.properties`并具有优先级。
+源码工程的默认配置位于`skill/law-crawler/countries/global-config.properties`；独立用户工作区的配置位于其`countries/global-config.properties`并具有优先级。
 
 ```properties
 downdloadDir=./downloads/
 ```
 
+源码工程使用该内置配置时，相对输出归入 `data/`，即 `data/downloads/`。独立安装包及显式用户配置仍相对其工作区解析。
+
 保留原键名 `downdloadDir`，兼容 `downloadDir`。基础目录内按国家分流；相对路径按 `--root` 解析，绝对基础目录同样追加国家子目录。目录拒绝符号链接和路径逃逸。
 
 ```text
-downloads/
+data/downloads/
 ├── Indonesia/      # 文件、独立元数据和去重状态
 ├── Canada/
 ├── Germany/
@@ -172,19 +183,19 @@ downloads/
 | `.batches/<ID>/` | 保存批次计划及 `candidates.json` 原文 URL 快照。 |
 | `attempts/0001/` 等 | 各次执行结果；生成机器 JSON、Markdown 与固定版式 HTML 报告。 |
 
-HTML/XML/JSON 必须先确认是法规原文，不能将导航、错误页、挑战页转换后当成成功法规。文本转换保留层级和内容，结果完整性仍受来源与格式限制；PDF/扫描图片不自动 OCR，其他二进制格式不自动转换。详见 [文件格式](skills/law-crawler/references/file-formats.md)。
+HTML/XML/JSON 必须先确认是法规原文，不能将导航、错误页、挑战页转换后当成成功法规。文本转换保留层级和内容，结果完整性仍受来源与格式限制；PDF/扫描图片不自动 OCR，其他二进制格式不自动转换。详见 [文件格式](skill/law-crawler/references/file-formats.md)。
 
-Markdown还需核对源结构，不能仅以文字片段存在或文件哈希正确验收。`structured_text_v2.4`字段标注仅显示名称和值，不追加`(XML 路径)`括号；保留日期角色、具名条款层级、表格行列/跨度、脚注及未知结构；双语节点分别标明English/Français并保留边界；加拿大登记日期、XML合并日期与制令日期分别标注，不混为公布日期。MathML保留源结构，缺失idref脚注标未解析。现有文件可用下述离线批次重建，旧Markdown及元数据保存在`conversion-history/`，原始字节、来源与请求计数保留；后续旧缓存也会自动升级。Markdown结构修复报告保存在本地 `reports/`。此前加拿大文本存在检查没有覆盖这些结构问题，不能继续作为结构验收证据。
+Markdown还需核对源结构，不能仅以文字片段存在或文件哈希正确验收。`structured_text_v2.4`字段标注仅显示名称和值，不追加`(XML 路径)`括号；保留日期角色、具名条款层级、表格行列/跨度、脚注及未知结构；双语节点分别标明English/Français并保留边界；加拿大登记日期、XML合并日期与制令日期分别标注，不混为公布日期。MathML保留源结构，缺失idref脚注标未解析。现有文件可用下述离线批次重建，旧Markdown及元数据保存在`conversion-history/`，原始字节、来源与请求计数保留；后续旧缓存也会自动升级。Markdown结构修复报告保存在本地 `data/reports/`。此前加拿大文本存在检查没有覆盖这些结构问题，不能继续作为结构验收证据。
 
 ```sh
-python3 -m law_crawler rebuild-markdown \
+python3 deploy/run.py skill rebuild-markdown \
   --root "$PWD" --jurisdiction Canada --batch-id canada-markdown-rebuild-RUN_ID
 
-python3 -m law_crawler rebuild-markdown \
+python3 deploy/run.py skill rebuild-markdown \
   --root "$PWD" --rerun-batch canada-markdown-rebuild-RUN_ID
 ```
 
-元数据中 `published_at` 是法规公布日期，`updated_at` 是官方明确提供的网页/记录更新时间，`effective_region` 是适用国家/地区；缺证据时为 `null`。法域输入用于任务范围和存储，不自动证明每一法规全国适用或当前有效。字段说明见 [元数据](skills/law-crawler/references/schema.md)。
+元数据中 `published_at` 是法规公布日期，`updated_at` 是官方明确提供的网页/记录更新时间，`effective_region` 是适用国家/地区；缺证据时为 `null`。法域输入用于任务范围和存储，不自动证明每一法规全国适用或当前有效。字段说明见 [元数据](skill/law-crawler/references/schema.md)。
 
 ## 去重、重试与报告
 
@@ -198,27 +209,27 @@ python3 -m law_crawler rebuild-markdown \
 
 ## 工程维护与验证证据
 
-目录树、唯一源码位置和检查流程见[源码结构说明](docs/development.md)。下载资料、历史报告及临时文件继续留在本地独立目录，不随源码整理迁移。
+目录树、唯一源码位置和检查流程见[源码结构说明](deploy/docs/development.md)。本地下载资料、历史报告和临时文件统一归入`data/`；历史证据原字节保留，旧路径通过迁移记录追溯，资料不随源码提交。
 
 | 路径 | 职责 |
 | --- | --- |
-| [SKILL.md](skills/law-crawler/SKILL.md) | 跨 agent 输入确认、执行和交付说明。 |
-| `skills/law-crawler/scripts/law_crawler/jurisdiction_registry.py` | 只读索引登记与法域校验。 |
-| `skills/law-crawler/scripts/law_crawler/download_regulations.py`、同目录`platform_adapters/` | 执行调度与官方目录/详情解析。 |
-| `skills/law-crawler/scripts/law_crawler/`中的存储、格式和元数据模块 | 存储、去重、格式和元数据基础能力。 |
-| `skills/law-crawler/scripts/` | 直接维护的唯一完整运行包与六个命令入口。 |
-| `law_crawler/__init__.py` | 工程兼容导入桥，加载上述运行包，无业务实现。 |
-| `skills/law-crawler/countries/` | 国家索引及默认配置，直接维护并随skill安装。 |
-| 根目录四个Python命令 | 仅兼容旧CLI，实际实现位于skill内的law_crawler包。 |
-| `observer/`、`deploy/` | 独立看板和服务器部署，不打入skill。 |
-| `tools/install_skill.py` | 目标 agent 安装；不修改权限配置。 |
-| `tests/` | 自动化测试与固定样本。 |
-| `reports/` | 本地验证报告与历史实跑证据，已加入 `.gitignore`，不纳入版本控制。 |
+| [SKILL.md](skill/law-crawler/SKILL.md) | 跨 agent 输入确认、执行和交付说明。 |
+| `skill/law-crawler/scripts/law_crawler/jurisdiction_registry.py` | 只读索引登记与法域校验。 |
+| `skill/law-crawler/scripts/law_crawler/download_regulations.py`、同目录`platform_adapters/` | 执行调度与官方目录/详情解析。 |
+| `skill/law-crawler/scripts/law_crawler/`中的存储、格式和元数据模块 | 存储、去重、格式和元数据基础能力。 |
+| `skill/law-crawler/scripts/` | 直接维护的唯一完整运行包与六个命令入口。 |
+| `skill/law_crawler/__init__.py` | 工程兼容导入桥，加载上述运行包，无业务实现。 |
+| `skill/law-crawler/countries/` | 国家索引及默认配置，直接维护并随skill安装。 |
+| skill目录的四个Python兼容命令 | 仅兼容旧CLI，实际实现位于skill内的law_crawler包。 |
+| `web/observer/`、`deploy/` | 独立看板和服务器部署，不打入skill。 |
+| `deploy/tools/install_skill.py` | 目标 agent 安装；不修改权限配置。 |
+| `skill/tests/`、`web/tests/`、`deploy/tests/` | 分别验证采集、看板和部署，固定采集样本位于skill/tests/fixtures。 |
+| `data/reports/` | 本地验证报告与历史实跑证据，已加入 `.gitignore`，不纳入版本控制。 |
 
 ```sh
-python3 tools/check_skill.py
-python3 -m unittest discover -s tests -v
-python3 tools/install_skill.py --agent codex
+python3 deploy/tools/check_skill.py
+python3 deploy/run.py test -v
+python3 deploy/tools/install_skill.py --agent codex
 ```
 
 `check_skill.py`只读检查必需资源、Python语法与内部依赖，不改写文件；安装器直接复制完整skill目录，不生成另一套源码。独立 skill 包不包含下载原件或状态数据库。本次源码归并通过363项测试；独立测试子代理在中文含空格临时路径验证了完整skill副本的初始化、加拿大计划与同批次重跑，产出两轮Markdown、HTML报告，未访问网络。新增平台必须验证官方目录→详情→原文链路，再复跑核对去重；离线测试不替代真实网络验收。
@@ -227,11 +238,11 @@ python3 tools/install_skill.py --agent codex
 
 每轮还有 `attempts/000N/execution-plan.json`、`execution-plan.md` 和下载前的 `file-plan.json`；同一批次不允许并发执行。默认重跑沿用已成功文件，恢复失败的目录/详情发现和未完成原件任务；正文格式中的其余链接作为备选，已取得一个可用格式后记录跳过。
 
-历史采集、核验更正与浏览器排查记录见[历史样本验证](docs/validation-history.md)；当前能力按实际运行报告确认。
+历史采集、核验更正与浏览器排查记录见[历史样本验证](deploy/docs/validation-history.md)；当前能力按实际运行报告确认。
 
 跨agent浏览器分层对照可运行以下命令，用自己可用的浏览器工具访问stdout中返回的URL，并核对fixture.json中的marker和实际附件SHA；诊断文件保存在报告证据目录，不导入法规库：
 
 ```sh
-python3 -m law_crawler browser-healthcheck \
-  --duration 180 --output-dir reports/browser-healthcheck-RUN_ID
+python3 deploy/run.py skill browser-healthcheck \
+  --duration 180 --output-dir data/reports/browser-healthcheck-RUN_ID
 ```

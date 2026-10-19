@@ -25,7 +25,7 @@ chmod -R a+rX "$TASK_CODE_DIR"
 if [ ! -x "$TASK_HOME/.local/bin/claude" ]; then
   runuser -u "$TASK_USER" -- bash -c 'set -euo pipefail; curl -fsSL --connect-timeout 20 --max-time 180 https://claude.ai/install.sh | bash -s stable'
 fi
-runuser -u "$TASK_USER" -- python3 "$TASK_CODE_DIR/tools/configure_server.py" \
+runuser -u "$TASK_USER" -- python3 "$TASK_CODE_DIR/deploy/tools/configure_server.py" \
   --workspace "$TASK_BASE/workspace" --download-base "$TASK_BASE/downloads" --runtime-dir "$TASK_BASE/runtime"
 
 cat > /usr/local/bin/law-claude <<'SH'
@@ -38,7 +38,7 @@ if [ "$(id -un)" != lawcrawler ]; then
   echo '请使用 lawcrawler 用户运行，或由 root 执行 law-claude。' >&2
   exit 1
 fi
-cd /opt/law-crawler/current
+cd /opt/law-crawler/current/web
 exec /usr/bin/python3 -m observer.launch --binary /home/lawcrawler/.local/bin/claude --workspace /var/lib/law-crawler/workspace --runtime-dir /var/lib/law-crawler/runtime -- --permission-mode manual "$@"
 SH
 chmod 0755 /usr/local/bin/law-claude
@@ -55,7 +55,7 @@ After=network.target
 Type=simple
 User=lawcrawler
 Group=lawcrawler
-WorkingDirectory=/opt/law-crawler/current
+WorkingDirectory=/opt/law-crawler/current/web
 Environment=PYTHONUNBUFFERED=1
 Environment=PYTHONDONTWRITEBYTECODE=1
 ExecStart=/usr/bin/python3 -m observer.server --workspace /var/lib/law-crawler/workspace --download-base /var/lib/law-crawler/downloads --runtime-dir /var/lib/law-crawler/runtime

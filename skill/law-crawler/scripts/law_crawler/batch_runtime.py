@@ -19,6 +19,7 @@ from urllib.parse import urlsplit
 
 from law_crawler.crawl_store import atomic_write, write_json
 from law_crawler.file_lock import FileLock
+from law_crawler.download_transport import is_retryable, retry_delay, wait_delay, RetryDeferred
 
 
 def timestamp():
@@ -83,7 +84,14 @@ LABELS = {'schema_version':'报告版本','jurisdiction':'适用国家/法域','
 'detail_pages':'检查详情页数','errors':'错误记录','sha256':'内容SHA-256',
 'downloaded':'新增文件','existing':'复用已有文件','content_duplicate':'内容重复',
 'previous_success':'复用前轮成功结果','metadata_updated':'元数据已更新',
-'body_review':'正文身份核验','evidence':'核验证据','reviewed_at':'核验时间（UTC）'}
+'body_review':'正文身份核验','evidence':'核验证据','reviewed_at':'核验时间（UTC）',
+'stage':'执行阶段','duration_seconds':'耗时（秒）','import_duration_seconds':'复核导入耗时（秒）',
+'billed_cost_usd':'API账单费用（美元，空值表示未知）','hardware_cost_usd':'硬件及电力成本（美元，空值表示未知）',
+'cost_note':'费用口径','usage':'模型用量与阶段计时','quality_flags':'质量风险',
+'coverage':'提取文本分块覆盖比例','coverage_scope':'覆盖统计范围','semantic_completeness':'语义完整性',
+'model':'模型','reviewer':'独立复核者','review_status':'复核状态','verdict':'复核结论',
+'issues':'待解决问题','resolved_quality_flags':'质量标记核验证据','extraction':'提取方法与页数',
+'artifacts':'原件及派生文件哈希','success':'成功','failed':'失败或待修订'}
 
 
 def _field_label(key):
@@ -143,39 +151,42 @@ def emit_report(report, directory, name='report'):
 
 
 def _temporary(exc):
-    if isinstance(exc, HTTPError):
-        return exc.code == 429 or 500 <= exc.code <= 599
-    if isinstance(exc, ssl.SSLCertVerificationError):
-        return False
-    if isinstance(exc, (TimeoutError, socket.timeout)):
-        return True
-    if isinstance(exc, URLError):
-        return not isinstance(exc.reason, ssl.SSLCertVerificationError)
-    return False
+    return is_retryable(exc)
 
 
-def retry_fetch(fetcher, url, max_attempts=3, base_delay=1, sleep=time.sleep, event_callback=None):
+def retry_fetch(fetcher, url, max_attempts=3, base_delay=1, sleep=time.sleep, event_callback=None, *, stop_event=None, jitter=None):
     """临时网络失败指数退避；403 / 数据格式错误不会重试。"""
     if not isinstance(max_attempts, int) or isinstance(max_attempts, bool) or max_attempts < 1:
         raise ValueError('max_attempts 必须为正整数（包括首次请求）')
     if not isinstance(base_delay, (int, float)) or not math.isfinite(base_delay) or base_delay < 0:
         raise ValueError('base_delay 必须为非负数')
     for attempt in range(1, max_attempts + 1):
+        if stop_event is not None and stop_event.is_set():
+            raise InterruptedError('请求已停止')
         try:
             result = fetcher(url)
         except Exception as exc:
             retry = attempt < max_attempts and _temporary(exc)
-            # 请求次数可配置，但单次等待最多 30 秒，以便 agent 能及时响应用户。
-            delay = min(base_delay * 2 ** min(attempt - 1, 30), 30) if retry else 0
+            delay = 0
+            deferred = None
+            if retry:
+                try:
+                    delay = retry_delay(attempt, base_delay, getattr(exc, 'headers', None), jitter=jitter)
+                except RetryDeferred as wait_error:
+                    deferred = wait_error
+                    deferred.retry_attempts = attempt
+                    retry = False
             if event_callback:
-                event_callback(dict(url=url, attempt=attempt, attempts=attempt, status='retrying' if retry else 'failed', reason=str(exc), error_type=type(exc).__name__, backoff_seconds=delay, checked_at=timestamp()))
+                event_callback(dict(url=url, attempt=attempt, attempts=attempt, status='deferred' if deferred else ('retrying' if retry else 'failed'), reason=str(deferred or exc), error_type=type(deferred or exc).__name__, backoff_seconds=delay, retry_not_before=deferred.not_before if deferred else None, not_before=deferred.not_before if deferred else None, retry_after_seconds=deferred.retry_after_seconds if deferred else None, checked_at=timestamp()))
+            if deferred is not None:
+                raise deferred from exc
             if not retry:
                 try:
                     exc.retry_attempts = attempt
                 except (AttributeError, TypeError):
                     pass
                 raise
-            sleep(delay)
+            wait_delay(delay, stop_event=stop_event, sleep=sleep)
         else:
             if event_callback:
                 event_callback(dict(url=url, attempt=attempt, attempts=attempt, status='succeeded', reason='请求成功', backoff_seconds=0, checked_at=timestamp()))

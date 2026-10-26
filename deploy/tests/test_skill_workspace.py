@@ -148,6 +148,26 @@ class WorkspacePreparationTests(unittest.TestCase):
 
 
 class InstallerCompatibilityTests(unittest.TestCase):
+    def test_all_agents_share_one_source_and_run_from_other_directory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp).resolve() / '项目 with spaces'
+            for agent in ('qoder', 'claude', 'deepseek-harness', 'codex', 'opencode', 'workbuddy'):
+                with self.subTest(agent=agent):
+                    target = install(agent, 'project', project, source=SKILL)
+                    self.assertTrue(target.is_symlink())
+                    self.assertEqual(target.resolve(), SKILL.resolve())
+                    self.assertEqual(install(agent, 'project', project, source=SKILL), target)
+                    result = subprocess.run([sys.executable, str(target/'scripts/prepare_workspace.py'), '--help'], cwd=tmp, capture_output=True, text=True)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_existing_copy_is_preserved_and_harness_requires_explicit_user_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp)/'law-crawler'; target.mkdir()
+            (target/'keep').write_text('existing')
+            with self.assertRaises(ValueError): install('claude', destination=tmp)
+            self.assertEqual((target/'keep').read_text(), 'existing')
+            with self.assertRaises(ValueError): skills_root('deepseek-harness')
+
     def test_workbuddy_project_scope_and_installed_package_are_complete(self):
         with tempfile.TemporaryDirectory() as tmp:
             project = Path(tmp).resolve() / '项目 with spaces'

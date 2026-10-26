@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """从国家平台索引下载法规原文件，更新来源元数据并执行多层去重。"""
 import argparse
+import io
 from copy import copy
 import json
 import re
@@ -10,6 +11,8 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import urlsplit, quote
 
+from law_crawler.download_transport import stream_response
+from law_crawler.batch_runtime import retry_fetch
 from law_crawler.crawl_store import CrawlStore, canonical_url, now, write_json
 from law_crawler.platform_adapters.base import Links
 from law_crawler.resources import configuration_path, default_workspace
@@ -78,12 +81,12 @@ def index_platforms(index):
 
 def fetch(url, timeout, max_bytes=40 * 1024 * 1024):
     encoded = quote(url, safe=":/?#[]@!$&'()*+,;=%")
-    request = urllib.request.Request(encoded, headers={'User-Agent': 'law-crawler/0.3 (official regulation downloader)'})
+    request = urllib.request.Request(encoded, headers={'User-Agent': 'law-crawler/0.3 (official regulation downloader)', 'Accept-Encoding': 'identity'})
     with urllib.request.urlopen(request, timeout=timeout) as response:
-        data = response.read(max_bytes + 1)
-        if len(data) > max_bytes:
-            raise ValueError('响应超过大小上限')
-        return data, response.url
+        # Compatibility API returns bytes; transfer is bounded and streamed first.
+        output = io.BytesIO()
+        stream_response(response, output.write, max_bytes)
+        return output.getvalue(), response.url
 
 
 def official_fetch(url, timeout, hosts, max_bytes=40 * 1024 * 1024):
@@ -99,7 +102,7 @@ def official_fetch(url, timeout, hosts, max_bytes=40 * 1024 * 1024):
 def save_pdf(directory, url, detail, platform, timeout, metadata=None, refresh=False):
     """兼容单文件调用；批量运行共享一个 CrawlStore。"""
     with CrawlStore(directory) as store:
-        return store.save(url, detail, platform, lambda u: fetch(u, timeout), metadata, refresh)
+        return store.save(url, detail, platform, lambda u: retry_fetch(lambda value: fetch(value, timeout), u), metadata, refresh)
 
 
 def record_result(report, record, result):
@@ -179,7 +182,9 @@ def download_platform(args, store, report, platform, seen_pdfs):
     seen_details, platform_hashes = set(), set()
     error_start = len(report['errors'])
     def fetch_page(url):
-        return official_fetch(url, args.timeout, adapter.allowed_hosts)
+        return retry_fetch(lambda value: official_fetch(value, args.timeout, adapter.allowed_hosts), url,
+            max_attempts=getattr(args, 'max_attempts', 3), base_delay=getattr(args, 'backoff_base', 1),
+            event_callback=lambda event: state.setdefault('request_attempts', []).append(event))
     try:
         details = adapter.discover(fetch_page, args.max_details)
         for detail in details:

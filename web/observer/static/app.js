@@ -117,6 +117,7 @@
     const overview = state.overview;
     if (!overview) {
       if (state.overviewError) {
+        renderDownload(null);
         $("workspace-name").textContent = "工作区暂不可用";
         $("session-list").replaceChildren(emptyState("无法读取会话", "请检查观测服务是否运行，以及本地转发连接是否正常。", "error", refresh));
         $("batch-list").replaceChildren(emptyState("无法读取批次", "恢复服务后可手动刷新，系统也会继续自动重试。", "error", refresh));
@@ -130,7 +131,87 @@
       $(id).textContent = overview.counts?.[field] === undefined ? "—" : count(overview.counts[field]);
     }
     notice($("overview-warnings"), overview.warnings);
+    renderDownload(overview.download);
     renderSessionList(); renderBatchList(); renderSetup(overview.setup || {}); renderResources(overview.host || {});
+  }
+
+  function renderDownload(download) {
+    const available = download?.available === true;
+    const statuses = { running: ["正在下载", "info"], paused: ["已暂停", "warning"], finished: ["已结束", "positive"], unknown: ["状态未知", "neutral"] };
+    const status = available && statuses[download.status] ? download.status : "unknown";
+    const statusLabel = !available ? ["未接入", "neutral"] : status === "finished" && download.has_gaps ? ["已结束 · 有缺口", "warning"] : null;
+    $("download-status").replaceChildren(badge(status, statuses, statusLabel));
+    $("download-scope").textContent = available ? [text(download.jurisdiction, "法域未记录"), text(download.batch_id, "批次未记录")].join(" / ") : "尚未取得服务器原文下载批次";
+    const metric = (value) => available && value != null ? count(value) : "—";
+    const census = download?.batch_kind === "census_oss", oss = download?.oss || {}, outcomes = download?.task_outcomes || {};
+    const operations = download?.operations || {}, files = download?.file_counts || {}, identity = download?.identity_counts || {}, timing = download?.timing || {};
+    const duration = (seconds) => {
+      if (!available || seconds == null || !Number.isFinite(Number(seconds))) return "待核验";
+      const value = Math.floor(num(seconds)), days = Math.floor(value / 86400), hours = Math.floor(value % 86400 / 3600), minutes = Math.floor(value % 3600 / 60);
+      return [days ? `${days}天` : "", hours ? `${hours}小时` : "", minutes ? `${minutes}分钟` : "", !days && !hours && !minutes ? `${value}秒` : ""].filter(Boolean).join(" ");
+    };
+    const metrics = [
+      ["下载任务总量", metric(operations.total), "本批次已发现的详情归档任务", ""],
+      ["已下载完成", metric(operations.completed), census ? "原件及元数据已完成 OSS 归档校验" : "归档任务完成，非法规数量", "is-complete"],
+      ["下载中", metric(operations.active), "正在执行的任务，非并发上限", "is-running"],
+      ["待下载", metric(operations.pending), "尚待执行的任务", "is-pending"],
+      ["本批次已历时", duration(timing.elapsed_seconds), "含目录发现、等待及暂停", "is-duration"],
+    ];
+    $("download-metrics").replaceChildren(...metrics.map(([label, value, detail, css]) => {
+      const item = node("div", `download-metric ${css}`); item.append(node("span", "", label), node("strong", "", value), node("small", "", detail)); return item;
+    }));
+    $("download-outcomes").hidden = !census;
+    $("download-outcomes").replaceChildren(...(census ? [["失败", outcomes.failed], ["不完整", outcomes.incomplete], ["未发现原件", outcomes.no_original]].map(([label, value]) => {
+      const item = node("div", "download-reason"); item.append(node("span", "", label), node("strong", "", metric(value))); return item;
+    }) : []));
+    $("download-partition-note").textContent = available && operations.total != null ? `任务分区：总量 ${metric(operations.total)} = 已完成 ${metric(operations.completed)} + 下载中 ${metric(operations.active)} + 待下载 ${metric(operations.pending)} + 失败或未完整 ${metric(operations.failed)} + ${census ? "未发现原件" : "状态待核验"} ${metric(operations.needs_verification)}。${operations.partition_valid === false ? "分区核对不一致，需检查。" : ""}详情任务可能重复指向同一法规，不能当作法规数。` : "下载任务分区尚未记录，不能据文件数推算法规数量。";
+    const knownProgress = available && operations.total != null && operations.completed != null && num(operations.total) > 0;
+    const total = num(operations.total), completed = num(operations.completed);
+    const percentage = knownProgress ? Math.min(100, completed / total * 100) : 0;
+    $("download-progress").value = percentage;
+    $("download-progress").setAttribute("aria-valuetext", knownProgress ? `已完成下载 ${count(completed)} / ${count(total)} 条详情归档任务` : "下载完成进度待核验");
+    $("download-progress-label").textContent = knownProgress ? `归档任务完成 ${count(completed)} / ${count(total)} · ${numberFormat.format(percentage)}%` : "下载完成进度待核验";
+    $("download-updated").textContent = `下载数据更新时间：${timestamp(download?.updated_at)}${download?.stale ? " · 数据已过期，请核查服务" : ""}`;
+    $("download-workers").textContent = `配置并发：${metric(download?.workers)} 路 · 最近一轮：${metric(download?.run_workers)} 路 · 当前并发上限：${metric(download?.active_concurrency_limit)} 路。批次开始：${timestamp(timing.started_at)} · 结束：${timestamp(timing.ended_at)}。实际活跃下载时长：${timing.active_download_seconds == null ? "待核验" : duration(timing.active_download_seconds)}。${census ? `本轮运行时长：${duration(timing.run_elapsed_seconds)}。` : ""}数据时间独立于页面刷新时间。`;
+    $("download-oss").hidden = !census;
+    const bytes = (value) => {
+      if (value == null || !Number.isFinite(Number(value))) return "待核验";
+      const size = num(value), units = ["B", "KiB", "MiB", "GiB", "TiB"], power = size > 0 ? Math.min(4, Math.floor(Math.log(size) / Math.log(1024))) : 0;
+      return `${numberFormat.format(size / 1024 ** power)} ${units[power]}`;
+    };
+    $("download-oss-metrics").replaceChildren(...[["本批 OSS 原件", metric(oss.unique_files), "按内容去重，包含复用原件"], ["本批 OSS 原件容量", available ? bytes(oss.bytes) : "—", "上述原件的总字节数，不含元数据"]].map(([label, value, detail]) => {
+      const item = node("div", "download-inventory-item"); item.append(node("span", "", label), node("strong", "", value), node("small", "", detail)); return item;
+    }));
+    $("download-oss-note").textContent = "仅统计本批任务已关联并校验的 OSS 原件，包含此前已归档的复用文件；不是本轮新增上传量，也不是整个 Bucket 的对象数量或容量。一个详情可关联多个原件，文件数不能作为法规数或任务完成数。";
+    $("download-legacy-breakdown").hidden = census;
+    const verified = (value) => available && value != null ? count(value) : "待核验";
+    const inventory = [
+      ["法规目录（元数据去重）", identity.regulations, "同一法规跨来源、跨版本仅计一次"],
+      ["司法指导类文件（去重）", identity.judicial_guidance, "与法规分开计数"],
+      ["身份 / 文种待核验详情", identity.identity_pending_details, "未纳入元数据识别法规数量", true],
+      ["不同原始文件", files.unique_downloaded_files, "按文件内容 SHA 去重，非法规数"],
+      ["已识别正文文件", files.body_files, "仅统计已确认用途的成功文件"],
+      ["已识别附件文件", files.annex_files, "附件不新增法规数量"],
+      ["已识别关联文件", files.related_files, "关联材料单独列示"],
+      ["文件用途待核验", files.role_pending_files, "用途不明或证据冲突", true],
+      ["已确认版本数", identity.versions, "须有明确版本依据，不按文件数推断", identity.versions == null],
+      ["版本待核验法规", identity.version_pending_regulations, "已识别法规身份，版本仍待核验", true],
+      ["重复来源记录", identity.duplicate_source_records, "归并后不重复计入法规数量"],
+      ["非目标详情", identity.non_target_details, "不计入法规、司法指导类文件"],
+    ];
+    $("download-inventory").replaceChildren(...inventory.map(([label, value, detail, pending]) => {
+      const item = node("div", `download-inventory-item${pending ? " is-unverified" : ""}`);
+      item.append(node("span", "", label), node("strong", "", verified(value)), node("small", "", detail)); return item;
+    }));
+    $("download-identity-note").textContent = `法规目录按文种、编号、年份、发布机关等元数据去重，包含尚未取回原件的目录；下方法规库仅收有成功文件的记录。不代表法律效力已核验。不同版本归入同一法规，缺少版本证据时标待核验。成功文件按 SHA 去重后分为正文、附件、关联文件和用途待核验，分类互斥。已下载文件引用 ${metric(files.downloaded_references)} / 全部文件引用 ${metric(files.total_references)}；失败引用 ${metric(files.failed_references)}。同一文件可被多条详情引用，引用数与文件数不相加。`;
+    const notes = { running: "下载任务正在运行；配置并发表示上限，实际连接数会受节流和退避影响。", paused: "下载任务已暂停，已归档文件与断点保留。", finished: download?.has_gaps ? "本次执行已结束，仍有下载失败或覆盖缺口，不能视为全部下载成功。" : "本次执行已结束；统计范围以该批次已发现的来源为准。", unknown: available ? "无法确认下载任务当前是否运行，请结合最近更新时间和提示检查。" : "服务器尚未提供可读取的原文下载状态。" };
+    $("download-state-note").textContent = notes[status];
+    notice($("download-warnings"), download?.warnings);
+    const failures = list(download?.failure_reasons);
+    $("download-failure-basis").textContent = census ? `${text(download?.failure_reason_basis, "每个未完成详情任务只计一个主要原因")}。原因更新时间：${timestamp(download?.failure_reasons_updated_at)}。` : "";
+    $("download-failure-reasons").replaceChildren(...(failures.length ? failures.map((failure) => {
+      const item = node("div", "download-reason"); item.append(node("span", "", text(failure.reason, "原因未记录")), node("strong", "", count(failure.count))); return item;
+    }) : [node("span", "muted small-text", !available ? "等待服务器下载记录。" : num(download.failed_file_references) > 0 ? "存在失败文件，原因明细尚未记录。" : (census && (num(outcomes.failed) + num(outcomes.incomplete) + num(outcomes.no_original) > 0) ? "存在未完成任务，原因明细尚未记录。" : "暂无文件下载失败记录。")) ]));
   }
 
   function renderSessionList() {

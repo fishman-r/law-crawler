@@ -1,0 +1,26 @@
+{
+  "id": "zh-cn_en-gb-legal",
+  "version": 1,
+  "targets": {
+    "zh": "Chinese mainland: normative legal Chinese",
+    "en": "United Kingdom: OPC legislative drafting English"
+  },
+  "instructions": "Produce legally idiomatic translations, not word-for-word calques. Use the same defined term consistently. Preserve the source law, legal effect, actors, conditions, exceptions, negation, temporal scope, amounts, citations and all substantive content. Do not import Chinese or UK substantive law or replace Indonesian institutions with target-jurisdiction bodies. Keep source numbering, Article/paragraph/item hierarchy and all annexes. For Chinese use precise mainland normative legal usage: 应当 for obligations, 可以 for legal permission/discretion, 不得 for prohibitions, only when justified by the source; distinguish ability from permission and invalidity from repeal. Use 自…起施行 for commencement where accurate; distinguish making, promulgation and application dates. Render recitals naturally (e.g. 鉴于, 依据) without dropping them. Do not turn ministerial regulations into Chinese statutes or judgments. For English use clear, modern UK legislative drafting: must for duties, may for powers/permissions and must not for prohibitions where justified; avoid routine legislative shall, archaic calques and inflated wording. Prefer natural active clauses only when the actor is supported. Never replace semantic shall with mechanical substitutions. Preserve all tables, HTML tags and rowspan/colspan attributes, cell ordering, units, ranges and footnotes; translate textual labels and maintain the relationships. Do not guess unreadable OCR or uncertain terminology; retain clearly labelled uncertainty. Keep supplied editorial notes separate from law. These are unofficial translations; do not claim approval by a court or authority.",
+  "sources": [
+    {
+      "title": "立法技术规范（试行）（一）及其说明（国家市场监督管理总局公布文本）",
+      "url": "https://www.samr.gov.cn/fgs/zfjd/art/2023/art_6e7ad21c6e9243e69b41dee1108d4f73.html",
+      "scope": "中文规范法律用语、条款引用；仅借鉴表达，不改外国法规结构或实体含义"
+    },
+    {
+      "title": "最高人民法院司改办负责人就规范裁判文书释法说理答记者问",
+      "url": "https://www.court.gov.cn/zixun/xiangqing/101572.html",
+      "scope": "中文司法用语准确清楚、行文规范的原则；不移植判决书体例到法规"
+    },
+    {
+      "title": "UK Office of the Parliamentary Counsel: Drafting guidance",
+      "url": "https://www.gov.uk/government/publications/drafting-bills-for-parliament/2024-03-19-drafting-guidance",
+      "scope": "英文法规表达的清晰性与情态用语；不适用英国实体规则"
+    }
+  ]
+}

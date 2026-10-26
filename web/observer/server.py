@@ -7,6 +7,9 @@ from pathlib import Path
 import re
 from urllib.parse import parse_qs, unquote, urlsplit
 
+from observer.archive_index import ArchiveCatalog
+from observer.archive_export import ArchiveExporter
+from observer.download_progress import DownloadProgressReader
 from observer.events import hooks_installed, session_detail, session_list
 from observer.library import (CHUNK_BYTES, LibraryError, LibraryReader,
                               content_disposition, parse_range)
@@ -25,6 +28,9 @@ class Observer:
         self.settings_path = Path(settings_path or Path.home()/'.claude/settings.json')
         self.reader = SnapshotReader(self.workspace, self.download_base)
         self.library = LibraryReader(self.download_base)
+        self.archive_catalog = ArchiveCatalog(self.download_base, self.download_base/'Indonesia/pipeline/library/archive.sqlite3')
+        self.archive_exporter = ArchiveExporter(self.download_base)
+        self.download_progress = DownloadProgressReader(self.workspace, self.download_base, self.runtime_dir)
 
     def setup(self):
         """只返回必要配置和布尔值；永不返回配置文件的 env 或凭据。"""
@@ -72,7 +78,7 @@ class Observer:
                                 active_sessions=sum(s.get('status') in ('running','waiting') for s in sessions),
                                 batches=len(batches),
                                 finished_batches=sum(b.get('status') in ('completed','completed_with_errors','planned_only') for b in batches)),
-                    sessions=sessions, batches=batches, warnings=warnings)
+                    sessions=sessions, batches=batches, download=self.download_progress.snapshot(), warnings=warnings)
 
 
 class Server(ThreadingHTTPServer):
@@ -158,6 +164,29 @@ class Handler(BaseHTTPRequestHandler):
         return dict(country=values.get('country', [''])[0] or None,
                     q=values.get('q', [''])[0], offset=int(offset), limit=int(limit))
 
+    def _regulations_query(self, query, archive=False):
+        values = parse_qs(query, keep_blank_values=True, strict_parsing=True, max_num_fields=8)
+        allowed = ('q', 'page', 'page_size', 'classification', 'sort', 'token') if archive else ('q', 'page', 'page_size', 'classification', 'sort')
+        if any(k not in allowed or len(v) != 1 for k,v in values.items()):
+            raise LibraryError(400, '法规库查询参数无效', 'invalid_query')
+        page, size = values.get('page',['1'])[0], values.get('page_size',['20'])[0]
+        if not re.fullmatch(r'[1-9][0-9]{0,6}',page) or not re.fullmatch(r'[1-9][0-9]{0,2}',size) or int(size)>100:
+            raise LibraryError(400, '法规库分页参数无效', 'invalid_query')
+        q=values.get('q',[''])[0]
+        if len(q)>200 or any(ord(c)<32 for c in q):
+            raise LibraryError(400, '检索内容过长或无效', 'invalid_query')
+        category=values.get('classification',['all'])[0]
+        sort=values.get('sort',['published_desc'])[0]
+        if category not in ('all','regulation','judicial_guidance','administrative_decision','other','pending') or sort not in ('published_desc','published_asc','title_asc','title_desc','year_desc','year_asc'):
+            raise LibraryError(400, '分类或排序参数无效', 'invalid_query')
+        result=dict(q=q,page=int(page),page_size=int(size),classification=category,sort=sort)
+        if archive:
+            token=values.get('token',[''])[0]
+            if not re.fullmatch(r'[a-f0-9]{64}',token):
+                raise LibraryError(400, '当前页导出凭据无效，请刷新列表', 'invalid_page_token')
+            return result,token
+        return result
+
     def do_GET(self):
         """固定路由与本机 Host 校验，拒绝任意文件读取及 DNS rebinding。"""
         try:
@@ -177,6 +206,25 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, {'status':'ok','read_only':True})
             if target == '/api/overview':
                 return self._send(200, observer.overview())
+            if target == '/api/regulations':
+                return self._send(200, observer.archive_catalog.listing(**self._regulations_query(split.query)))
+            if target == '/api/regulations/archive.zip':
+                query, token = self._regulations_query(split.query, archive=True)
+                selection = observer.archive_catalog.selection(**query)
+                with observer.archive_exporter.archive(selection, expected_token=token) as prepared:
+                    return self._stream(prepared)
+            match = re.fullmatch(r'/api/regulations/files/([a-f0-9]{64})/(download|preview)', target)
+            if match:
+                identifier, action = match.groups()
+                spec = observer.archive_catalog.get_file(identifier)
+                with observer.archive_exporter.prepare_file(spec) as prepared:
+                    if action == 'download':
+                        return self._stream(prepared)
+                    if prepared.preview_kind == 'text':
+                        return self._send(200, observer.library.text_preview(prepared))
+                    if prepared.preview_kind in ('pdf','image'):
+                        return self._stream(prepared, inline=True, allow_range=True)
+                    raise LibraryError(415, '该原始格式仅支持下载', 'preview_unavailable')
             if target == '/api/library':
                 return self._send(200, observer.library.listing(**self._library_query(split.query)))
             match = re.fullmatch(r'/api/library/files/([A-Za-z0-9_-]{1,1024})/(download|preview|metadata)', target)
@@ -216,7 +264,8 @@ class Handler(BaseHTTPRequestHandler):
                       '/static/app.js':('app.js','text/javascript; charset=utf-8'),
                       '/static/style.css':('style.css','text/css; charset=utf-8'),
                       '/static/library.js':('library.js','text/javascript; charset=utf-8'),
-                      '/static/library.css':('library.css','text/css; charset=utf-8')}
+                      '/static/library.css':('library.css','text/css; charset=utf-8'),
+                      '/static/library-page.css':('library-page.css','text/css; charset=utf-8')}
             if target in static:
                 filename, content_type = static[target]
                 path = Path(__file__).parent/'static'/filename

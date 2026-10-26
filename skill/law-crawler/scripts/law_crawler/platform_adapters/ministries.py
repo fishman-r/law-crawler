@@ -119,8 +119,13 @@ class MinistryAdapter(Adapter):
                 continue
             candidate = urldefrag(urljoin(final, candidate))[0]
             parsed = urlsplit(candidate)
+            # 财政部旧法规正文可以是 HTML；只接受详情明确给出的 fulltext
+            # 下载入口，不把导航页、关联文章或猜出的文件名当作原件。
+            fulltext = (self.platform == 'kemenkeu.go.id'
+                        and parsed.path.startswith('/api/download/fulltext/')
+                        and parsed.path.lower().endswith(('.htm', '.html', '.txt', '.xml', '.json', '.pdf')))
             if (parsed.scheme in ('https', 'http') and parsed.hostname in self.allowed_hosts
-                    and document_url(candidate) and candidate not in pdfs):
+                    and (document_url(candidate) or fulltext) and candidate not in pdfs):
                 pdfs.append(candidate)
         if not pdfs:
             raise ValueError('官方法规详情未提供可验证的正文文件链接')

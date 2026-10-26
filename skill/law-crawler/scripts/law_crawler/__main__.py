@@ -5,6 +5,20 @@ import sys
 
 
 COMMANDS = {
+    'coverage-matrix': 'coverage_matrix',
+    'recover-attachments': 'attachment_recovery',
+    'recovery-workflow': 'recovery_workflow',
+    'audit-recovery': 'recovery_audit',
+    'recover-missing': 'recover_missing_original',
+    'pipeline': 'staged_pipeline',
+    'bulk-archive': 'bulk_archive',
+    'bulk-download-fast': 'bulk_download_fast',
+    'bulk-process': 'bulk_process',
+    'bulk-report': 'bulk_report',
+    'ocr': 'local_ocr',
+    'ocr-tables': 'reconstruct_ocr_tables',
+    'auto-tables': 'automatic_tables',
+    'check-table-translations': 'translation_tables',
     'download': 'download_regulations',
     'import-file': 'import_browser_download',
     'review-body': 'import_body_review',

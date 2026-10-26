@@ -3,7 +3,6 @@
 import argparse
 import os
 from pathlib import Path
-import shutil
 
 ROOT = Path(__file__).resolve().parents[2]
 SKILL = ROOT / 'skill/law-crawler'
@@ -12,7 +11,11 @@ SKILL = ROOT / 'skill/law-crawler'
 def skills_root(agent, scope='user', project=None):
     if scope == 'project':
         project = Path(project or ROOT).expanduser().resolve()
-        return project / {'codex': '.agents/skills', 'claude': '.claude/skills', 'opencode': '.opencode/skills', 'workbuddy': '.workbuddy/skills'}[agent]
+        return project / {'codex': '.agents/skills', 'claude': '.claude/skills', 'qoder': '.qoder/skills', 'deepseek-harness': '.dsh/skills', 'opencode': '.opencode/skills', 'workbuddy': '.workbuddy/skills'}[agent]
+    if agent == 'qoder':
+        return Path.home() / '.qoder/skills'
+    if agent == 'deepseek-harness':
+        raise ValueError('DeepSeek Harness用户目录取决于dshHome配置；用--dest指定实际skills目录，或选择--scope project')
     if agent == 'codex':
         return Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex'))) / 'skills'
     if agent == 'claude':
@@ -34,20 +37,22 @@ def install(agent, scope='user', project=None, destination=None, source=SKILL):
     if target == source or source in target.parents or target in source.parents:
         raise ValueError('安装目录不能与工程skill源码重叠')
     if target.is_symlink():
-        raise ValueError('安装目标不得为符号链接')
-    for item in source.rglob('*'):
-        if item.is_file() and '__pycache__' not in item.parts and item.suffix != '.pyc':
-            output = target / item.relative_to(source)
-            if output.is_symlink() or any(parent.is_symlink() for parent in output.parents if parent != directory.parent):
-                raise ValueError('安装目标路径不得含符号链接')
-            output.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(item, output)
+        if target.resolve() == source:
+            return target
+        raise ValueError('安装目标已链接其他源码；请先核对，不自动替换')
+    if target.exists():
+        raise ValueError('安装目标已存在；请核对旧副本，不自动覆盖或删除')
+    target.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        target.symlink_to(source, target_is_directory=True)
+    except OSError as exc:
+        raise ValueError('无法建立目录链接；请配置agent自定义技能目录或显式加载源码SKILL.md，不自动生成副本') from exc
     return target
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--agent', choices=('codex', 'claude', 'opencode', 'workbuddy'), required=True)
+    parser.add_argument('--agent', choices=('codex', 'claude', 'qoder', 'deepseek-harness', 'opencode', 'workbuddy'), required=True)
     parser.add_argument('--scope', choices=('user', 'project'), default='user')
     parser.add_argument('--project', help='项目级安装的工程路径')
     parser.add_argument('--dest', help='自定义技能集合目录（其下创建law-crawler）')

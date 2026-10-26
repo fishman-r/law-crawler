@@ -57,6 +57,24 @@ class MinistryAdaptersTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, '正文文件'):
             adapter.read_document(adapter.entry_urls[0], lambda u: (html, u))
 
+    def test_kemenkeu_explicit_html_fulltext_is_an_original(self):
+        adapter = ADAPTERS['kemenkeu.go.id']
+        html = self.page('kemenkeu', 'detail')
+        # UU40/2007 uses the same observed official fulltext route, with .htm.
+        html = html.replace(b'/api/download/d860feb1-5e64-401d-b50e-8d57b7b94a7b/2026pmkeuangan74.pdf', b'/api/download/fulltext/2007/40TAHUN2007UU.htm')
+        doc = adapter.read_document('https://jdih.kemenkeu.go.id/dok/uu-40-tahun-2007',
+                                    lambda u: (html, u))
+        self.assertEqual(len(doc.file_urls), 1)
+        self.assertIn('/api/download/fulltext/', doc.file_urls[0])
+        self.assertTrue(doc.file_urls[0].endswith('40TAHUN2007UU.htm'))
+
+    def test_html_navigation_is_not_a_fulltext_download(self):
+        adapter = ADAPTERS['kemenkeu.go.id']
+        html = self.page('kemenkeu', 'detail').replace(
+            b'/api/download/d860feb1-5e64-401d-b50e-8d57b7b94a7b/2026pmkeuangan74.pdf', b'/news/40TAHUN2007UU.htm')
+        with self.assertRaisesRegex(ValueError, '正文文件'):
+            adapter.read_document(adapter.entry_urls[0], lambda u: (html, u))
+
     def test_misleading_slug_does_not_override_document_type(self):
         adapter = ADAPTERS['bkpm.go.id']
         html = self.page('bkpm', 'detail').replace(b'<dd>Peraturan</dd>', b'<dd>Monografi Hukum</dd>')

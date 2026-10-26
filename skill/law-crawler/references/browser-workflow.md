@@ -39,7 +39,7 @@ python -X utf8 "SKILL_DIR/scripts/browser_healthcheck.py" --duration 180 --outpu
 - `detail_url`：已观察到的官方详情/列表 URL；缺失时为 `null`。
 - `download_url`：页面实际提供的官方文件链接。
 - `final_url` 与 `final_url_verified`：未确认终点时省略或置空 `final_url`，并设 `final_url_verified: false`；只有取得证据后才同时填写终点和 `true`。导入记录可能用 `download_url` 作为兼容占位值，仍须保留验证标记为 `false`。
-- `metadata`：schema 2 字段对象，至少有 `title`、`published_at`、`updated_at`、`effective_region`、`document_type`；每项包含 `value/raw/source_label/source_url/status/meaning`。标题必须有观察证据，`document_type.value` 必须为 `regulation`，并保留官方法规类型原文；不能从文件名猜出这些字段。
+- `metadata`：schema 2 字段对象，至少有 `title`、`published_at`、`updated_at`、`effective_region`、`document_type`；每项包含 `value/raw/source_label/source_url/status/meaning`。标题必须有观察证据，`document_type.value` 通常为 `regulation`，并保留官方法规类型原文；仅最高法院正式 SEMA 可为 `judicial_guidance`。为 SEMA 提供 `status: observed` 的完整 `legal_identity`：`type: "Surat Edaran Mahkamah Agung"`、`issuer: "Mahkamah Agung"`、`jurisdiction: "ID"` 及非空 `number/year`；文种原文填 `Surat Edaran Mahkamah Agung` 或 `SEMA`。标题、文种与身份来源须在 `jdih.mahkamahagung.go.id` 或 `kepaniteraan.mahkamahagung.go.id`，平台填 `mahkamahagung.go.id`。将 SEMA 标注为印度尼西亚最高法院通函/司法指导文件，不等同于中国法的司法解释；不因此接收其他指导文件、法院判决、草案或新闻。不能从文件名猜出这些字段。
 
 所有声明的来源 URL 都须属于对应平台适配器的官方主机白名单；不要临时泛化白名单来接受未知跳转。
 
@@ -51,7 +51,7 @@ python -X utf8 "SKILL_DIR/scripts/import_browser_download.py" --root "WORK_ROOT"
 
 `--rerun-batch <ID>` 可重跑已有浏览器批次，不能另传新的 manifest 或修改法域/模式；`--rerun-all` 可重新处理成功项。
 
-检查配置目录中的原件、每文件 JSON 和本批次 Markdown/HTML/JSON 报告（`browser-import-last-run.json` 是旧入口报告），核对 SHA-256、字节数、来源、未知字段以及错误数。来源记录应包含 `discovery_method: browser_download` 和 `final_url_verified`，报告模式为 `browser_import`。重复导入应复用相同内容文件；不同字节应保留不同版本。对外交付注明 `browser-assisted`，不要据此将 CLI 的网络失败状态改成全自动成功。
+检查配置目录中的原件、每文件 JSON 和本批次 Markdown/HTML/JSON 报告（`browser-import-last-run.json` 是旧入口报告），核对 SHA-256、字节数、来源、未知字段以及错误数。按实际取得方式核对来源和报告：浏览器方式为 `discovery_method: browser_download`、`browser_import`；CLI方式为 `official_cli_download`、`official_file_import`。两者均核对 `final_url_verified`。重复导入应复用相同内容文件；不同字节应保留不同版本。仅实际使用浏览器补收时注明 `browser-assisted`；不要据此将 CLI 的网络失败状态改成全自动成功。
 
 相同 SHA、相同来源重复导入时，本次未知字段不会覆盖已有 `observed` 证据，未知终点不会覆盖已验证终点；本次声明仍保存在 `browser_import`，报告的 `stored_final_url` / `stored_final_url_verified` 表示合并后记录。不同内容或不同来源不继承这些证据。
 

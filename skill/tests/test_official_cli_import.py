@@ -175,13 +175,13 @@ class OfficialFetchLimitTests(unittest.TestCase):
         with patch('law_crawler.download_regulations.fetch', return_value=(PDF, DOWNLOAD)) as fetch:
             self.assertEqual(download.official_fetch(DOWNLOAD, 12, ('s.mkri.id',), max_bytes=limit), (PDF, DOWNLOAD))
             fetch.assert_called_once_with(DOWNLOAD, 12, limit)
-        response = Mock(url=DOWNLOAD)
+        response = Mock(url=DOWNLOAD, headers={"Content-Length": str(len(PDF))})
         response.read.return_value = PDF
         response.__enter__ = Mock(return_value=response)
         response.__exit__ = Mock(return_value=False)
         with patch('urllib.request.urlopen', return_value=response):
             self.assertEqual(download.official_fetch(DOWNLOAD, 12, ('s.mkri.id',), max_bytes=limit), (PDF, DOWNLOAD))
-        response.read.assert_called_once_with(limit + 1)
+        response.read.assert_called_once_with(65536)
 
     def test_expanded_limit_still_checks_request_and_redirect_host_whitelist(self):
         limit = 128 * 1024 * 1024

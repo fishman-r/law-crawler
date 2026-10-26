@@ -9,7 +9,7 @@ law-crawler/
 │   │   ├── agents/                # 客户端展示配置
 │   │   ├── countries/             # 唯一随包国家索引与默认配置
 │   │   └── scripts/
-│   │       ├── *.py               # 六个独立命令入口
+│   │       ├── *.py               # 独立命令薄入口
 │   │       └── law_crawler/       # 唯一采集实现，含平台适配器
 │   ├── law_crawler/__init__.py    # 工程导入桥，不复制运行实现
 │   ├── *.py                      # 原四个兼容命令
@@ -46,7 +46,7 @@ python3 deploy/run.py skill rebuild-markdown --root "$PWD" --jurisdiction Canada
 python3 deploy/run.py web --workspace "$PWD" --download-base "$PWD/data/downloads" --runtime-dir "$PWD/data/runtime"
 ```
 
-`skill` 转交给标准包入口，保留 download、import-file、review-body、rebuild-markdown、prepare、browser-healthcheck 子命令。`web`、`claude`、`events` 分别转交看板服务、Claude启动器和事件接收器；所需参数可用各自的 `--help` 查看。
+`skill` 转交给标准包入口，保留 download、import-file、review-body、rebuild-markdown、prepare、browser-healthcheck 子命令，并提供 pipeline 三阶段处理、ocr 本地识别及 ocr-tables 人工格线重建及 auto-tables 自动有框表格识别入口。`web`、`claude`、`events` 分别转交看板服务、Claude启动器和事件接收器；所需参数可用各自的 `--help` 查看。
 
 原四个兼容命令已归入 `skill/`，例如 `python3 skill/download_regulations.py --help`。独立安装包继续使用自身 `scripts/*.py`；在其 scripts 目录也可运行 `python3 -m law_crawler`。
 
@@ -83,3 +83,7 @@ python3 deploy/tools/install_skill.py --agent codex
 安装器还支持 `--agent claude|opencode|workbuddy`，以及 `--scope project --project /path/to/project` 或 `--dest`。安装后的目录仅用于运行，修改仍回到工程源码。
 
 运行中的服务器和其他智能体安装副本不会因本地重排自动发布。服务器更新按[部署说明](deployment-ecs.md)执行，持久数据使用原先明确配置的绝对路径。
+
+### 批量归档入口
+
+使用`skill bulk-archive`执行目录分页、原件归档、活跃清单导出及断点报告；使用`skill bulk-process`逐件生成OCR、三语稿和独立复核请求。源码均位于完整skill包的`scripts/law_crawler/`，顶层scripts仅为入口。MA和Kemendag支持已验证分页协议；其他平台不能因首屏有下载而标记全量。详见[批量流程](../../skill/law-crawler/references/bulk-collection.md)。

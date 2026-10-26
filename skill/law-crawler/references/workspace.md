@@ -2,7 +2,7 @@
 
 ## 选择解释器和路径
 
-将`SKILL_DIR`替换为当前加载的SKILL.md所在目录，将`WORK_ROOT`替换为用户选定的工作区。选择Python 3.10+完整安装，包含ssl、sqlite3及本机锁模块；无需pip包、仓库检出或某个agent连接器。使用`python -X utf8`运行以下单行命令；macOS/Linux可选择`python3`，Windows可选择`py -3`，先通过`--version`确认实际版本。不将示例占位符作为字面目录创建。其他参考命令中的MANIFEST_PATH、AUDIT_PATH、COUNTRY_DIRECTORY替换为本次实际文件/目录，BATCH_ID与RUN_ID替换为本次批次/唯一标识。
+将`SKILL_DIR`替换为当前加载的SKILL.md解析目录链接后的真实所在目录，将`WORK_ROOT`替换为用户选定的工作区。选择Python 3.10+完整安装，包含ssl、sqlite3及本机锁模块；无需pip包、仓库检出或某个agent连接器。使用`python -X utf8`运行以下单行命令；macOS/Linux可选择`python3`，Windows可选择`py -3`，先通过`--version`确认实际版本。不将示例占位符作为字面目录创建。其他参考命令中的MANIFEST_PATH、AUDIT_PATH、COUNTRY_DIRECTORY替换为本次实际文件/目录，BATCH_ID与RUN_ID替换为本次批次/唯一标识。
 
 按需使用当前agent公开的文件/终端/浏览器能力。仅本地Python和文件工具可用时，仍可执行CLI采集、计划与离线重建；浏览器不可用只影响浏览器辅助路线。CLI联网仍受实际网络和官方响应限制。
 
@@ -34,7 +34,7 @@ python -X utf8 "SKILL_DIR/scripts/prepare_workspace.py" --root "WORK_ROOT" --jur
 
 ## 在不同agent中使用
 
-复制或安装整个skill目录，保留SKILL.md、scripts、references、countries的相对关系。不要只复制SKILL.md。将个人技能放到所用agent的用户级目录，将团队技能放到其项目级目录；不把某一个agent的目录作为所有agent的通用路径。安装位置和源码维护命令参见源码工程README（仅维护者需要）；运行已安装包不依赖该README或工程tools目录。
+连接同一份完整skill源码，保留SKILL.md、scripts、references、assets、countries的相对关系。使用目录级符号链接或工具支持的自定义技能根目录，不为各客户端生成源码副本。不要只链接SKILL.md。入口发现规则与无链接回退见[跨工具兼容](agent-compatibility.md)。运行不依赖工程README或deploy工具。
 
 使用`agents/openai.yaml`只影响Codex展示；忽略该文件也能运行通用CLI。将`metadata.agent_created: "true"`作为生成来源标记；采用字符串映射以符合[Agent Skills规范](https://agentskills.io/specification)，不添加平台私有顶层字段。
 

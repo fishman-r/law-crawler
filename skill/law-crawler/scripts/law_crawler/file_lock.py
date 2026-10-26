@@ -16,6 +16,10 @@ def _backend():
         raise ValueError(f'当前 Python 缺少系统文件锁模块 {name}；请使用包含该标准库模块的完整 Python 运行环境') from exc
 
 
+class FileLockBusy(ValueError):
+    """锁已被其他执行者持有；与权限、路径或文件系统错误区分。"""
+
+
 class FileLock:
     """立即取得独占锁；冲突不等待。close 可重复调用，且从不删除锁文件。"""
     def __init__(self, path, busy_message='已有任务持有执行锁，请稍后重试'):
@@ -44,8 +48,10 @@ class FileLock:
         except OSError as exc:
             if self.stream is not None:
                 self.stream.close()
-            if exc.errno in (errno.EACCES, errno.EAGAIN, errno.EDEADLK) or getattr(exc, 'winerror', None) in (33, 36):
-                raise ValueError(busy_message) from None
+            busy = (exc.errno in (errno.EAGAIN, errno.EWOULDBLOCK) if self.backend_name != 'msvcrt'
+                    else exc.errno in (errno.EACCES, errno.EAGAIN, errno.EDEADLK) or getattr(exc, 'winerror', None) in (33, 36))
+            if busy:
+                raise FileLockBusy(busy_message) from None
             raise ValueError(f'无法取得执行锁 {self.path}: {exc}；请检查目录权限和文件系统是否支持文件锁') from exc
 
     def close(self):

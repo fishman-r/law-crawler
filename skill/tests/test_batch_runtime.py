@@ -85,7 +85,7 @@ class RetryFetchTests(unittest.TestCase):
             calls.append(url)
             raise URLError(TimeoutError('temporary timeout'))
         with self.assertRaises(URLError) as raised:
-            retry_fetch(fetcher, 'https://example.gov/a', sleep=delays.append, event_callback=events.append)
+            retry_fetch(fetcher, 'https://example.gov/a', sleep=delays.append, event_callback=events.append, jitter=lambda: 0)
         self.assertEqual(len(calls), 3)
         self.assertEqual(delays, [1, 2])
         self.assertEqual([e['status'] for e in events], ['retrying', 'retrying', 'failed'])
@@ -101,7 +101,7 @@ class RetryFetchTests(unittest.TestCase):
             if isinstance(value, Exception):
                 raise value
             return value
-        result = retry_fetch(fetcher, 'https://example.gov', base_delay=0.5, sleep=delays.append, event_callback=events.append)
+        result = retry_fetch(fetcher, 'https://example.gov', base_delay=0.5, sleep=delays.append, event_callback=events.append, jitter=lambda: 0)
         self.assertEqual(result[0], b'PDF')
         self.assertEqual(delays, [0.5, 1])
         self.assertEqual(events[-1]['status'], 'succeeded')
@@ -133,7 +133,7 @@ class RetryFetchTests(unittest.TestCase):
         def fetcher(url):
             raise TimeoutError('timeout')
         with self.assertRaises(TimeoutError):
-            retry_fetch(fetcher, 'https://example.gov', max_attempts=4, base_delay=20, sleep=delays.append)
+            retry_fetch(fetcher, 'https://example.gov', max_attempts=4, base_delay=20, sleep=delays.append, jitter=lambda: 0)
         self.assertEqual(delays, [20, 30, 30])
 
 

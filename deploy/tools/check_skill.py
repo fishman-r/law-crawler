@@ -6,17 +6,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SKILL = ROOT / 'skill/law-crawler'
+# 历史独立上传入口只有这一份实现；不要求生成包内副本。
+STANDALONE_ENTRYPOINTS = ('oss_archive_upload',)
 ENTRYPOINTS = ('download_regulations', 'import_browser_download', 'import_body_review',
-               'rebuild_markdown', 'prepare_workspace', 'browser_healthcheck')
+               'recovery_workflow', 'recovery_audit', 'recover_missing_original', 'attachment_recovery', 'coverage_matrix',
+               'rebuild_markdown', 'prepare_workspace', 'browser_healthcheck', 'staged_pipeline', 'local_ocr', 'reconstruct_ocr_tables', 'automatic_tables', 'translation_tables', 'bulk_archive', 'bulk_download_fast', 'bulk_process', 'bulk_report')
 
 
 def validate(skill=SKILL):
     skill = Path(skill).resolve()
     errors = []
     required = ['SKILL.md', 'countries/global-config.properties',
-                'scripts/law_crawler/__init__.py', 'scripts/law_crawler/__main__.py']
+                'scripts/law_crawler/__init__.py', 'scripts/law_crawler/__main__.py',
+                'scripts/law_crawler/apple_vision_ocr.swift', 'assets/translation-styles/zh-cn_en-gb.json']
     required += ['scripts/' + name + '.py' for name in ENTRYPOINTS]
     required += ['scripts/law_crawler/' + name + '.py' for name in ENTRYPOINTS]
+    required += ['scripts/' + name + '.py' for name in STANDALONE_ENTRYPOINTS]
     for name in required:
         if not (skill / name).is_file():
             errors.append('缺少文件: ' + name)
@@ -25,10 +30,10 @@ def validate(skill=SKILL):
     if (skill / '.generated-files.json').exists():
         errors.append('存在旧生成清单；完整skill应直接维护源码')
     for path in sorted((skill / 'scripts').rglob('*.py')):
-        if '__pycache__' in path.parts:
+        if '__pycache__' in path.parts or path.name.startswith('._'):
             continue
         relative = path.relative_to(skill).as_posix()
-        if path.parent == skill / 'scripts' and path.stem not in ENTRYPOINTS:
+        if path.parent == skill / 'scripts' and path.stem not in ENTRYPOINTS + STANDALONE_ENTRYPOINTS:
             errors.append('存在额外顶层运行副本: ' + relative)
         try:
             tree = ast.parse(path.read_text(encoding='utf-8'), filename=relative)

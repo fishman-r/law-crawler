@@ -116,3 +116,50 @@ systemctl restart law-crawler-observer
 服务开机自启、异常退出自动重启，以只读文件系统视图和 192 MB 内存上限运行。更新时把新源码放到新的 release 目录，再运行其中的 `deploy/install.sh`；安装器切换 `current`，下载目录、已有索引及 API Key 保留。运行中的 Claude 会话应先结束，再更新技能和 hooks。
 
 更新或排障时不要输出完整 `settings.json`，不要将其写入工单、仓库或网页。看板中的“密钥已配置”只表示存在配置值；一次真实 Claude API 请求才能证明认证和额度当前可用。
+
+## 下载专用服务
+
+仅需下载原件时，部署完整的`skill/law-crawler/`及`deploy/tools/configure_downloader.py`到新的、固定的源码版本目录。直接运行归档脚本，不安装Claude、Ollama或模型服务，不读写提供方凭据，不切换`/opt/law-crawler/current`，不重启已有看板。
+
+为服务器建立独立工作区、明确的绝对`downdloadDir`和新批次。保留本机已停止任务的原件、索引快照、计划、签名和运行记录；现有bulk断点及raw缓存包含冻结的绝对路径，不能直接重写路径和签名来冒充原批次。需要跨路径迁移断点时，另行生成具有来源映射和校验证据的派生批次。
+
+先检查SSH权限、现有下载进程、Python与SSL/SQLite/fcntl、磁盘余量和下载目录。使用配置器的dry-run检查固定源码路径、所选法域、平台范围、批次、目录和systemd单元，再安装配置、重新加载systemd并显式启动。下载使用低权限账户、有界网络重试和服务资源限制；失败保留断点，不自动启动付费模型处理。
+
+例如以服务器root执行下列预览；将`VERSION`、`RUN_ID`替换为实际版本和独立批次，平台参数省略时使用该法域登记来源。确认预览后去掉`--dry-run`安装配置，再运行工具输出的`systemctl`命令：
+
+```sh
+python3 /opt/law-crawler/releases/VERSION/deploy/tools/configure_downloader.py --release /opt/law-crawler/releases/VERSION --workspace /var/lib/law-crawler/download-workspaces/RUN_ID --download-base /var/lib/law-crawler/downloads --jurisdiction Indonesia --batch-id RUN_ID --dry-run
+```
+
+用`systemd-analyze verify /etc/systemd/system/UNIT.service`验收实际Linux单元后再启动。服务配置为不自动失败重启，停止发送SIGINT；再次`systemctl start UNIT`时会核验冻结计划并自动选择批次重跑。重启不会清除来源失败记录，也不会修改范围或重试上限。
+
+验收时分别检查服务状态、日志增量、实际官方来源响应、原件字节和SHA、元数据、JSON/Markdown/HTML业务报告。归档程序可能在单件失败时仍正常退出，不能用systemd的active或退出0替代下载成功。记录未适配分页、TLS/403、缺附件和待身份核验项。部署包不得包含开发机`data/`、私有配置、密钥、会话和缓存。
+
+## 下载进度接入
+
+为服务器下载批次在`runtime/<deployment>/active-download.json`登记`batch_id`、`state`、`unit`和配置`workers`；`state`必须位于下载根的`<jurisdiction>/pipeline/bulk/<batch>/state.json`。允许观测服务用户遍历该部署目录并读取指针（建议目录`root:lawcrawler 0750`、指针`root:lawcrawler 0640`），不放宽其他私有文件权限。新下载器在`fast-download/status.json`保存轻量摘要；旧批次由`deploy/tools/refresh_download_progress.py --batch-dir ...`生成独立摘要，不改历史计划和状态。
+
+部署原件缺口修复新版时，先把完整 skill 放入新的固定 release，在服务器从工程外运行源码检查与恢复测试；保留旧 release 和原始冻结范围。按[可重放修复流程](../../skill/law-crawler/references/recovery-workflow.md)逐批审核、冻结计划，然后仅切换下载单元的 `PYTHONPATH`、计划路径和独立 `--results-output`。保持 5 路并发及现有沙箱，结果路径放在原批次可写目录内。使用不可覆盖的逐次结果文件时设置 `Restart=no`，避免已写出结果的失败尝试被自动重启反复拒绝；检查原因后以新 attempt 路径显式续跑。每批服务退出后独立回读 OSS 审计，再运行下一批，核对发布器、Web API 与队列同口径；不把审核等待时间显示为正在下载。
+
+候选筛选、冻结计划和执行器共用批次锁。允许审核者并行阅读已经冻结的证据，但把新一轮 `select` 与服务启动错开。若服务因 `FileLockBusy` 在创建 Runner 前退出，保留日志，确认活动 PID 为零、最终 attempt 文件不存在且队列未变后，等待筛选结束，再沿同一计划与尚未使用的 attempt 路径启动；不得删除锁文件或重置队列来绕过互斥。
+
+观测服务仅执行白名单下载单元的`systemctl show`读取状态：有活动PID时显示运行；已停止但无结束标记显示暂停；`finished`显示结束，即使存在下载失败导致服务退出码1。网页分别展示配置并发、本轮并发及当前运行并发上限，不能当作实时活动HTTP请求数。队列100%仅代表已尝试所有已发现详情。
+
+## 将成功原件归档到OSS
+
+使用完整skill中的 `scripts/oss_archive_upload.py`，在目标服务器安装可选依赖 `oss2`。读取已完成批次的 `metadata.json`，只选取 `saved/reused`、完整且HTTP 2xx的文件；排除错误页，按内容SHA去重。上传前核对本地SHA，上传后回读原件与来源元数据核对SHA。默认5路、每项最多3次，保留本地原件；同键已存在但内容不符时报告冲突，不覆盖。
+
+```sh
+python oss_archive_upload.py --credentials CREDENTIAL_FILE --metadata BATCH_METADATA_JSON --output UPLOAD_BATCH_DIR --bucket BUCKET --endpoint REGION_ENDPOINT --region REGION --prefix ods/Indonesia --workers 5 --sample
+# 样本通过后，以相同参数去掉 --sample 执行整个冻结清单。
+```
+
+在工程外创建权限为600的凭据JSON（字段为 `access_key_id`、`access_key_secret`），不要将值写入命令行、代码、报告或Git。临时凭据文件放在服务器受限运行目录，任务完成后移除；需要持续运行时使用独立凭据管理方案。
+
+对象布局为 `ods/Indonesia/raw/<SHA>.<原始扩展名>`、`ods/Indonesia/metadata/<来源批次>/<SHA>.json`、`ods/Indonesia/batches/<上传批次>/{plan,status}.json`。每份元数据保留所有关联来源和身份核验状态；ODS原始归档不等于法规已完成法律审查。状态记录成功、失败、原因、次数、字节数及耗时。重跑同一计划时核验已有对象后跳过上传，不自动删除OSS对象。
+
+### 53,430条冻结目录常驻下载
+
+线上批次 `id-census-oss-20261022` 使用 `law-crawler-census-oss.service`，固定源码release `20261022-census-oss`，5路并发轮转处理七个目录入口（六个平台）。冻结队列、逐详情结果、报告和断点位于服务器 `Indonesia/pipeline/census-download/id-census-oss-20261022/`。只读检查 `systemctl status law-crawler-census-oss.service` 与批次 `status.json`；`systemctl stop` 保存活动任务，`start` 从pending继续。失败/不完整任务保持记录，不因服务重启自动反复重试。
+
+OSS凭据由root在工程外受限配置目录管理，systemd配置只引用路径，不包含密钥。服务开机启动、异常有界重启，OSS鉴权失败或可用空间不足时主动暂停。新文件使用本批临时目录，OSS原件及来源元数据核验后清理；旧原始归档不删除。此服务不自动接入旧批次Web统计，不应将旧批次2,466条详情面板当作本批53,430条进度。

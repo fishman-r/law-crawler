@@ -8,6 +8,7 @@
     <title>采集观测台 · Law Crawler</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/library.css">
+    <link rel="stylesheet" href="/static/library-page.css">
     <script src="/static/library.js" defer></script>
     <script src="/static/app.js" defer></script>
   </head>
@@ -20,9 +21,11 @@
           <span>采集观测台<span class="brand-subtitle">LAW CRAWLER</span></span>
         </a>
         <nav class="main-nav" aria-label="页面导航">
+          <a href="#overview" id="nav-dashboard">运维工作台</a>
+          <a href="#download">原文下载</a>
           <a href="#sessions">智能体会话</a>
           <a href="#batches">采集批次</a>
-          <a href="#library">法规文件</a>
+          <a href="#library" id="nav-library">法规库</a>
           <a href="#deployment">部署状态</a>
         </nav>
         <span class="readonly-label">只读工作区</span>
@@ -44,6 +47,25 @@
 
       <div id="connection-banner" class="notice notice-error" role="status" hidden></div>
       <div id="overview-warnings" class="notice notice-warning" role="status" hidden></div>
+
+      <section id="download" class="dashboard-section" aria-labelledby="download-title">
+        <div class="section-heading"><div><div class="section-kicker">RAW DOCUMENT ARCHIVE</div><h2 id="download-title">全量原文下载</h2><p>查看当前批次任务进度、失败原因和原件归档情况；详情任务、法规和文件分开统计。</p></div><div id="download-status" aria-live="polite"><span class="status-badge tone-neutral">等待数据</span></div></div>
+        <div class="panel download-panel">
+          <p id="download-scope" class="download-scope mono">正在读取下载批次…</p>
+          <div id="download-metrics" class="download-metrics" aria-label="下载任务进度"></div>
+          <div id="download-outcomes" class="download-reasons download-outcomes" aria-label="未完成任务分类" hidden></div>
+          <p id="download-partition-note" class="download-partition-note">正在核对任务口径…</p>
+          <div class="download-progress-heading"><span id="download-progress-label">等待下载完成进度</span><span id="download-updated">下载数据更新时间：未记录</span></div>
+          <progress id="download-progress" class="download-progress" max="100" value="0" aria-label="本批次下载任务完成进度"></progress>
+          <p id="download-workers" class="download-worker-note">执行并发记录尚未读取</p>
+          <p id="download-state-note" class="download-state-note">正在读取服务器状态…</p>
+          <div id="download-warnings" class="notice notice-warning detail-notice" role="status" hidden></div>
+          <div id="download-oss" class="download-breakdown" hidden><h3>OSS 归档</h3><div id="download-oss-metrics" class="download-inventory download-oss-metrics"></div><p id="download-oss-note" class="download-accounting-note"></p></div>
+          <div id="download-legacy-breakdown" class="download-breakdown"><h3>法规与文件分开统计</h3><div id="download-inventory" class="download-inventory"></div><p id="download-identity-note" class="download-accounting-note">法规身份和文件用途正在核对…</p></div>
+          <div class="download-failures"><h3>失败或未完整原因</h3><p id="download-failure-basis" class="muted small-text"></p><div id="download-failure-reasons" class="download-reasons"><span class="muted">等待数据</span></div></div>
+          <p class="record-note">任务总量只覆盖本批次已发现的来源，不代表全国法规总数；同一法规可能对应多个版本、正文或附件。身份或用途缺少可靠依据时标为待核验。仅统计原始归档，不含 OCR、翻译或模型复核。</p>
+        </div>
+      </section>
 
       <section class="metrics-grid" aria-label="工作区概览">
         <article class="metric-card"><div class="metric-label">智能体会话<span class="metric-symbol" aria-hidden="true">◎</span></div><div class="metric-value" id="metric-sessions">—</div><div class="metric-footnote">已记录的 Claude Code 会话</div></article>
@@ -91,18 +113,20 @@
       </section>
 
       <section id="library" class="dashboard-section" aria-labelledby="library-title">
-        <div class="section-heading"><div><div class="section-kicker">03 / REGULATION LIBRARY</div><h2 id="library-title">法规文件</h2><p>浏览服务器已保存的法规原文，查看元数据、预览与下载。</p></div><button id="library-refresh" class="button button-secondary" type="button">刷新文件 ↻</button></div>
+        <div class="library-page-heading"><div><p class="library-breadcrumb"><a href="#overview">运维工作台</a><span>/</span>印尼法规库</p><h1 id="library-title" tabindex="-1">印度尼西亚法规库</h1><p>官方原件 · 分类检索 · 当页打包下载</p></div><button id="library-refresh" class="button button-secondary" type="button">刷新结果</button></div>
+        <div class="library-search-hero"><form id="library-search-form" role="search"><label class="sr-only" for="library-search">搜索法规标题、类型或编号</label><input id="library-search" type="search" placeholder="输入法规标题、类型或编号检索" autocomplete="off" maxlength="200"><button type="submit" id="library-search-submit">检 索</button></form><p>默认展示中文参考译名，保留印尼语原文对照；支持中印尼文关键词检索。</p></div>
         <div class="panel library-layout">
-          <aside class="library-countries-pane" aria-label="按法域浏览"><div class="pane-heading">法域目录</div><div id="library-countries" class="library-countries"><div class="empty-state compact"><span class="loading-ring" aria-hidden="true"></span><p>正在读取目录…</p></div></div></aside>
+          <aside class="library-countries-pane" aria-label="法规分类"><div class="pane-heading">法域范围</div><div id="library-countries" class="library-countries"></div><div class="pane-heading">文件分类</div><div id="library-classifications" class="library-classifications" aria-label="按分类筛选"></div><p class="library-sidebar-note">仅收录已成功归档的官方材料。身份或用途不明的记录单列待核验。</p></aside>
           <div class="library-main">
-            <div class="library-toolbar"><div class="min-width-zero"><h3 id="library-scope">全部法域</h3><p id="library-count" class="muted small-text" aria-live="polite">正在读取法规文件…</p></div><div class="library-search"><label class="sr-only" for="library-search">搜索法规标题、编号或文件名</label><input id="library-search" type="search" placeholder="搜索法规标题、编号或文件名" autocomplete="off" maxlength="200"></div></div>
-            <div id="library-warnings" class="notice notice-warning detail-notice library-notice" role="status" hidden></div>
+            <div class="library-toolbar"><div class="min-width-zero"><h2 id="library-scope">检索结果</h2><p id="library-count" class="muted small-text" aria-live="polite">正在读取法规库…</p></div></div>
+            <div class="library-filterbar"><label>法规分类<select id="library-category"><option value="">全部分类</option></select></label><label>排序<select id="library-sort"><option value="title_asc">原文标题 A → Z</option><option value="title_desc">原文标题 Z → A</option><option value="year_desc">年份从新到旧</option><option value="year_asc">年份从旧到新</option><option value="published_desc">公布日期从新到旧</option><option value="published_asc">公布日期从旧到新</option></select></label><label>每页<select id="library-page-size"><option value="20">20 条</option><option value="50">50 条</option><option value="100">100 条</option></select></label><a id="library-page-export" class="button button-primary" aria-disabled="true" tabindex="-1">打包下载当页 ↓</a><span id="library-export-note" class="muted small-text" aria-live="polite">仅打包当前页关联的已归档原件。</span></div>
+            <details class="library-scope-note"><summary>收录范围与中文译名说明</summary><div id="library-warnings" class="notice notice-warning detail-notice library-notice" role="status" hidden></div></details>
             <div id="library-error" class="notice notice-error detail-notice library-notice" role="status" hidden></div>
             <div class="library-workspace">
-              <div class="library-list-column"><div id="library-file-list" class="library-file-list" aria-label="选择法规文件" aria-busy="true"><div class="empty-state"><span class="loading-ring" aria-hidden="true"></span><p>正在读取法规文件…</p></div></div><div class="library-pagination"><span id="library-page-note" class="muted small-text"></span><button id="library-more" class="text-button" type="button" hidden>再显示 50 份 ↓</button><button id="library-retry" class="text-button" type="button" hidden>重新读取 ↻</button></div></div>
-              <article id="library-file-detail" class="library-file-detail" aria-label="法规文件详情"><div class="empty-state"><div class="empty-symbol" aria-hidden="true">▤</div><h3>选择一份法规原文</h3><p>在左侧选择文件，查看预览、法规信息和下载入口。</p></div></article>
+              <div class="library-list-column"><div id="library-file-list" class="library-file-list" aria-label="选择法规" aria-busy="true"><div class="empty-state"><span class="loading-ring" aria-hidden="true"></span><p>正在读取法规库…</p></div></div><div class="library-pagination"><span id="library-page-note" class="muted small-text"></span><div class="library-page-actions"><button id="library-previous" class="text-button" type="button" disabled>← 上一页</button><button id="library-more" class="text-button" type="button" disabled>下一页 →</button><button id="library-retry" class="text-button" type="button" hidden>重新读取 ↻</button></div></div></div>
+              <dialog id="library-detail-dialog" class="library-detail-dialog" aria-label="法规详情"><div class="library-dialog-toolbar"><span>法规详情与原件</span><button id="library-detail-close" type="button" autofocus aria-label="关闭法规详情">关闭 ×</button></div><article id="library-file-detail" class="library-file-detail" aria-label="法规文件详情"><div class="empty-state"><div class="empty-symbol" aria-hidden="true">▤</div><h3>选择一份法规原文</h3><p>选择记录，查看元数据、附件与下载入口。</p></div></article></dialog>
             </div>
-            <p class="library-footnote">这里只列出法规库存。采集成功与正文审查状态分别展示；公布日期未记录时不作推断，法规效力需另行核验。文件清单按需读取，可手动刷新。</p>
+            <p class="library-footnote">只展示存在成功归档文件的法规记录。身份明确的法规按身份合并；无法确认的身份、正文/附件和版本关系标为“待核验”。下载成功不代表正文审查通过或法规现行有效。ZIP 含当页原件和元数据清单，文件内容去重；公布日期未知时不作推断。</p>
           </div>
         </div>
       </section>

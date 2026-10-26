@@ -19,6 +19,9 @@ ROOT = default_workspace()
 REQUIRED_METADATA = {'title', 'published_at', 'updated_at', 'effective_region', 'document_type'}
 WRAPPER_KEYS = {'value', 'raw', 'source_label', 'source_url', 'status', 'meaning'}
 STATUSES = {'observed', 'not_provided', 'unparsed', 'partial'}
+MA_GUIDANCE_HOSTS = {'jdih.mahkamahagung.go.id', 'kepaniteraan.mahkamahagung.go.id'}
+SEMA_KIND = 'Surat Edaran Mahkamah Agung'
+SEMA_MEANING = '印度尼西亚最高法院通函 SEMA，属于司法指导文件；不等同于中国法的司法解释，效力尚未核实。'
 
 
 def official_url(value, label, hosts):
@@ -81,9 +84,27 @@ def validate_metadata(metadata, hosts):
         elif value is not None and (not isinstance(value, str) or not value.strip()):
             raise ValueError(f'metadata.{name}.value 必须是非空字符串或 null')
     if (metadata['title']['status'] != 'observed' or not metadata['title']['value']
-            or metadata['document_type']['status'] != 'observed'
-            or metadata['document_type']['value'] != 'regulation'):
+            or metadata['document_type']['status'] != 'observed'):
         raise ValueError('必须提供观察到的法规标题，且 document_type 为 regulation')
+    kind = metadata['document_type']['value']
+    if kind == 'judicial_guidance':
+        # 仅扩展最高法院正式 SEMA，不把法院判决、其他通函或文章放宽为法规。
+        identity_field = metadata.get('legal_identity', {})
+        identity = identity_field.get('value')
+        if (not hosts or not set(hosts).issubset(MA_GUIDANCE_HOSTS)
+                or identity_field.get('status') != 'observed' or not isinstance(identity, dict)
+                or identity.get('type') != SEMA_KIND or identity.get('issuer') != 'Mahkamah Agung'
+                or identity.get('jurisdiction') != 'ID'
+                or any(not isinstance(identity.get(key), str) or not identity[key].strip() for key in ('number', 'year'))
+                or metadata['document_type']['raw'] not in (SEMA_KIND, 'SEMA')):
+            raise ValueError('judicial_guidance 仅接受最高法院官方来源及完整观察身份的 SEMA')
+        # 前述通用校验保证每个已观察字段均有实际来源声明；额外限制为 MA 主机。
+        for name in ('title', 'document_type', 'legal_identity'):
+            official_url(metadata[name]['source_url'], 'SEMA ' + name + ' 来源', MA_GUIDANCE_HOSTS)
+        metadata = copy.deepcopy(metadata)
+        metadata['document_type']['meaning'] = SEMA_MEANING
+    elif kind != 'regulation':
+        raise ValueError('必须提供观察到的法规标题，且 document_type 为 regulation 或已核实 SEMA judicial_guidance')
     return metadata
 
 
@@ -109,6 +130,8 @@ def prepare_item(item, platforms, manifest_dir, max_bytes):
             raise ValueError('显式 final_url 必须同时提供 final_url_verified=true')
         final_verified = True
     metadata = validate_metadata(item.get('metadata'), hosts)
+    if metadata['document_type']['value'] == 'judicial_guidance' and platform != 'mahkamahagung.go.id':
+        raise ValueError('SEMA 司法指导文件仅允许最高法院平台导入')
     local = item.get('local_file')
     if not isinstance(local, str) or not local.strip():
         raise ValueError('local_file 必须是本地文件路径')
